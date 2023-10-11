@@ -1,0 +1,52 @@
+---
+import BaseHead from "@/components/BaseHead.astro";
+import { getErrorResponse } from "@/lib/server/error-response";
+import { checkLangParam, getUrlLang } from "@/lib/server/lang/lang";
+import { throwError } from "@/lib/shared/error";
+import supabase from "@/lib/shared/supabase";
+import { Card } from "@chabad/ui";
+import "@/styles/global.css";
+
+if (!checkLangParam(Astro)) {
+  return await getErrorResponse(Astro.url);
+}
+
+const lang = getUrlLang(Astro.url);
+
+const articles = await supabase
+  .from("articles")
+  .select()
+  .limit(100)
+  .then(({ data, error }) => {
+    error && throwError("Index PAGE, supabase", error.message);
+    return data || [];
+  });
+
+console.log(articles);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <BaseHead title="Chabad.it | Homepage" description="" />
+  </head>
+  <body>
+    <div class="max-w-screen-md mx-auto text-center p-4">
+      <h1 class="text-2xl font-bold">homepage</h1>
+      <a href="/editor" class="underline text-blue-500">editor</a>
+
+      <br />
+      <br />
+
+      <Card title="titolo" href="#" client:load >
+        This is a card from a shared package
+      </Card>
+
+      <br />
+      <br />
+
+      <h2>articles:</h2>
+      <pre>{JSON.stringify(articles)}</pre>
+    </div>
+  </body>
+</html>

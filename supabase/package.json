@@ -1,0 +1,17 @@
+{
+  "name": "@chabad/supabase",
+  "scripts": {
+    "login": "echo sbp_3d6d2756182b038ad7d35d6e1e5773553a5fa0e8 | pnpm supabase login",
+    "start": "supabase status || supabase start",
+    "dev": "pnpm start",
+    "stop": "supabase stop",
+    "reset": "supabase db reset || supabase start",
+    "test": "supabase db test",
+    "lint": "supabase db lint",
+    "deploy": "supabase link --project-ref $SUPABASE_PROJECT_REF && supabase db push",
+    "types": "supabase gen types typescript --local > ../packages/types/src/database.ts"
+  },
+  "devDependencies": {
+    "supabase": "^1.100.1"
+  }
+}

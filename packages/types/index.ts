@@ -1,0 +1,1 @@
+export * as database from "./src/database";
