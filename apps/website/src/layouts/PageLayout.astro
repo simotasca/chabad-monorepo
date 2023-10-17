@@ -1,0 +1,82 @@
+---
+import PageHeader from "@/components/blog/header/PageHeader.astro";
+import Newsletter from "@/components/blog/sidebar/Newsletter.astro";
+import "@/styles/global.css";
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHeader />
+
+  <slot name="title" />
+  <div
+    class="relative chabad-container grid grid-cols-1 md:grid-cols-4 px-4 md:gap-4 mx-auto">
+    <!-- VERTICAL-LINE -->
+    <div
+      class="absolute w-[1px] h-full left-[5px] xs:left-[13px] md:left-[9px] lg:left-[11px] top-0 bg-blue-900 -z-[60]">
+    </div>
+    <!-- VERTICAL-LINE -->
+    <div
+      class="hidden md:block absolute w-[1px] h-[calc(100%+60%)] md:h-full right-[10px] top-0 mb-4 bg-blue-900 -z-[60]">
+    </div>
+
+    <!-- VERTICAL-LINE -->
+    <div
+      class="absolute w-[1px] h-full right-[5px] xs:right-[13px] md:right-[10px] top-0 bg-blue-900 -z-[60]">
+    </div>
+
+    <div
+      class="relative md:bg-transparent bg-white lg:bg-white -mx-1 xs:mx-3 md:px-0 md:py-0 lg:p-5 col-span-3 md:ml-1 md:mr-0.5 lg:ml-0 lg:mr-1 flex flex-col gap-6">
+      <!-- VERTICAL-LINE -->
+      <div
+        class="hidden md:block absolute w-[1px] h-full -right-2 md:-right-[10px] lg:-right-2 top-0 bg-blue-900 -z-[60]">
+      </div>
+
+      <!-- CONTENT-1 -->
+      <slot name="content-1" />
+    </div>
+
+    <div
+      class="lg:bg-white bg-white -mx-1 xs:mx-0 xs:px-2 mt-4 md:mt-0 mb-1 md:px-0 lg:px-4 lg:pt-5 md:mr-1 md:ml-0.5 lg:mr-0 lg:ml-0">
+      <slot name="sidebar" />
+    </div>
+
+    <!-- NEWSLETTER -->
+    <div
+      class="md:hidden relative sm:mx-4 md:m-0 col-span-3 flex flex-col gap-6 xs:px-4 pb-8">
+      <Newsletter />
+      <div class="md:hidden">
+        <slot name="elenco-cell" />
+      </div>
+    </div>
+  </div>
+
+  <div class="p-8 hidden md:grid border-t-blue-950 border-t-[1px]">
+    <slot name="elenco-desktop" />
+  </div>
+
+  <div
+    class="w-full p-24 grid grid-cols-4"
+    style="background: linear-gradient(0.83deg, #001C46 5.69%, rgba(0, 52, 128, 0.44) 208.16%)">
+    <div>
+      <div class="flex gap-4">
+        <img
+          src="/images/icons/icon-map.svg"
+          alt="icon map"
+          class="w-6 -translate-y-1"
+        />
+        <h3
+          class="uppercase text-3xl pb-1 text-white font-raleway font-semibold">
+          Sedi
+        </h3>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

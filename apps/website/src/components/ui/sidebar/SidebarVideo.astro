@@ -1,0 +1,16 @@
+---
+interface Props {
+  title: string
+  img: string
+  href: string
+}
+
+const { title, img, href } = Astro.props
+---
+
+<a href={href}>
+  <img class="w-full" src={img} alt="immagine video" />
+  <h2 class="text-xl leading-[1.2] xs:text-lg xs:leading-[1.2] font-display mt-2">
+    {title}
+  </h2>
+</a>

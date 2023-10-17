@@ -1,0 +1,16 @@
+---
+import ShadowBox from "@/components/ui/ShadowBox.astro";
+
+const { title, date, image } = Astro.props;
+---
+
+<ShadowBox>
+  <div class="py-3 px-4 lg:p-4">
+    <h2
+      class="text-blue-950 font-medium font-display text-2xl md:text-xl lg:text-2xl leading-tight uppercase">
+      {title}
+    </h2>
+    <p class="italic font-raleway text-neutral-500 text-sm mb-1">{date}</p>
+    <img src={image} alt="icon" />
+  </div>
+</ShadowBox>

@@ -1,29 +1,32 @@
 import node from "@astrojs/node";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
 export default defineConfig({
   server: {
     host: process.env.HOST || "0.0.0.0",
-    port: Number(process.env.PORT) || 3000
+    port: Number(process.env.PORT) || 3000,
   },
   site: "https://www.chabad.it",
   output: "server",
   adapter: node({
-    mode: 'standalone'
+    mode: "middleware",
   }),
-  integrations: [tailwind(), react()],
-  vite: {
-    build: {
-      rollupOptions: {
-        input: {
-          // Add the path to your entry file here
-          main: 'node_modules/@mdxeditor/editor',
+  integrations: [
+    tailwind(),
+    react(),
+    {
+      name: "demo-intl-production",
+      hooks: {
+        "astro:config:setup": ({ injectRoute }) => {
+          injectRoute({
+            entryPoint: "src/pages/[...lang]/index.astro",
+            prerender: false,
+            pattern: "/hr/",
+          });
         },
-        // Add this option to transpile CommonJS modules
-        external: ['library'],
-      }
-    }
-  }
+      },
+    },
+  ],
 });

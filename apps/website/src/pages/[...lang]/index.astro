@@ -1,52 +1,260 @@
 ---
-import BaseHead from "@/components/BaseHead.astro";
-import { getErrorResponse } from "@/lib/server/error-response";
-import { checkLangParam, getUrlLang } from "@/lib/server/lang/lang";
-import { throwError } from "@/lib/shared/error";
-import supabase from "@/lib/shared/supabase";
-import { Card } from "@chabad/ui";
-import "@/styles/global.css";
+import ArticleSection from "@/components/blog/ArticleSection.astro";
+import Parshat from "@/components/blog/sidebar/Parshat.astro";
+import EventsSection from "@/components/blog/EventsSection.astro";
+import Newsletter from "@/components/blog/sidebar/Newsletter.astro";
+import SectionTitle from "@/components/ui/SectionTitle.astro";
+import ShadowBox from "@/components/ui/ShadowBox.astro";
+import SidebarContainer from "@/components/ui/sidebar/SidebarContainer.astro";
+import SidebarTitle from "@/components/ui/sidebar/SidebarTitle.astro";
+import SidebarVideo from "@/components/ui/sidebar/SidebarVideo.astro";
+import Carousel from "@/components/ux/carousel/Carousel.astro";
+import CarouselItem from "@/components/ux/carousel/CarouselItem.astro";
+import HomeLayout from "@/layouts/HomeLayout.astro";
+import { errorResponse } from "@/lib/server/error-response";
+import { checkLangParam } from "@/lib/server/lang/lang";
+import { getData } from "./_utils";
 
+/** Non so come evitare di scriverlo ogni volta */
 if (!checkLangParam(Astro)) {
-  return await getErrorResponse(Astro.url);
+  return errorResponse(Astro.url);
 }
 
-const lang = getUrlLang(Astro.url);
+const { articles, scraped } = await getData();
 
-const articles = await supabase
-  .from("articles")
-  .select()
-  .limit(100)
-  .then(({ data, error }) => {
-    error && throwError("Index PAGE, supabase", error.message);
-    return data || [];
-  });
+// const news = [];
 
-console.log(articles);
+// const last24hArticles = articles.filter(
+//   (a) => Number(a.date) > Date.now() - 1000 * 60 * 60 * 24
+// );
+
+// notizie + articoli recenti
+// const ultimaOra = new Array(...news, ...last24hArticles)
+//   .sort((a, b) => Number(a.date) - Number(b.date))
+//   .slice(0, 4);
+
+const imgVideo = "/images/video-prova.jpg";
+
+// const organizations = await findAllOrganizations()
+const organizations = [
+  { name: "Beith chabad", image: { url: "/images/third-main-image.jpg" } },
+  { name: "Beith chabad", image: { url: "/images/third-main-image.jpg" } },
+  { name: "Beith chabad", image: { url: "/images/third-main-image.jpg" } },
+  { name: "Beith chabad", image: { url: "/images/third-main-image.jpg" } },
+];
 ---
 
-<!doctype html>
-<html lang={lang}>
-  <head>
-    <BaseHead title="Chabad.it | Homepage" description="" />
-  </head>
-  <body>
-    <div class="max-w-screen-md mx-auto text-center p-4">
-      <h1 class="text-2xl font-bold">homepage</h1>
-      <a href="/editor" class="underline text-blue-500">editor</a>
+<HomeLayout
+  title="Chabad | Homepage"
+  description="sito del portale kosher più in voga d'italia">
+  <div slot="content-1" class="flex flex-col gap-4">
+    {
+      articles.length > 0 && (
+        <ArticleSection
+          title="Ultima ora"
+          icon="/images/icons/clock.svg"
+          mainArticle={articles[0]}
+          articles={articles.slice(1)}
+          reverse={true}
+        />
+      )
+    }
 
-      <br />
-      <br />
+    {
+      scraped.length > 0 && (
+        <ArticleSection
+          title="Notizie dal mondo"
+          icon="/images/icons/blue-icons/globe-icon.svg"
+          mainArticle={scraped[0]}
+          articles={scraped.slice(1)}
+          reverse={false}
+          hideImageOnMobile={true}
+        />
+      )
+    }
 
-      <Card title="titolo" href="#" client:load >
-        This is a card from a shared package
-      </Card>
+    <ArticleSection
+      title="Articoli"
+      icon="/images/icons/pencil-icon.svg"
+      mainArticle={articles[0]}
+      articles={articles.slice(1)}
+      reverse={true}
+    />
+  </div>
 
-      <br />
-      <br />
+  <!-- SIDEBAR -->
+  <section slot="sidebar" class="flex flex-col gap-4">
+    <!-- VIDEOS -->
+    <ShadowBox class="contents md:block">
+      <SidebarTitle title="Watch" img="/images/icons/video.svg" />
+      <SidebarContainer>
+        <SidebarVideo
+          title="Perchè si legge Parà, una nuova religione"
+          img={imgVideo}
+          href="http://www.eurokosher.it"
+        />
+        <SidebarVideo
+          title="Perchè si legge Parà, una nuova religione"
+          img={imgVideo}
+          href="http://www.eurokosher.it"
+        />
+      </SidebarContainer>
+    </ShadowBox>
 
-      <h2>articles:</h2>
-      <pre>{JSON.stringify(articles)}</pre>
+    <!-- JIM TV -->
+    <ShadowBox class="contents md:block">
+      <SidebarTitle title="Jim TV" img="/images/icons/maghen-david.svg" />
+      <SidebarContainer>
+        <SidebarVideo
+          title="Perchè si legge Parà, una nuova religione"
+          img={imgVideo}
+          href="http://www.eurokosher.it"
+        />
+        <SidebarVideo
+          title="Perchè si legge Parà, una nuova religione"
+          img={imgVideo}
+          href="http://www.eurokosher.it"
+        />
+      </SidebarContainer>
+    </ShadowBox>
+
+    <Parshat
+      title="acharei kedoshim"
+      date="15/giugno/2023"
+      image="images/parshat/acharei-kedoshim.jpeg"
+    />
+
+    <div class="hidden md:block">
+      <Newsletter />
     </div>
-  </body>
-</html>
+  </section>
+
+  <div slot="content-2" class="flex flex-col gap-4">
+    <!-- PUNTI CHABAD -->
+    <section class="relative">
+      <ShadowBox class="contents md:block md:p-4">
+        <h2 class="mb-4 mt-2 ml-2 md:ml-4">
+          <SectionTitle icon="/images/icons/synagogue.svg">
+            punti chabad
+          </SectionTitle>
+        </h2>
+        <div class="relative px-2 md:px-4">
+          <Carousel nextArrowId="arrow-next" prevArrowId="arrow-previous">
+            {
+              organizations.map((o) => (
+                <CarouselItem>
+                  <a href="#">
+                    <div class="bg-white mr-5">
+                      <div class="w-40 md:w-60 aspect-[4/3] border border-black bg-slate-200">
+                        {o.image && (
+                          <img
+                            src={o.image.url}
+                            class="w-full h-full object-cover bg-white"
+                          />
+                        )}
+                      </div>
+                      <h3 class="font-display text-black uppercase text-base md:text-xl text-center">
+                        {o.name}
+                      </h3>
+                    </div>
+                  </a>
+                </CarouselItem>
+              ))
+            }
+          </Carousel>
+        </div>
+        <div class="relative pl-8 pt-8 pb-4 pr-4">
+          <Carousel nextArrowId="arrow-next" prevArrowId="arrow-previous">
+            {
+              organizations.map((o) => (
+                <CarouselItem>
+                  <a href="#">
+                    <div class="bg-white mr-5">
+                      <div class="w-40 md:w-60 aspect-[4/3] border border-black bg-slate-200">
+                        {o.image && (
+                          <img
+                            src={o.image.url}
+                            class="w-full h-full object-cover bg-white"
+                          />
+                        )}
+                      </div>
+                      <h3 class="font-display text-black uppercase text-base md:text-xl text-center">
+                        {o.name}
+                      </h3>
+                    </div>
+                  </a>
+                </CarouselItem>
+              ))
+            }
+          </Carousel>
+        </div>
+        <button
+          id="arrow-previous"
+          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 left-0 md:-left-6 -translate-y-1/2 shadow">
+          <img
+            class="w-full"
+            src="/images/icons/arrow-prev.svg"
+            alt="carousel icon"
+          />
+        </button>
+        <button
+          id="arrow-next"
+          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 right-0 md:-right-6 -translate-y-1/2 shadow">
+          <img
+            class="w-full"
+            src="/images/icons/arrow-next.svg"
+            alt="icona carousel"
+          /></button
+        >
+      </ShadowBox>
+    </section>
+
+    <!-- EVENTI -->
+    <section>
+      <ShadowBox class="contents md:block md:p-4">
+        <h2 class="mb-4 mt-2 ml-2 md:ml-4">
+          <SectionTitle icon="/images/icons/synagogue.svg">
+            punti chabad
+          </SectionTitle>
+        </h2>
+        <div class="relative">
+          <Carousel
+            nextArrowId="arrow-next-event"
+            prevArrowId="arrow-previous-event">
+            {
+              [...new Array(20)].map((p) => (
+                <CarouselItem>
+                  <EventsSection
+                    associazione="Beit chabad"
+                    nome="Seder di Rosh Hashanah"
+                    data="89/75/7805"
+                    immagine="../../images/parshat/acharei-kedoshim.jpeg"
+                    citta="Milano"
+                  />
+                </CarouselItem>
+              ))
+            }
+          </Carousel>
+          <button
+            id="arrow-previous-event"
+            class="absolute rounded-[100%] w-12 h-12 shadow left-0 top-1/2 -translate-x-5 lg:-translate-x-8 -translate-y-1/2">
+            <img
+              class="w-full"
+              src="/images/icons/arrow-prev.svg"
+              alt="carousel icon"
+            />
+          </button>
+          <button
+            id="arrow-next-event"
+            class="absolute rounded-[100%] w-12 h-12 z-10 shadow right-0 top-1/2 translate-x-5 lg:translate-x-9 -translate-y-1/2">
+            <img
+              class="w-full"
+              src="/images/icons/arrow-next.svg"
+              alt="icona carousel"
+            />
+          </button>
+        </div>
+      </ShadowBox>
+    </section>
+  </div>
+</HomeLayout>

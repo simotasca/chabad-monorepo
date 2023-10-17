@@ -1,0 +1,108 @@
+<header class="text-white">
+  <div class="w-full bg-[#031B4D]">
+    <div
+      class="chabad-container grid grid-cols-[auto_1fr_auto] xs:grid-cols-[1fr_auto_1fr] gap-x-10 xs:gap-x-0 items-center py-2 mx-auto">
+      <div class="flex justify-start -translate-y-px pl-2">
+        <img
+          src="/images/logo.svg"
+          class="h-8 xs:h-10 -m-1"
+          alt="chabad logo icon"
+        />
+
+        <img
+          src="/images/logo-text.svg"
+          alt="chabad.it"
+          class="w-24 xs:w-28 translate-y-[4px]"
+        />
+      </div>
+      <ul
+        class="hidden sm:flex items-center gap-8 text-slate-200 font-raleway text-sm justify-center translate-y-px">
+        <li class="font-bold text-white">
+          <button>Italiano</button>
+        </li>
+        <li>
+          <button>English</button>
+        </li>
+        <li>
+          <button>עברית</button>
+        </li>
+      </ul>
+      <div
+        class="sm:hidden flex items-center xs:justify-center gap-1 text-sm sm:text-base text-white font-montserrat font-medium translate-y-[2px]">
+        <select class="bg-transparent">
+          <option value="italiano">italiano</option>
+          <option value="englesh">englesh</option>
+          <option value="finnish">finnish</option>
+        </select>
+      </div>
+      <div class="flex items-center gap-4 xs:gap-6 justify-end pr-2">
+        <button
+          class="w-6 xs:w-8 aspect-square bg-white border-blue-800 rounded-full p-1 xs:p-2">
+          <img
+            class="w-full h-full"
+            src="/images/icons/search.png"
+            alt="search icon"
+          />
+        </button>
+
+        <div
+          data-sidebar-toggle
+          class="md:hidden flex h-7 ml-auto xs:mr-4 items-center justify-end">
+          <img src="/images/icons/menu-icon.svg" alt="hamburger menu" />
+        </div>
+
+        <div class="hidden xs:block text-white leading-none translate-y-px">
+          ב"ה
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="relative chabad-container px-4 mx-auto">
+    <!-- ELLISSE -->
+    <div
+      class="absolute top-0 left-1/2 -translate-y-1/2 -translate-x-1/2 -z-50">
+      <div
+        class="w-[calc(120vw+3rem)] lg:w-[calc(170vw+3rem)] h-[calc(90vw+3rem)] lg:h-[calc(70vw+3rem)] bg-white rounded-[100%]">
+      </div>
+    </div>
+
+    <div
+      class="absolute top-0 left-1/2 -translate-y-1/2 -translate-x-1/2 -z-50">
+      {
+        /* <div
+        style={{ boxShadow: "inset 0 0 20rem 2rem black" }}
+        class="w-[120vw] h-[90vw] bg-blue-800 rounded-[100%]"></div> */
+      }
+      <div
+        style={{
+          background:
+            "radial-gradient(46.4% 56.57% at 50.47% 39.48%, #00378A 0%, #002D70 37.48%, #002D70 81.75%, #001C46 96.02%)",
+        }}
+        class="w-[120vw] lg:w-[170vw] h-[90vw] lg:h-[70vw] rounded-[100%]">
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="bg-slate-100 border-y border-blue-950 py-2">
+  <nav class="chabad-container px-4 mx-auto">
+    <ul
+      class="flex justify-center gap-8 lg:gap-14 text-base md:text-lg lg:text-xl text-blue-950 font-semibold font-montserrat translate-y-px">
+      <li class="md:hidden">
+        <button class="uppercase text-red-800">live</button>
+      </li>
+      <li><button class="uppercase">articoli</button></li>
+      <li><button class="uppercase">notizie</button></li>
+      <li class="hidden sm:block"><button class="uppercase">chabad</button></li>
+      <li class="hidden md:block">
+        <button class="uppercase">risorse</button>
+      </li>
+      <li class="hidden xs:block">
+        <button class="uppercase">contribuisci</button>
+      </li>
+      <li class="hidden md:block">
+        <button class="uppercase">contatti</button>
+      </li>
+    </ul>
+  </nav>
+</div>

@@ -8,6 +8,3 @@ const supabase = createClient<db.Database>(
 );
 
 export default supabase;
-
-export type Table<T extends keyof db.Database["public"]["Tables"]> =
-  db.Database["public"]["Tables"][T]["Row"];

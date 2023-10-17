@@ -1,0 +1,88 @@
+---
+import BaseHead from "@/components/BaseHead.astro";
+import { articleNotFoundResponse } from "@/lib/server/error-response";
+import { checkLangParam } from "@/lib/server/lang/lang";
+import { throwError } from "@/lib/shared/error";
+import supabase from "@/lib/shared/supabase";
+import { compile, run } from "@mdx-js/mdx";
+import * as runtime from "react/jsx-runtime"; // Production.
+// import * as runtime from 'react/jsx-dev-runtime' // Development.
+
+if (!checkLangParam(Astro)) {
+  return errorResponse(Astro.url);
+}
+
+const { slug } = Astro.params;
+const article = !slug
+  ? null
+  : await supabase
+      .from("articles")
+      .select("title, content")
+      .eq("slug", slug)
+      .single()
+      .then(({ data, error }) => {
+        if (error) {
+          throwError(
+            "Article page",
+            "Error fetching articles: " + error.message
+          );
+        }
+        return data;
+      });
+
+if (!article) {
+  return articleNotFoundResponse();
+}
+
+// funziona solo se i componenti sono importabili
+// per questo usare solo componenti di @chabad/ui condiviso tra questa repo e l'editor
+const code = !article
+  ? ""
+  : String(
+      await compile(article.content, {
+        outputFormat: "function-body",
+        development: false,
+        // ^-- Generate code for production.
+        // `false` if you use `/jsx-runtime` on client, `true` if you use
+        // `/jsx-dev-runtime`.
+        /* …otherOptions */
+      })
+    );
+
+const Content = (await run(code, runtime)).default || "div";
+---
+
+<!doctype html>
+<html>
+  <head>
+    <BaseHead title={article.title} description={"bla bla bla"} />
+  </head>
+  <body class="py-8 px-4">
+    <div class="font-bold max-w-prose mx-auto">
+      <p>
+        <a
+          href="/"
+          class="block text-sm underline text-blue-500 font-normal -mb-4">
+          back to home . . .
+        </a>
+        <br />
+        <span class="uppercase text-slate-400">
+          Non c'è la pagina del singolo articolo
+        </span>
+      </p>
+      <h2 class="uppercase text-4xl text-blue-800 -mt-1 mb-4">
+        {article.title}
+      </h2>
+    </div>
+    <div class="prose mx-auto">
+      <Content />
+    </div>
+    <div class="max-w-prose mx-auto">
+      <a
+        href="/"
+        class="block text-right text-sm underline text-blue-600 font-normal">
+        . . . back to home
+      </a>
+    </div>
+  </body>
+</html>

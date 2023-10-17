@@ -2,7 +2,9 @@ import { cwd } from "node:process";
 import type { Astro } from "../astro";
 import { config } from "./config";
 
-export function checkLangParam(Astro: Astro) {
+export function checkLangParam(Astro: {
+  params: Record<string, string | undefined>;
+}) {
   const { lang } = Astro.params;
   return config.languages
     .map((l) => (l === config.canonical ? undefined : l))
