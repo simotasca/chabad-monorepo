@@ -4,6 +4,18 @@ import { articleUrl, articlesMapper } from "@/lib/server/articles";
 
 export async function getData() {
   return {
+    organizations: await supabase
+      .from("organizations")
+      .select("*, organization_contacts(*)")
+      .limit(20)
+      .then(({ data, error }) => {
+        if (error)
+          throwError(
+            "Page Index",
+            "Error fetching organizations:" + error.message
+          );
+        return data || [];
+      }),
     articles: await supabase
       .from("articles")
       .select("title, date, content, category, image, preview, slug")
@@ -21,7 +33,7 @@ export async function getData() {
         if (error)
           throwError(
             "Page Index",
-            "Error fetching scraped articles:" + error.message,
+            "Error fetching scraped articles:" + error.message
           );
         return (
           data?.map((s) => ({

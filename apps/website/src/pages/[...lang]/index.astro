@@ -20,8 +20,15 @@ if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
 }
 
-const { articles, scraped } = await getData();
+const { articles, scraped, organizations } = await getData();
 
+console.log("guarda qua le associazioni:", organizations);
+
+const halforganizations = Math.round(organizations.length / 2);
+
+const organizations1 = organizations.slice(0, halforganizations);
+
+const organizations2 = organizations.slice(halforganizations);
 // const news = [];
 
 // const last24hArticles = articles.filter(
@@ -36,17 +43,12 @@ const { articles, scraped } = await getData();
 const imgVideo = "/images/video-prova.jpg";
 
 // const organizations = await findAllOrganizations()
-const organizations = [
-  { name: "Beith chabad", image: { url: "/images/third-main-image.jpg" } },
-  { name: "Beith chabad", image: { url: "/images/third-main-image.jpg" } },
-  { name: "Beith chabad", image: { url: "/images/third-main-image.jpg" } },
-  { name: "Beith chabad", image: { url: "/images/third-main-image.jpg" } },
-];
 ---
 
 <HomeLayout
   title="Chabad | Homepage"
-  description="sito del portale kosher più in voga d'italia">
+  description="sito del portale kosher più in voga d'italia"
+>
   <div slot="content-1" class="flex flex-col gap-4">
     {
       articles.length > 0 && (
@@ -141,14 +143,14 @@ const organizations = [
         <div class="relative px-2 md:px-4">
           <Carousel nextArrowId="arrow-next" prevArrowId="arrow-previous">
             {
-              organizations.map((o) => (
+              organizations1.map((o) => (
                 <CarouselItem>
                   <a href="#">
                     <div class="bg-white mr-5">
                       <div class="w-40 md:w-60 aspect-[4/3] border border-black bg-slate-200">
-                        {o.image && (
+                        {o["main image"] && (
                           <img
-                            src={o.image.url}
+                            src={o["main image"]}
                             class="w-full h-full object-cover bg-white"
                           />
                         )}
@@ -166,16 +168,13 @@ const organizations = [
         <div class="relative pl-8 pt-8 pb-4 pr-4">
           <Carousel nextArrowId="arrow-next" prevArrowId="arrow-previous">
             {
-              organizations.map((o) => (
+              organizations2.map((o) => (
                 <CarouselItem>
                   <a href="#">
                     <div class="bg-white mr-5">
                       <div class="w-40 md:w-60 aspect-[4/3] border border-black bg-slate-200">
-                        {o.image && (
-                          <img
-                            src={o.image.url}
-                            class="w-full h-full object-cover bg-white"
-                          />
+                        {o && (
+                          <img class="w-full h-full object-cover bg-white" />
                         )}
                       </div>
                       <h3 class="font-display text-black uppercase text-base md:text-xl text-center">
@@ -190,7 +189,8 @@ const organizations = [
         </div>
         <button
           id="arrow-previous"
-          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 left-0 md:-left-6 -translate-y-1/2 shadow">
+          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 left-0 md:-left-6 -translate-y-1/2 shadow"
+        >
           <img
             class="w-full"
             src="/images/icons/arrow-prev.svg"
@@ -199,7 +199,8 @@ const organizations = [
         </button>
         <button
           id="arrow-next"
-          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 right-0 md:-right-6 -translate-y-1/2 shadow">
+          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 right-0 md:-right-6 -translate-y-1/2 shadow"
+        >
           <img
             class="w-full"
             src="/images/icons/arrow-next.svg"
@@ -220,7 +221,8 @@ const organizations = [
         <div class="relative">
           <Carousel
             nextArrowId="arrow-next-event"
-            prevArrowId="arrow-previous-event">
+            prevArrowId="arrow-previous-event"
+          >
             {
               [...new Array(20)].map((p) => (
                 <CarouselItem>
@@ -237,7 +239,8 @@ const organizations = [
           </Carousel>
           <button
             id="arrow-previous-event"
-            class="absolute rounded-[100%] w-12 h-12 shadow left-0 top-1/2 -translate-x-5 lg:-translate-x-8 -translate-y-1/2">
+            class="absolute rounded-[100%] w-12 h-12 shadow left-0 top-1/2 -translate-x-5 lg:-translate-x-8 -translate-y-1/2"
+          >
             <img
               class="w-full"
               src="/images/icons/arrow-prev.svg"
@@ -246,7 +249,8 @@ const organizations = [
           </button>
           <button
             id="arrow-next-event"
-            class="absolute rounded-[100%] w-12 h-12 z-10 shadow right-0 top-1/2 translate-x-5 lg:translate-x-9 -translate-y-1/2">
+            class="absolute rounded-[100%] w-12 h-12 z-10 shadow right-0 top-1/2 translate-x-5 lg:translate-x-9 -translate-y-1/2"
+          >
             <img
               class="w-full"
               src="/images/icons/arrow-next.svg"

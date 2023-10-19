@@ -91,6 +91,76 @@ export interface Database {
         }
         Relationships: []
       }
+      organization_contacts: {
+        Row: {
+          content: string
+          created_at: string
+          description: string
+          id: number
+          id_organization: number | null
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          description: string
+          id?: number
+          id_organization?: number | null
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          description?: string
+          id?: number
+          id_organization?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organization_contacts_id_organization_fkey"
+            columns: ["id_organization"]
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      organizations: {
+        Row: {
+          address: string
+          city: string
+          contacts: string[] | null
+          content: string | null
+          created_at: string
+          id: number
+          "main image": string | null
+          name: string
+          slug: string
+          website: string | null
+        }
+        Insert: {
+          address: string
+          city: string
+          contacts?: string[] | null
+          content?: string | null
+          created_at?: string
+          id?: number
+          "main image"?: string | null
+          name: string
+          slug?: string
+          website?: string | null
+        }
+        Update: {
+          address?: string
+          city?: string
+          contacts?: string[] | null
+          content?: string | null
+          created_at?: string
+          id?: number
+          "main image"?: string | null
+          name?: string
+          slug?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
       scraped: {
         Row: {
           created_at: string
