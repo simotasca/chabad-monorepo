@@ -1,6 +1,6 @@
-interface WithSlug {
-  slug: string;
-}
+import type { Tables } from "@chabad/types/src/database";
+
+type WithSlug = Pick<Tables<"articles">, "slug">;
 
 export function articleUrl({ slug }: WithSlug) {
   return `/articles/${slug}`;

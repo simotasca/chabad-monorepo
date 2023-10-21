@@ -5,6 +5,7 @@ import {
   hebDateFormat,
   upcomingEvent,
 } from "@/lib/shared/calendar";
+import routes from "@/lib/shared/routes";
 import { Image } from "astro:assets";
 import MenuCell from "./MenuCell.astro";
 import MenuItem from "./MenuItem.astro";
@@ -65,8 +66,8 @@ import imgLogo from "@/images/logo.svg";
         <div
           class="md:hidden flex items-center justify-end gap-4 text-sm sm:text-base text-white font-montserrat">
           <select class="bg-transparent" id="language-select">
-            <option selected value="">Italiano</option></select
-          >
+            <option selected value="">Italiano</option>
+          </select>
           <span>ב"ה</span>
         </div>
 
@@ -229,23 +230,23 @@ import imgLogo from "@/images/logo.svg";
   <div class="bg-slate-100 border-y border-blue-950 py-1 md:py-2 xl:mt-1">
     <nav class="chabad-container px-4 mx-auto">
       <ul
-        class="flex justify-center gap-5 xs:gap-8 lg:gap-14 text-base md:text-lg lg:text-xl text-blue-950 font-semibold font-montserrat translate-y-px">
+        class="flex justify-center gap-5 xs:gap-8 lg:gap-14 text-base md:text-lg lg:text-xl text-blue-950 font-semibold font-montserrat translate-y-px uppercase">
         <li class="md:hidden">
-          <button class="uppercase text-red-800">live</button>
+          <a href={routes.lessons} class="text-red-800">live</a>
         </li>
-        <li><a href="/articles" class="uppercase">articoli</a></li>
-        <li><button class="uppercase">notizie</button></li>
+        <li><a href={routes.articles}>articoli</a></li>
+        <li><a href={routes.news}>notizie</a></li>
         <li class="hidden sm:block">
-          <button class="uppercase">chabad</button>
+          <a href={routes.chabad}>chabad</a>
         </li>
         <li class="hidden md:block">
-          <button class="uppercase">risorse</button>
+          <a href={routes.resources}>risorse</a>
         </li>
         <li class="hidden xs:block">
-          <button class="uppercase">contribuisci</button>
+          <a href={routes.contribute}>contribuisci</a>
         </li>
         <li class="hidden md:block">
-          <button class="uppercase">contatti</button>
+          <a href={routes.contacts}>contatti</a>
         </li>
       </ul>
     </nav>

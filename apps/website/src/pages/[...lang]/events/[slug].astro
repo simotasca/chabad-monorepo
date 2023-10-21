@@ -1,0 +1,161 @@
+---
+import Newsletter from "@/components/sidebar/Newsletter.astro";
+import PageLayout from "src/layouts/PageLayout.astro";
+import EventsPageSection from "@/components/events/EventsPageSection.astro";
+import ShadowBox from "@/components/ui/ShadowBox.astro";
+---
+
+<PageLayout title="Event" description="">
+  <section slot="title">
+    <div
+      class="grid grid-cols-[1fr_auto_1fr] items-center pt-2 pb-[1px] sm:pt-4 sm:pb-3 px-4">
+      <div class="h-0.5 bg-white mr-4 mb-2 ml-9 border-t"></div>
+      <h1
+        class="text-2xl sm:text-4xl uppercase font-messiri text-white font-bold text-center">
+        eventi
+      </h1>
+      <div class="h-0.5 bg-white ml-4 mb-2 mr-9 border-t"></div>
+    </div>
+  </section>
+
+  <section slot="content-1">
+    <ShadowBox class="relative flex flex-col gap-y-1 p-4">
+      <p class="text-blue-800 text-sm font-raleway font-bold uppercase mb-2">
+        beit chabad milano
+      </p>
+
+      <h2
+        class="text-black text-3xl md:text-4xl font-display font-semibold leading-tight">
+        Seder di Rosh Hashanah
+      </h2>
+
+      <p class="text-gray-600 text-sm sm:text-base font-raleway">45/57/5099</p>
+
+      <img
+        class="w-full aspect-video mt-2"
+        src="/images/mainimage.jpg"
+        alt="main article image"
+      />
+
+      <div class="pt-4 px-4 pb-12">
+        <p class="text-base text-black font-raleway">
+          Testo a caso per provare che sia abbastanza lungo da poter
+          rappresentare la descrizione dell'evento. Testo a caso per provare che
+          sia abbastanza lungo da poter rappresentare la descrizione
+          dell'evento. Testo a caso per provare che sia abbastanza lungo da
+          poter rappresentare la descrizione dell'evento. Testo a caso per
+          provare che sia abbastanza lungo da poter rappresentare la descrizione
+          dell'evento. Testo a caso per provare che sia abbastanza lungo da
+          poter rappresentare la descrizione dell'evento. Testo a caso per
+          provare che sia abbastanza lungo da poter rappresentare la descrizione
+          dell'evento. Testo a caso per provare che sia abbastanza lungo da
+          poter rappresentare la descrizione dell'evento. Testo a caso per
+          provare che sia abbastanza lungo da poter rappresentare la descrizione
+          dell'evento. Testo a caso per provare che sia abbastanza lungo da
+          poter rappresentare la descrizione dell'evento. Testo a caso per
+          provare che sia abbastanza lungo da poter rappresentare la descrizione
+          dell'evento. Testo a caso per provare che sia abbastanza lungo da
+          poter rappresentare la descrizione dell'evento. Testo a caso per
+          provare che sia abbastanza lungo da poter rappresentare la descrizione
+          dell'evento. Testo a caso per provare che sia abbastanza lungo da
+          poter rappresentare la descrizione dell'evento. Testo a caso per
+          provare che sia abbastanza lungo da poter rappresentare la descrizione
+          dell'evento. Testo a caso per provare che sia abbastanza lungo da
+          poter rappresentare la descrizione dell'evento. Testo a caso per
+          provare che sia abbastanza lungo da poter rappresentare la descrizione
+          dell'evento. Testo a caso per provare che sia abbastanza lungo da
+          poter rappresentare la descrizione dell'evento. Testo a caso per
+          provare che sia abbastanza lungo da poter rappresentare la descrizione
+          dell'evento. Testo a caso per provare che sia abbastanza lungo da
+          poter rappresentare la descrizione dell'evento. Testo a caso per
+          provare che sia abbastanza lungo da poter rappresentare la descrizione
+          dell'evento. Testo a caso per provare che sia abbastanza lungo da
+          poter rappresentare la descrizione dell'evento.
+        </p>
+      </div>
+    </ShadowBox>
+  </section>
+
+  <section slot="sidebar" class="md:flex flex-col gap-4">
+    <ShadowBox class="m-5 md:m-0 p-4">
+      <h3
+        class="text-blue-950 font-raleway font-semibold uppercase text-2xl md:text-xl lg:text-2xl leading-tight mb-2">
+        contatti evento
+      </h3>
+      <ul class="text-black font-raleway text-sm">
+        <li>
+          <b>email</b>: carlogrossi@venti.net
+        </li>
+        <li>
+          <b>telefono</b>:34567891234
+        </li>
+        <li>
+          <b>email</b>: carlogrossi@venti.net
+        </li>
+        <li>
+          <b>telefono</b>:34567891234
+        </li>
+      </ul>
+    </ShadowBox>
+
+    <div class="hidden md:block">
+      <Newsletter />
+    </div>
+  </section>
+
+  <section slot="elenco-cell">
+    <h2 class="font-raleway uppercase text-blue-950 font-semibold text-2xl">
+      tutti gli eventi
+    </h2>
+    <div class="grid grid-cols-1 xs:grid-cols-2 gap-8 p-4">
+      <EventsPageSection
+        associazione="Beit chabad"
+        nome="Seder di Rosh Hashanah"
+        data="89/75/7805"
+        titoloContatti="CONTATTI"
+        email="fabio@rovazzi.net"
+        telefono="34567891234"
+      />
+      <EventsPageSection
+        associazione="Beit chabad"
+        nome="Seder di Rosh Hashanah"
+        data="89/75/7805"
+        immagine="/images/parshat/acharei-kedoshim.jpeg"
+        titoloContatti="CONTATTI"
+        email="fabio@rovazzi.net"
+        telefono="34567891234"
+      />
+      <EventsPageSection
+        associazione="Beit chabad"
+        nome="Seder di Rosh Hashanah"
+        data="89/75/7805"
+        immagine="/images/parshat/acharei-kedoshim.jpeg"
+        titoloContatti="CONTATTI"
+        email="fabio@rovazzi.net"
+        telefono="34567891234"
+      />
+      <EventsPageSection
+        associazione="Beit chabad"
+        nome="Seder di Rosh Hashanah"
+        data="89/75/7805"
+        immagine="/images/parshat/acharei-kedoshim.jpeg"
+        titoloContatti="CONTATTI"
+        email="fabio@rovazzi.net"
+        telefono="34567891234"
+      />
+    </div>
+  </section>
+
+  <section slot="elenco-desktop">
+    <h2
+      class="font-raleway uppercase text-blue-950 font-bold text-2xl mx-4 my-4">
+      tutti gli eventi
+    </h2>
+    <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-8 p-4">
+      <EventsPageSection />
+      <EventsPageSection />
+      <EventsPageSection />
+      <EventsPageSection />
+    </div>
+  </section>
+</PageLayout>

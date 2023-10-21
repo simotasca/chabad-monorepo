@@ -1,0 +1,117 @@
+---
+import ContributeSection from "@/components/contribute/ContributeSection.astro";
+import Newsletter from "@/components/sidebar/Newsletter.astro";
+import EventsPageSection from "@/components/events/EventsPageSection.astro";
+import PageLayout from "@/layouts/PageLayout.astro";
+---
+
+<PageLayout title="Contribute" description="bla bla">
+  <section slot="title" class="h-6"></section>
+
+  <section slot="content-1">
+    <div class="relative mb-4">
+      <img
+        src="/images/fundraising.jpg"
+        alt="immagine a caso"
+        class="w-full object-cover aspect-[9/4]"
+      />
+      <div
+        class="absolute flex items-center gap-3 w-full h-fit bg-blue-950 opacity-60 bottom-0 px-6 py-4 z-10">
+        <div>
+          <img
+            class="w-24 flex-grow shadow-md"
+            src="/images/icons/logo-blanco.svg"
+            alt="logo bianco chabad"
+          />
+        </div>
+
+        <p
+          class="text-white font-raleway font-bold text-2xl uppercase flex-shrink shadow-md"
+          style="text-shadow: 0 0 5px rgb(37, 37, 37)">
+          PARTECIPA ALLA NOSTRA CAUSA! SCEGLI UNO DEI NOSTRI PROGETTI A CUI VUOI
+          CONTRIBUIRE CON LA TUA DONAZIONE
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <ContributeSection
+        progetto="Portiamo le matzot alle famiglie"
+        associazione="Beit chabad"
+        città="Milano"
+        immagine="../../images/parshat/acharei-kedoshim.jpeg"
+        testo="Portiamo le Matzot agli anziani e ai disabili"
+        rabbini="Rav Nazrolai, Rav Canarutto, Rav Igal Hazan"
+      />
+      <ContributeSection
+        progetto="Portiamo le matzot alle famiglie"
+        associazione="Beit chabad"
+        città="Milano"
+        immagine="../../images/parshat/acharei-kedoshim.jpeg"
+        testo="Portiamo le Matzot agli anziani e ai disabili"
+        rabbini="Rav Nazrolai, Rav Canarutto, Rav Igal Hazan"
+      />
+      <ContributeSection
+        progetto="Portiamo le matzot alle famiglie"
+        associazione="Beit chabad"
+        città="Milano"
+        immagine="../../images/parshat/acharei-kedoshim.jpeg"
+        testo="Portiamo le Matzot agli anziani e ai disabili"
+        rabbini="Rav Nazrolai, Rav Canarutto, Rav Igal Hazan"
+      />
+      <ContributeSection
+        progetto="Portiamo le matzot alle famiglie"
+        associazione="Beit chabad"
+        città="Milano"
+        immagine="../../images/parshat/acharei-kedoshim.jpeg"
+        testo="Portiamo le Matzot agli anziani e ai disabili"
+        rabbini="Rav Nazrolai, Rav Canarutto, Rav Igal Hazan"
+      />
+      <ContributeSection
+        progetto="Portiamo le matzot alle famiglie"
+        associazione="Beit chabad"
+        città="Milano"
+        immagine="../../images/parshat/acharei-kedoshim.jpeg"
+        testo="Portiamo le Matzot agli anziani e ai disabili"
+        rabbini="Rav Nazrolai, Rav Canarutto, Rav Igal Hazan"
+      />
+      <ContributeSection
+        progetto="Portiamo le matzot alle famiglie"
+        associazione="Beit chabad"
+        città="Milano"
+        immagine="../../images/parshat/acharei-kedoshim.jpeg"
+        testo="Portiamo le Matzot agli anziani e ai disabili"
+        rabbini="Rav Nazrolai, Rav Canarutto, Rav Igal Hazan"
+      />
+      <ContributeSection
+        progetto="Portiamo le matzot alle famiglie"
+        associazione="Beit chabad"
+        città="Milano"
+        immagine="../../images/parshat/acharei-kedoshim.jpeg"
+        testo="Portiamo le Matzot agli anziani e ai disabili"
+        rabbini="Rav Nazrolai, Rav Canarutto, Rav Igal Hazan"
+      />
+      <ContributeSection
+        progetto="Portiamo le matzot alle famiglie"
+        associazione="Beit chabad"
+        città="Milano"
+        immagine="../../images/parshat/acharei-kedoshim.jpeg"
+        testo="lorem ipsum febricitante godet ad quiqueris adipiscebant promisque aedificaverunt probandus est. aliquid abstinentia moverit legit probandae. lorem ipsum febricitante godet ad quiqueris adipiscebant promisque aedificaverunt probandus est. aliquid abstinentia moverit legit probandae. lorem ipsum febricitante godet ad quiqueris adipiscebant promisque aedificaverunt probandus est. aliquid abstinentia moverit legit probandae."
+        rabbini="Rav Nazrolai, Rav Canarutto, Rav Igal Hazan"
+      />
+    </div>
+  </section>
+  <section slot="sidebar" class="md:flex flex-col gap-4">
+    <div class="m-4 md:m-0">
+      <EventsPageSection
+        associazione="Beit chabad"
+        nome="Seder di Rosh Hashanah"
+        data="89/75/7805"
+      />
+    </div>
+
+    <div class="hidden md:block">
+      <Newsletter />
+    </div>
+  </section>
+</PageLayout>

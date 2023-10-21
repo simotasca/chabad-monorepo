@@ -4,7 +4,7 @@ import ShadowBox from "@/components/ui/ShadowBox.astro";
 import Tooltip from "@/components/ui/Tooltip.astro";
 import { formatDate } from "@/lib/shared/calendar.js";
 import type { Tables } from "@chabad/types/src/database";
-import { articleLinkTarget } from "@/lib/server/articles";
+import { articleLinkTarget } from "@/lib/shared/supabase/articles";
 
 type Article = Pick<
   Tables<"articles">,
@@ -128,3 +128,4 @@ const {
     </section>
   </ShadowBox>
 </div>
+ @/lib/shared/supabase/articles

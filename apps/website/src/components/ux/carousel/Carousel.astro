@@ -34,8 +34,8 @@ let {
   class AstroCarousel extends HTMLElement {
     container: HTMLDivElement;
     items: NodeListOf<HTMLDivElement>;
-    arrowPrevious: HTMLElement;
-    arrowNext: HTMLElement;
+    arrowPrevious!: HTMLElement;
+    arrowNext!: HTMLElement;
     lastItem: HTMLDivElement;
 
     isSlidin = false;
@@ -71,7 +71,7 @@ let {
       }
     }
 
-    touchStartX: number;
+    touchStartX!: number;
     initGestures() {
       this.addEventListener("touchstart", (e) => {
         this.touchStartX = e.touches[0].clientX;

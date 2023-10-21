@@ -1,0 +1,108 @@
+---
+import OrganizationSection from "@/components/OrganizationSection.astro";
+import Newsletter from "@/components/sidebar/Newsletter.astro";
+import EventsPageSection from "@/components/EventsPageSection.astro";
+import PageLayout from "@/layouts/PageLayout.astro";
+---
+
+<PageLayout>
+  <section slot="title">
+    <div
+      class="grid grid-cols-[1fr_auto_1fr] items-center pt-2 pb-[1px] sm:pt-4 sm:pb-3 px-4">
+      <div class="h-0.5 bg-white mr-4 mb-2 ml-9 border-t"></div>
+      <h1
+        class="text-2xl sm:text-4xl uppercase font-messiri text-white font-bold text-center">
+        punti chabad
+      </h1>
+      <div class="h-0.5 bg-white ml-4 mb-2 mr-9 border-t"></div>
+    </div>
+  </section>
+
+  <section slot="content-1" class="flex flex-col gap-4">
+    <OrganizationSection
+      associazione="Beit chabad"
+      città="Milano"
+      immagine="../../images/parshat/acharei-kedoshim.jpeg"
+      titoloContatti="CONTATTI"
+      indirizzo="via dei molari,25"
+      email="fabio@rovazzi.net"
+      telefono="34567891234"
+    />
+    <OrganizationSection
+      associazione="Beit chabad"
+      città="Milano"
+      immagine="../../images/parshat/acharei-kedoshim.jpeg"
+      titoloContatti="CONTATTI"
+      indirizzo="via dei molari,25"
+      email="fabio@rovazzi.net"
+      telefono="34567891234"
+    />
+    <OrganizationSection
+      associazione="Beit chabad"
+      città="Milano"
+      immagine="../../images/parshat/acharei-kedoshim.jpeg"
+      titoloContatti="CONTATTI"
+      indirizzo="via dei molari,25"
+      email="fabio@rovazzi.net"
+      telefono="34567891234"
+    />
+    <OrganizationSection
+      associazione="Beit chabad"
+      città="Milano"
+      immagine="../../images/parshat/acharei-kedoshim.jpeg"
+      titoloContatti="CONTATTI"
+      indirizzo="via dei molari,25"
+      email="fabio@rovazzi.net"
+      telefono="34567891234"
+    />
+    <OrganizationSection
+      associazione="Beit chabad"
+      città="Milano"
+      immagine="../../images/parshat/acharei-kedoshim.jpeg"
+      titoloContatti="CONTATTI"
+      indirizzo="via dei molari,25"
+      email="fabio@rovazzi.net"
+      telefono="34567891234"
+    />
+    <OrganizationSection
+      associazione="Beit chabad"
+      città="Milano"
+      immagine="../../images/parshat/acharei-kedoshim.jpeg"
+      titoloContatti="CONTATTI"
+      indirizzo="via dei molari,25"
+      email="fabio@rovazzi.net"
+      telefono="34567891234"
+    />
+    <OrganizationSection
+      associazione="Beit chabad"
+      città="Milano"
+      immagine="../../images/parshat/acharei-kedoshim.jpeg"
+      titoloContatti="CONTATTI"
+      indirizzo="via dei molari,25"
+      email="fabio@rovazzi.net"
+      telefono="34567891234"
+    />
+    <OrganizationSection
+      associazione="Beit chabad"
+      città="Milano"
+      immagine="../../images/parshat/acharei-kedoshim.jpeg"
+      titoloContatti="CONTATTI"
+      indirizzo="via dei molari,25"
+      email="fabio@rovazzi.net"
+      telefono="34567891234"
+    />
+  </section>
+  <section slot="sidebar" class="md:flex flex-col gap-4">
+    <div class="m-4 md:m-0">
+      <EventsPageSection
+        associazione="Beit chabad"
+        nome="Seder di Rosh Hashanah"
+        data="89/75/7805"
+      />
+    </div>
+
+    <div class="hidden md:block">
+      <Newsletter />
+    </div>
+  </section>
+</PageLayout>

@@ -1,8 +1,8 @@
 ---
 import ArticleSection from "@/components/blog/ArticleSection.astro";
-import Parshat from "@/components/blog/sidebar/Parshat.astro";
-import EventsSection from "@/components/blog/EventsSection.astro";
-import Newsletter from "@/components/blog/sidebar/Newsletter.astro";
+import EventsSection from "@/components/events/EventsSection.astro";
+import Newsletter from "@/components/sidebar/Newsletter.astro";
+import Parshat from "@/components/sidebar/Parshat.astro";
 import SectionTitle from "@/components/ui/SectionTitle.astro";
 import ShadowBox from "@/components/ui/ShadowBox.astro";
 import SidebarContainer from "@/components/ui/sidebar/SidebarContainer.astro";
@@ -47,8 +47,7 @@ const imgVideo = "/images/video-prova.jpg";
 
 <HomeLayout
   title="Chabad | Homepage"
-  description="sito del portale kosher più in voga d'italia"
->
+  description="sito del portale kosher più in voga d'italia">
   <div slot="content-1" class="flex flex-col gap-4">
     {
       articles.length > 0 && (
@@ -189,8 +188,7 @@ const imgVideo = "/images/video-prova.jpg";
         </div>
         <button
           id="arrow-previous"
-          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 left-0 md:-left-6 -translate-y-1/2 shadow"
-        >
+          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 left-0 md:-left-6 -translate-y-1/2 shadow">
           <img
             class="w-full"
             src="/images/icons/arrow-prev.svg"
@@ -199,8 +197,7 @@ const imgVideo = "/images/video-prova.jpg";
         </button>
         <button
           id="arrow-next"
-          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 right-0 md:-right-6 -translate-y-1/2 shadow"
-        >
+          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 right-0 md:-right-6 -translate-y-1/2 shadow">
           <img
             class="w-full"
             src="/images/icons/arrow-next.svg"
@@ -221,8 +218,7 @@ const imgVideo = "/images/video-prova.jpg";
         <div class="relative">
           <Carousel
             nextArrowId="arrow-next-event"
-            prevArrowId="arrow-previous-event"
-          >
+            prevArrowId="arrow-previous-event">
             {
               [...new Array(20)].map((p) => (
                 <CarouselItem>
@@ -239,8 +235,7 @@ const imgVideo = "/images/video-prova.jpg";
           </Carousel>
           <button
             id="arrow-previous-event"
-            class="absolute rounded-[100%] w-12 h-12 shadow left-0 top-1/2 -translate-x-5 lg:-translate-x-8 -translate-y-1/2"
-          >
+            class="absolute rounded-[100%] w-12 h-12 shadow left-0 top-1/2 -translate-x-5 lg:-translate-x-8 -translate-y-1/2">
             <img
               class="w-full"
               src="/images/icons/arrow-prev.svg"
@@ -249,8 +244,7 @@ const imgVideo = "/images/video-prova.jpg";
           </button>
           <button
             id="arrow-next-event"
-            class="absolute rounded-[100%] w-12 h-12 z-10 shadow right-0 top-1/2 translate-x-5 lg:translate-x-9 -translate-y-1/2"
-          >
+            class="absolute rounded-[100%] w-12 h-12 z-10 shadow right-0 top-1/2 translate-x-5 lg:translate-x-9 -translate-y-1/2">
             <img
               class="w-full"
               src="/images/icons/arrow-next.svg"

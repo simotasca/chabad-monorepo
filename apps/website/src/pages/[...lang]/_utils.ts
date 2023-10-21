@@ -1,6 +1,6 @@
+import { articlesMapper } from "@/lib/shared/supabase/articles";
 import { throwError } from "@/lib/shared/error";
 import supabase from "@/lib/shared/supabase";
-import { articleUrl, articlesMapper } from "@/lib/server/articles";
 
 export async function getData() {
   return {

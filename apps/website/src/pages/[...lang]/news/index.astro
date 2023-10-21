@@ -1,19 +1,12 @@
 ---
-import ShadowBox from "@/components/ui/ShadowBox.astro";
+import ArticlePageSection from "@/components/blog/PageArticleSection.astro";
+import EventsPageSection from "@/components/events/EventsPageSection.astro";
 import Newsletter from "@/components/sidebar/Newsletter.astro";
-import Parshat from "@/components/sidebar/Parshat.astro";
-import PageLayout from "src/layouts/PageLayout.astro";
-import PageArticleSection from "@/components/blog/PageArticleSection.astro";
-import SectionTitle from "@/components/ui/SectionTitle.astro";
-import { throwError } from "src/lib/shared/error";
+import ShadowBox from "@/components/ui/ShadowBox.astro";
+import { throwError } from "@/lib/shared/error";
 import supabase from "@/lib/shared/supabase";
 import { articlesMapper } from "@/lib/shared/supabase/articles";
-import { checkLangParam } from "@/lib/server/lang/lang";
-import { errorResponse } from "@/lib/server/error-response";
-
-if (!checkLangParam(Astro)) {
-  return errorResponse(Astro.url);
-}
+import PageLayout from "src/layouts/PageLayout.astro";
 
 const articles = await supabase
   .from("articles")
@@ -21,7 +14,7 @@ const articles = await supabase
   .limit(10)
   .then(({ error, data }) => {
     if (error) {
-      throwError("PAGE Articles", "Error fetching articles:" + error.message);
+      throwError("Page News", "Error fetching articles:" + error.message);
     }
     return data?.map(articlesMapper) || [];
   });
@@ -29,30 +22,30 @@ const articles = await supabase
 const mainArticle = articles.pop()!;
 ---
 
-<PageLayout title="Articoli" description="bla bla bla">
+<PageLayout title="news" description="">
   <section slot="title">
     <div
       class="grid grid-cols-[1fr_auto_1fr] items-center pt-2 pb-[1px] sm:pt-4 sm:pb-3 px-8">
       <div class="h-0.5 bg-white mr-4 mb-2 ml-9 border-t"></div>
       <h1
         class="text-2xl sm:text-4xl uppercase font-messiri text-white font-bold text-center">
-        Articoli
+        notizie
       </h1>
       <div class="h-0.5 bg-white ml-4 mb-2 mr-9 border-t"></div>
     </div>
   </section>
 
   <section slot="content-1" class="flex flex-col gap-4">
-    <PageArticleSection mainArticle={mainArticle} />
+    <ArticlePageSection mainArticle={mainArticle} />
 
     <ShadowBox>
       <div class="p-6">
-        <h1 class="mb-4">
-          <SectionTitle>Tutti gli articoli</SectionTitle>
-        </h1>
+        <h2
+          class="font-raleway text-2xl font-semibold text-blue-950 uppercase mb-4">
+          Tutte le notizie
+        </h2>
         <div
           class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-6">
-          <!-- TODO: SE getStrapiUrl da errore, l'errore risulta lanciato da questo file!!! -->
           {
             articles.map((a) => (
               <div>
@@ -73,15 +66,16 @@ const mainArticle = articles.pop()!;
   </section>
 
   <section slot="sidebar" class="md:flex flex-col gap-4">
-    <Parshat
-      title="acharei kedoshim"
-      date="15/giugno/2023"
-      image="images/parshat/acharei-kedoshim.jpeg"
-    />
+    <div class="m-4 md:m-0">
+      <EventsPageSection
+        associazione="Beit chabad"
+        nome="Seder di Rosh Hashanah"
+        data="89/75/7805"
+      />
+    </div>
 
     <div class="hidden md:block">
       <Newsletter />
     </div>
   </section>
 </PageLayout>
- @/lib/shared/supabase/articles

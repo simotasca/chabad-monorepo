@@ -1,4 +1,5 @@
 ---
+import routes from "@/lib/shared/routes";
 import Widget from "./Widget.astro";
 
 import cities from "@/assets/cities.json";
@@ -114,23 +115,33 @@ const stringCities = Object.keys(cities);
 
       <nav
         class="font-raleway font-bold text-base xs:text-lg sm:text-xl flex flex-col gap-y-3 xs:gap-y-4 px-12 xs:px-20 pb-[45px] pt-[38px]">
-        <span class="uppercase text-white mt-[1px]">home</span>
+        <a href={routes.home} class="uppercase text-white mt-[1px]">home</a>
         <div class="bg-gray-300 h-[1px] w-full"></div>
-        <span class="uppercase text-white mt-[1px]">articoli</span>
+        <a href={routes.articles} class="uppercase text-white mt-[1px]">
+          articoli
+        </a>
         <div class="bg-gray-300 h-[1px] w-full"></div>
-        <span class="uppercase text-white mt-[1px]">notizie</span>
+        <a href={routes.news} class="uppercase text-white mt-[1px]">notizie</a>
         <div class="bg-gray-300 h-[1px] w-full"></div>
-        <span class="uppercase text-white mt-[1px]">video lezioni</span>
+        <a href={routes.lessons} class="uppercase text-white mt-[1px]">
+          video lezioni
+        </a>
         <div class="bg-gray-300 h-[1px] w-full"></div>
-        <span class="uppercase text-white mt-[1px]">live</span>
+        <a href={routes.live} class="uppercase text-white mt-[1px]">live</a>
         <div class="bg-gray-300 h-[1px] w-full"></div>
-        <span class="uppercase text-white mt-[1px]">punti chabad</span>
+        <a href={routes.organizations} class="uppercase text-white mt-[1px]">
+          punti chabad
+        </a>
         <div class="bg-gray-300 h-[1px] w-full"></div>
-        <span class="uppercase text-white mt-[1px]">eventi</span>
+        <a href={routes.events} class="uppercase text-white mt-[1px]">eventi</a>
         <div class="bg-gray-300 h-[1px] w-full"></div>
-        <span class="uppercase text-white mt-[1px]">risorse</span>
+        <a href={routes.resources} class="uppercase text-white mt-[1px]">
+          risorse
+        </a>
         <div class="bg-gray-300 h-[1px] w-full"></div>
-        <span class="uppercase text-white mt-[1px]">contribuisci</span>
+        <a href={routes.contribute} class="uppercase text-white mt-[1px]">
+          contribuisci
+        </a>
       </nav>
     </div>
 
