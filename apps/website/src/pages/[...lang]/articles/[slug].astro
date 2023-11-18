@@ -1,4 +1,12 @@
 ---
+import ShadowBox from "@/components/ui/ShadowBox.astro";
+import Newsletter from "@/components/sidebar/Newsletter.astro";
+import Parshat from "@/components/sidebar/Parshat.astro";
+import PageLayout from "src/layouts/PageLayout.astro";
+import Tooltip from "@/components/ui/Tooltip.astro";
+import SectionTitle from "@/components/ui/SectionTitle.astro";
+import { articlesMapper } from "@/lib/shared/supabase/articles";
+
 import BaseHead from "@/components/BaseHead.astro";
 import { articleNotFoundResponse } from "@/lib/server/error-response";
 import { checkLangParam } from "@/lib/server/lang/lang";
@@ -6,6 +14,7 @@ import { throwError } from "@/lib/shared/error";
 import supabase from "@/lib/shared/supabase";
 import { compile, run } from "@mdx-js/mdx";
 import * as runtime from "react/jsx-runtime"; // Production.
+import { formatDate } from "@/lib/shared/calendar";
 // import * as runtime from 'react/jsx-dev-runtime' // Development.
 
 if (!checkLangParam(Astro)) {
@@ -17,21 +26,20 @@ const article = !slug
   ? null
   : await supabase
       .from("articles")
-      .select("title, content")
+      .select("title, content, date, image, category")
       .eq("slug", slug)
-      .single()
       .then(({ data, error }) => {
         if (error) {
           throwError(
             "Article page",
-            "Error fetching articles: " + error.message
+            "Error fetching article: " + error.message
           );
         }
-        return data;
+        return !data?.length ? null : data[0];
       });
 
 if (!article) {
-  return articleNotFoundResponse();
+  return articleNotFoundResponse(Astro.url);
 }
 
 // funziona solo se i componenti sono importabili
@@ -50,39 +58,142 @@ const code = !article
     );
 
 const Content = (await run(code, runtime)).default || "div";
+
+const articles = await supabase
+  .from("articles")
+  .select()
+  .limit(10)
+  .then(({ error, data }) => {
+    if (error) {
+      throwError("PAGE Article", "Error fetching articles:" + error.message);
+    }
+    return data?.map(articlesMapper) || [];
+  });
 ---
 
-<!doctype html>
-<html>
-  <head>
-    <BaseHead title={article.title} description={"bla bla bla"} />
-  </head>
-  <body class="py-8 px-4">
-    <div class="font-bold max-w-prose mx-auto">
-      <p>
-        <a
-          href="/"
-          class="block text-sm underline text-blue-500 font-normal -mb-4">
-          back to home . . .
-        </a>
-        <br />
-        <span class="uppercase text-slate-400">
-          Non c'è la pagina del singolo articolo
-        </span>
-      </p>
-      <h2 class="uppercase text-4xl text-blue-800 -mt-1 mb-4">
-        {article.title}
-      </h2>
+<PageLayout title="Articolo" description="bla bla bla">
+  <section slot="title">
+    <div class="h-6"></div>
+  </section>
+
+  <section slot="content-1">
+    <ShadowBox>
+      <div class="pb-6 px-6 pt-4">
+        <article>
+          <div class="relative grid grid-cols-[1fr_auto_1fr] items-center mt-2">
+            <div class="absolute flex -top-1 w-full">
+              <img
+                class="w-20 mb-1"
+                src="/src/images/chabad-text-black.svg"
+                alt="logo chabad text black"
+              />
+              <i class="font-raleway text-sm font-light ml-auto mr-0"
+                >{formatDate(article.date)}</i
+              >
+            </div>
+            <div class="bg-black h-[1px] w-full"></div>
+            <div class="flex items-center gap-2 px-4">
+              <img
+                class="w-6"
+                src="/src/images/logo-black.svg"
+                alt="logo chabad black"
+              />
+            </div>
+            <div class="bg-black h-[1px] w-full mt-1"></div>
+          </div>
+
+          <div class="flex">
+            <div class="ml-0 mr-auto">
+              <p
+                class="font-raleway uppercase text-blue-950 font-bold items-end"
+              >
+                {article.category}
+              </p>
+            </div>
+            <div class="flex gap-1 justify-end items-center">
+              <span class="text-xs text-blue-950 font-medium font-raleway"
+                >share</span
+              >
+              <Tooltip>
+                <img
+                  class="sm:w-8"
+                  src="/images/icons/share.svg"
+                  alt="share icon"
+                />
+                <div
+                  class="bg-black bg-opacity-70 text-white px-2"
+                  slot="tooltip"
+                >
+                  share
+                </div>
+              </Tooltip>
+            </div>
+          </div>
+          <div class="font-display font-bold text-3xl sm:text-4xl pb-4 -mt-1">
+            <h1 class="leading-8">{article.title}</h1>
+          </div>
+
+          <div class="pb-6">
+            <img class="aspect-video" src={article.image} alt="bla bla bla" />
+          </div>
+          <div
+            class="pb-4 prose prose:text-black prose-h1:text-red-500 prose-h2:text-3xl prose:font-raleway prose:text-black prose-h2:font-display prose-h2:my-2 prose-h3:uppercase prose-h3:my-1"
+          >
+            <Content />
+          </div>
+        </article>
+      </div>
+    </ShadowBox>
+
+    <div class="h-4"></div>
+
+    <section slot="content-2">
+      <ShadowBox>
+        <div class="p-6">
+          <h1 class="mb-4">
+            <SectionTitle>Tutti gli articoli</SectionTitle>
+          </h1>
+          <div
+            class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-6"
+          >
+            <!-- TODO: SE getStrapiUrl da errore, l'errore risulta lanciato da questo file!!! -->
+            {
+              articles.map((a) => (
+                <>
+                  <a href={a.url}>
+                    <div>
+                      <img
+                        class="w-full aspect-video"
+                        src={a.image}
+                        alt="main article image"
+                      />
+                      <p class="text-lg font-display font-medium mt-2 leading-tight">
+                        {a.title}
+                      </p>
+                    </div>
+                  </a>
+                </>
+              ))
+            }
+          </div>
+        </div>
+      </ShadowBox>
+    </section>
+  </section>
+
+  <section slot="sidebar" class="md:flex flex-col gap-4">
+    <div class="max-sm:hidden">
+      <Parshat
+        title="acharei kedoshim"
+        date="15/giugno/2023"
+        image="images/parshat/acharei-kedoshim.jpeg"
+      />
     </div>
-    <div class="prose mx-auto">
-      <Content />
+
+    <div class="md:hidden h-4"></div>
+
+    <div class="hidden md:block">
+      <Newsletter />
     </div>
-    <div class="max-w-prose mx-auto">
-      <a
-        href="/"
-        class="block text-right text-sm underline text-blue-600 font-normal">
-        . . . back to home
-      </a>
-    </div>
-  </body>
-</html>
+  </section>
+</PageLayout>

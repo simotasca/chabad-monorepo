@@ -13,15 +13,15 @@ export function checkLangParam(Astro: {
 
 const translationCache = new Map<string, Map<string, Object>>();
 
-export async function getTranslationFactory(id: string, lang: string | URL) {
+export async function getTranslations(id: string, lang: string | URL) {
   let translations: Map<string, Object>;
 
-  if (translationCache.has(id)) {
-    translations = translationCache.get(id)!;
-  } else {
+  // if (translationCache.has(id)) {
+  //   translations = translationCache.get(id)!;
+  // } else {
     translations = await loadTranslationsFromFiles(id);
-    translationCache.set(id, translations);
-  }
+    // translationCache.set(id, translations);
+  // } 
 
   const translationLang = typeof lang === "string" ? lang : getUrlLang(lang);
 

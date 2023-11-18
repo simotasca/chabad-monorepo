@@ -1,10 +1,6 @@
 import type { Tables } from "@chabad/types/src/database";
-
-type WithSlug = Pick<Tables<"articles">, "slug">;
-
-export function articleUrl({ slug }: WithSlug) {
-  return `/articles/${slug}`;
-}
+import type { WithSlug } from "../routes";
+import routes from "../routes";
 
 export function articleLinkTarget({ url }: { url: string }) {
   return url.startsWith("http") ? "_blank" : "_self";
@@ -14,5 +10,5 @@ export function articleLinkTarget({ url }: { url: string }) {
  * maps the article's **slug** to the corresponding **Astro url**
  */
 export function articlesMapper<T extends WithSlug>(a: T) {
-  return { ...a, url: articleUrl(a) };
+  return { ...a, url: routes.article(a) };
 }

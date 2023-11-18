@@ -1,15 +1,18 @@
 ---
 import ShadowBox from "@/components/ui/ShadowBox.astro";
+import { getTranslations } from "@/lib/server/lang/lang";
+
+const t = await getTranslations("components/newsletter", Astro.url);
 ---
 
 <ShadowBox>
   <div class="p-4">
     <h3
       class="text-blue-950 font-semibold font-raleway text-2xl md:text-xl lg:text-2xl leading-tight uppercase">
-      Newsletter
+      {t("title")}
     </h3>
     <p class="italic font-raleway text-neutral-700 mt-1 mb-2">
-      Iscriviti alla newsletter per essere sempre aggiornato!
+      {t("paragraph")}
     </p>
     <div
       class="flex focus-within:ring-1 focus-within:ring-blue-900 focus-within:outline-none border border-neutral-200 rounded-lg shadow-md">
@@ -22,7 +25,7 @@ import ShadowBox from "@/components/ui/ShadowBox.astro";
       />
     </div>
     <div class="bg-red-700 w-fit py-1 px-4 cursor-pointer mt-4">
-      <span class="text-center text-white font-montserrat">ISCRIVITI</span>
+      <span class="text-center text-white font-montserrat uppercase">{t("subscribe-button")}</span>
     </div>
   </div>
 </ShadowBox>

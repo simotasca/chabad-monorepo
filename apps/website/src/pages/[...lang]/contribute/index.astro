@@ -3,6 +3,9 @@ import ContributeSection from "@/components/contribute/ContributeSection.astro";
 import Newsletter from "@/components/sidebar/Newsletter.astro";
 import EventsPageSection from "@/components/events/EventsPageSection.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
+import { getTranslations } from "@/lib/server/lang/lang";
+
+const t = await getTranslations("pages/contribute", Astro.url);
 ---
 
 <PageLayout title="Contribute" description="bla bla">
@@ -25,12 +28,11 @@ import PageLayout from "@/layouts/PageLayout.astro";
           />
         </div>
 
-        <p
+        <h1
           class="text-white font-raleway font-bold text-2xl uppercase flex-shrink shadow-md"
           style="text-shadow: 0 0 5px rgb(37, 37, 37)">
-          PARTECIPA ALLA NOSTRA CAUSA! SCEGLI UNO DEI NOSTRI PROGETTI A CUI VUOI
-          CONTRIBUIRE CON LA TUA DONAZIONE
-        </p>
+         {t("main-title")}
+        </h1>
       </div>
     </div>
 

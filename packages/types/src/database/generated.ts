@@ -91,75 +91,291 @@ export interface Database {
         }
         Relationships: []
       }
-      organization_contacts: {
+      contacts: {
         Row: {
-          content: string
           created_at: string
-          description: string
           id: number
+          id_event: number | null
           id_organization: number | null
+          key: Database["public"]["Enums"]["contacts_key"]
+          value: string
         }
         Insert: {
-          content: string
           created_at?: string
-          description: string
           id?: number
+          id_event?: number | null
           id_organization?: number | null
+          key: Database["public"]["Enums"]["contacts_key"]
+          value: string
         }
         Update: {
-          content?: string
           created_at?: string
-          description?: string
           id?: number
+          id_event?: number | null
           id_organization?: number | null
+          key?: Database["public"]["Enums"]["contacts_key"]
+          value?: string
         }
         Relationships: [
           {
-            foreignKeyName: "organization_contacts_id_organization_fkey"
+            foreignKeyName: "contacts_id_event_fkey"
+            columns: ["id_event"]
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contacts_id_organization_fkey"
             columns: ["id_organization"]
             referencedRelation: "organizations"
             referencedColumns: ["id"]
           }
         ]
       }
+      events: {
+        Row: {
+          city: string
+          created_at: string
+          date: string | null
+          id: number
+          main_image: string | null
+          markdown: string | null
+          name: string
+          slug: string
+        }
+        Insert: {
+          city: string
+          created_at?: string
+          date?: string | null
+          id?: number
+          main_image?: string | null
+          markdown?: string | null
+          name: string
+          slug: string
+        }
+        Update: {
+          city?: string
+          created_at?: string
+          date?: string | null
+          id?: number
+          main_image?: string | null
+          markdown?: string | null
+          name?: string
+          slug?: string
+        }
+        Relationships: []
+      }
+      events_organizations: {
+        Row: {
+          created_at: string
+          id: number
+          id_event: number
+          id_organization: number
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          id_event: number
+          id_organization: number
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          id_event?: number
+          id_organization?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "events_organizations_id_event_fkey"
+            columns: ["id_event"]
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "events_organizations_id_organization_fkey"
+            columns: ["id_organization"]
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      live_responsibles: {
+        Row: {
+          created_at: string
+          id: number
+          id_live: number | null
+          id_responsible: number | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          id_live?: number | null
+          id_responsible?: number | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          id_live?: number | null
+          id_responsible?: number | null
+        }
+        Relationships: []
+      }
+      live_video: {
+        Row: {
+          category: Database["public"]["Enums"]["video_live_category"]
+          created_at: string
+          date: string
+          id: number
+          responsible: number | null
+          slug: string
+          title: string
+          youtube_link: string
+        }
+        Insert: {
+          category: Database["public"]["Enums"]["video_live_category"]
+          created_at?: string
+          date?: string
+          id?: number
+          responsible?: number | null
+          slug: string
+          title: string
+          youtube_link: string
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["video_live_category"]
+          created_at?: string
+          date?: string
+          id?: number
+          responsible?: number | null
+          slug?: string
+          title?: string
+          youtube_link?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "live_video_responsible_fkey"
+            columns: ["responsible"]
+            referencedRelation: "responsibles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      news: {
+        Row: {
+          category: Database["public"]["Enums"]["news_category"] | null
+          content: string
+          created_at: string
+          date: string
+          draft: boolean
+          id: number
+          image: string
+          preview: string
+          slug: string
+          title: string
+        }
+        Insert: {
+          category?: Database["public"]["Enums"]["news_category"] | null
+          content: string
+          created_at?: string
+          date?: string
+          draft?: boolean
+          id?: number
+          image: string
+          preview: string
+          slug: string
+          title: string
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["news_category"] | null
+          content?: string
+          created_at?: string
+          date?: string
+          draft?: boolean
+          id?: number
+          image?: string
+          preview?: string
+          slug?: string
+          title?: string
+        }
+        Relationships: []
+      }
       organizations: {
         Row: {
           address: string
           city: string
-          contacts: string[] | null
           content: string | null
           created_at: string
           id: number
-          "main image": string | null
+          link_donate: string | null
+          main_image: string | null
+          markdown: string
           name: string
+          slogan: string | null
           slug: string
           website: string | null
         }
         Insert: {
           address: string
           city: string
-          contacts?: string[] | null
           content?: string | null
           created_at?: string
           id?: number
-          "main image"?: string | null
+          link_donate?: string | null
+          main_image?: string | null
+          markdown: string
           name: string
+          slogan?: string | null
           slug?: string
           website?: string | null
         }
         Update: {
           address?: string
           city?: string
-          contacts?: string[] | null
           content?: string | null
           created_at?: string
           id?: number
-          "main image"?: string | null
+          link_donate?: string | null
+          main_image?: string | null
+          markdown?: string
           name?: string
+          slogan?: string | null
           slug?: string
           website?: string | null
         }
         Relationships: []
+      }
+      responsibles: {
+        Row: {
+          created_at: string
+          email: string
+          id: number
+          id_organization: number | null
+          name: string
+          telephone: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: number
+          id_organization?: number | null
+          name: string
+          telephone?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: number
+          id_organization?: number | null
+          name?: string
+          telephone?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "responsibles_id_organization_fkey"
+            columns: ["id_organization"]
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       scraped: {
         Row: {
@@ -199,10 +415,37 @@ export interface Database {
         }
         Returns: string[]
       }
+      events_with_organizations: {
+        Args: {
+          limitation: number
+        }
+        Returns: {
+          e_id: number
+          e_created_at: string
+          e_name: string
+          e_markdown: string
+          e_main_image: string
+          e_slug: string
+          o_id: number
+          o_name: string
+        }[]
+      }
     }
     Enums: {
       article_category: "torah" | "family"
+      contacts_key:
+        | "facebook"
+        | "instagram"
+        | "tiktok"
+        | "youtube"
+        | "twitter"
+        | "linkedin"
+        | "telephone"
+        | "email"
+        | "iban"
+      news_category: "mazaltov" | "comunità" | "politica" | "società"
       scraper_website: "it-chabad"
+      video_live_category: "video" | "live"
     }
     CompositeTypes: {
       [_ in never]: never

@@ -8,7 +8,7 @@ import SectionTitle from "@/components/ui/SectionTitle.astro";
 import { throwError } from "src/lib/shared/error";
 import supabase from "@/lib/shared/supabase";
 import { articlesMapper } from "@/lib/shared/supabase/articles";
-import { checkLangParam } from "@/lib/server/lang/lang";
+import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
 import { errorResponse } from "@/lib/server/error-response";
 
 if (!checkLangParam(Astro)) {
@@ -18,6 +18,7 @@ if (!checkLangParam(Astro)) {
 const articles = await supabase
   .from("articles")
   .select()
+  .order("date", { ascending: false })
   .limit(10)
   .then(({ error, data }) => {
     if (error) {
@@ -27,16 +28,23 @@ const articles = await supabase
   });
 
 const mainArticle = articles.pop()!;
+
+const t = await getTranslations("pages/articles", Astro.url);
+
+console.log("TITOLO:", t("main.title"));
+console.log("SOTTO-TITOLO:", t("main.subtitle"));
 ---
 
 <PageLayout title="Articoli" description="bla bla bla">
   <section slot="title">
     <div
-      class="grid grid-cols-[1fr_auto_1fr] items-center pt-2 pb-[1px] sm:pt-4 sm:pb-3 px-8">
+      class="grid grid-cols-[1fr_auto_1fr] items-center pt-2 pb-[1px] sm:pt-4 sm:pb-3 px-8"
+    >
       <div class="h-0.5 bg-white mr-4 mb-2 ml-9 border-t"></div>
       <h1
-        class="text-2xl sm:text-4xl uppercase font-messiri text-white font-bold text-center">
-        Articoli
+        class="text-2xl sm:text-4xl uppercase font-messiri text-white font-bold text-center"
+      >
+        {t("main-title")}
       </h1>
       <div class="h-0.5 bg-white ml-4 mb-2 mr-9 border-t"></div>
     </div>
@@ -48,23 +56,26 @@ const mainArticle = articles.pop()!;
     <ShadowBox>
       <div class="p-6">
         <h1 class="mb-4">
-          <SectionTitle>Tutti gli articoli</SectionTitle>
+          <SectionTitle>{t("articles-section.title")}</SectionTitle>
         </h1>
         <div
-          class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-6">
+          class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-6"
+        >
           <!-- TODO: SE getStrapiUrl da errore, l'errore risulta lanciato da questo file!!! -->
           {
             articles.map((a) => (
-              <div>
-                <img
-                  class="w-full aspect-video"
-                  src={a.image}
-                  alt="main article image"
-                />
-                <p class="text-lg font-display font-medium mt-2 leading-tight">
-                  {a.title}
-                </p>
-              </div>
+              <a href={a.url}>
+                <div>
+                  <img
+                    class="w-full aspect-video"
+                    src={a.image}
+                    alt="main article image"
+                  />
+                  <p class="text-lg font-display font-medium mt-2 leading-tight">
+                    {a.title}
+                  </p>
+                </div>
+              </a>
             ))
           }
         </div>
@@ -84,4 +95,3 @@ const mainArticle = articles.pop()!;
     </div>
   </section>
 </PageLayout>
- @/lib/shared/supabase/articles

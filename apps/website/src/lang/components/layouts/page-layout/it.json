@@ -1,0 +1,31 @@
+{
+    "contacts": {
+        "title": "Contatti",
+        "email": "email",
+        "telephone": "Telefono",
+        "address": "indirizzo"
+    },
+
+    "locations-title": "Sedi",
+
+    "newsletter-paragraph": "Iscriviti alla newsletter per essere sempre aggiornato!",
+    "subscribe-button": "Iscriviti",
+
+    "navbar-menu": {
+        "home": "Home",
+        "news": "Notizie",
+        "articles": "Articoli",
+        "video-live": "Live-Video",
+        "organizations": "Punti Chabad",
+        "events": "Eventi",
+        "about-us": "Chi siamo",
+        "resources": "Risorse",
+        "contributes": "Contribuisci"
+    },
+
+    "terms-and-conditions": "Termini e condizioni",
+
+    "donate-button": "Dona"
+        
+    
+}
