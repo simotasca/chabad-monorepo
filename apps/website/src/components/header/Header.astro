@@ -16,6 +16,9 @@ import iconMenu from "@/images/icons/menu-icon.svg";
 import iconSearch from "@/images/icons/search.png";
 import imgLogoText from "@/images/logo-text.svg";
 import imgLogo from "@/images/logo.svg";
+import { getTranslations } from "@/lib/server/lang/lang";
+
+const t = await getTranslations("components/header", Astro.url);
 ---
 
 <MenuCell />
@@ -27,12 +30,14 @@ import imgLogo from "@/images/logo.svg";
       <div class="grid grid-cols-2 h-8 md:h-12">
         <!-- CELLULARE -->
         <div
-          class="md:hidden flex gap-x-3 sm:gap-x-5 justify-start items-center cursor-pointer">
+          class="md:hidden flex gap-x-3 sm:gap-x-5 justify-start items-center cursor-pointer"
+        >
           <div>
             <Widget icon="/images/icons/location.svg">
               <select
                 data-cities-select
-                class="bg-transparent border rounded-sm border-white border-opacity-40 text-white cursor-pointer w-12 sm:w-18 overflow-ellipsis uppercase xr-1 sm:pr-1">
+                class="bg-transparent border rounded-sm border-white border-opacity-40 text-white cursor-pointer w-12 sm:w-18 overflow-ellipsis uppercase xr-1 sm:pr-1"
+              >
                 <option selected value="">---</option>
                 {
                   stringCities.map((c) => (
@@ -46,25 +51,26 @@ import imgLogo from "@/images/logo.svg";
           </div>
           <div class="xr-1">
             <Widget icon="/images/icons/candles.svg">
-              <span class="hidden sm:inline">VEN</span>
+              <span class="hidden sm:inline">{t("dates.fri")}</span>
               <span data-shabbes-start>--:--</span>
             </Widget>
             <div class="xs:hidden -translate-y-[2px]">
               <Widget icon="/images/icons/stars.svg">
-                <span class="hidden">SAB</span>
+                <span class="hidden">{t("dates.sat")}</span>
                 <span data-shabbes-end>--:--</span>
               </Widget>
             </div>
           </div>
           <div class="hidden xs:inline">
             <Widget icon="/images/icons/stars.svg">
-              <span class="xs:hidden sm:inline">SAB</span>
+              <span class="xs:hidden sm:inline">{t("dates.sat")}</span>
               <span data-shabbes-end>--:--</span>
             </Widget>
           </div>
         </div>
         <div
-          class="md:hidden flex items-center justify-end gap-4 text-sm sm:text-base text-white font-montserrat">
+          class="md:hidden flex items-center justify-end gap-4 text-sm sm:text-base text-white font-montserrat"
+        >
           <select class="bg-transparent" id="language-select">
             <option selected value="">Italiano</option>
           </select>
@@ -73,10 +79,12 @@ import imgLogo from "@/images/logo.svg";
 
         <!-- DESKTOP -->
         <div
-          class="hidden pr-8 md:grid grid-cols-[60px_auto] md:gap-3 lg:gap-20 xs:gap-16">
+          class="hidden pr-8 md:grid grid-cols-[60px_auto] md:gap-3 lg:gap-20 xs:gap-16"
+        >
           <div class="hidden md:flex items-center">
             <button
-              class="w-8 aspect-square bg-white border-blue-800 rounded-full p-2">
+              class="w-8 aspect-square bg-white border-blue-800 rounded-full p-2"
+            >
               <Image
                 class="w-full h-full translate-x-px translate-y-px"
                 src={iconSearch}
@@ -87,15 +95,16 @@ import imgLogo from "@/images/logo.svg";
 
           <div class="hidden md:flex items-end font-raleway">
             <ul class="flex gap-2 text-sm">
-              <MenuItem>Feed</MenuItem>
-              <MenuItem>Newsletter</MenuItem>
-              <MenuItem>Accedi</MenuItem>
+              <MenuItem>{t("menu-items.feed")}</MenuItem>
+              <MenuItem>{t("menu-items.newsletter")}</MenuItem>
+              <MenuItem>{t("menu-items.login")}</MenuItem>
             </ul>
           </div>
 
           <!-- CELLULARE -->
           <div
-            class="md:hidden flex items-center justify-end gap-4 text-xs xs:text-sm sm:text-base text-white font-montserrat">
+            class="md:hidden flex items-center justify-end gap-4 text-xs xs:text-sm sm:text-base text-white font-montserrat"
+          >
             <select class="bg-transparent mr-auto">Italiano</select>
             <span>ב"ה</span>
           </div>
@@ -103,7 +112,8 @@ import imgLogo from "@/images/logo.svg";
 
         <!-- DESKTOP -->
         <ul
-          class="hidden pl-8 pb-1 md:flex items-end justify-end gap-8 text-slate-200 font-raleway text-sm">
+          class="hidden pl-8 pb-1 md:flex items-end justify-end gap-8 text-slate-200 font-raleway text-sm"
+        >
           <li class="font-bold text-white">
             <button>Italiano</button>
           </li>
@@ -119,7 +129,8 @@ import imgLogo from "@/images/logo.svg";
     </div>
     <div
       style={{ boxShadow: "0px 0px 4px #0F60DD" }}
-      class="w-full h-[2px] bg-[#3363AC]">
+      class="w-full h-[2px] bg-[#3363AC]"
+    >
     </div>
   </div>
 
@@ -127,14 +138,17 @@ import imgLogo from "@/images/logo.svg";
   <div class="relative chabad-container px-4 mx-auto">
     <!-- ELLISSE -->
     <div
-      class="absolute top-0 left-1/2 -translate-y-1/2 -translate-x-1/2 -z-50">
+      class="absolute top-0 left-1/2 -translate-y-1/2 -translate-x-1/2 -z-50"
+    >
       <div
-        class="w-[calc(120vw+3rem)] lg:w-[calc(170vw+3rem)] h-[calc(90vw+3rem)] lg:h-[calc(70vw+3rem)] bg-white rounded-[100%]">
+        class="w-[calc(120vw+3rem)] lg:w-[calc(170vw+3rem)] h-[calc(90vw+3rem)] lg:h-[calc(70vw+3rem)] bg-white rounded-[100%]"
+      >
       </div>
     </div>
 
     <div
-      class="absolute top-0 left-1/2 -translate-y-1/2 -translate-x-1/2 -z-50">
+      class="absolute top-0 left-1/2 -translate-y-1/2 -translate-x-1/2 -z-50"
+    >
       {
         /* <div
         style={{ boxShadow: "inset 0 0 20rem 2rem black" }}
@@ -145,13 +159,15 @@ import imgLogo from "@/images/logo.svg";
           background:
             "radial-gradient(46.4% 56.57% at 50.47% 39.48%, #00378A 0%, #002D70 37.48%, #002D70 81.75%, #001C46 96.02%)",
         }}
-        class="w-[120vw] lg:w-[170vw] h-[90vw] lg:h-[70vw] rounded-[100%]">
+        class="w-[120vw] lg:w-[170vw] h-[90vw] lg:h-[70vw] rounded-[100%]"
+      >
       </div>
     </div>
 
     <!-- GRIDROW -->
     <div
-      class="grid grid-cols-[1fr_auto_1fr] gap-x-10 xs:gap-x-16 md:gap-x-10 lg:gap-x-16 items-center md:pt-6">
+      class="grid grid-cols-[1fr_auto_1fr] gap-x-10 xs:gap-x-16 md:gap-x-10 lg:gap-x-16 items-center md:pt-6"
+    >
       <!-- DESKTOP -->
       <div class="hidden md:block">
         <ul class="flex flex-wrap gap-6 gap-y-1 justify-end mb-1">
@@ -164,7 +180,8 @@ import imgLogo from "@/images/logo.svg";
       <!-- CELLULARE -->
       <div class="flex md:hidden items-center xs:pl-4">
         <button
-          class="w-8 aspect-square bg-white border-blue-800 rounded-full p-2">
+          class="w-8 aspect-square bg-white border-blue-800 rounded-full p-2"
+        >
           <Image
             class="w-full h-full translate-y-px translate-x-px"
             src={iconSearch}
@@ -192,12 +209,17 @@ import imgLogo from "@/images/logo.svg";
       </div>
 
       <!-- DESKTOP -->
+
+      <!-- TODO: aggiungere per il desktop la possibilità di vedere il testo della città mentre lo si scrive 
+      (è anche un modo per far vedere all'utente che ha cliccato la barra di testo mentre si caricano le cities) -->
+
       <div class="hidden md:block">
         <ul class="flex flex-wrap gap-4 gap-y-1 mb-1">
           <Widget icon="/images/icons/location.svg">
             <select
               data-cities-select
-              class="bg-transparent border rounded-sm border-white border-opacity-40 text-white cursor-pointer w-24 overflow-ellipsis uppercase pr-1">
+              class="bg-transparent border rounded-sm border-white border-opacity-40 text-white cursor-pointer w-24 overflow-ellipsis uppercase pr-1"
+            >
               <option selected value="">---</option>
               {
                 stringCities.map((c) => (
@@ -209,10 +231,12 @@ import imgLogo from "@/images/logo.svg";
             </select>
           </Widget>
           <Widget icon="/images/icons/candles.svg">
-            VEN <span data-shabbes-start>--:--</span>
+            {t("dates.fri")}
+            <span data-shabbes-start>--:--</span>
           </Widget>
           <Widget icon="/images/icons/stars.svg">
-            SAB <span data-shabbes-end>--:--</span>
+            {t("dates.sat")}
+            <span data-shabbes-end>--:--</span>
           </Widget>
         </ul>
       </div>
@@ -220,7 +244,8 @@ import imgLogo from "@/images/logo.svg";
       <!-- CELLULARE -->
       <div
         data-sidebar-toggle
-        class="md:hidden flex h-7 ml-auto xs:mr-4 items-center justify-end">
+        class="md:hidden flex h-7 ml-auto xs:mr-4 items-center justify-end"
+      >
         <Image src={iconMenu} alt="hamburger menu" />
       </div>
     </div>
@@ -228,25 +253,32 @@ import imgLogo from "@/images/logo.svg";
 
   <!-- NAVBAR -->
   <div class="bg-slate-100 border-y border-blue-950 py-1 md:py-2 xl:mt-1">
-    <nav class="chabad-container px-4 mx-auto">
+    <nav class="chabad-container mx-auto">
       <ul
-        class="flex justify-center gap-5 xs:gap-8 lg:gap-14 text-base md:text-lg lg:text-xl text-blue-950 font-semibold font-montserrat translate-y-px uppercase">
+        class="flex justify-center gap-5 xs:gap-8 lg:gap-14 text-base md:text-lg lg:text-xl text-blue-950 font-semibold font-montserrat translate-y-px uppercase"
+      >
         <li class="md:hidden">
-          <a href={routes.lessons} class="text-red-800">live</a>
+          <a href={routes.live} class="text-red-800">live</a>
         </li>
-        <li><a href={routes.articles}>articoli</a></li>
-        <li><a href={routes.news}>notizie</a></li>
+        <li><a href={routes.news}>{t("navbar.news")}</a></li>
+        <li><a href={routes.articles}>{t("navbar.articles")}</a></li>
         <li class="hidden sm:block">
-          <a href={routes.chabad}>chabad</a>
+          <a href={routes.live}>{t("navbar.video-live")}</a>
         </li>
         <li class="hidden md:block">
-          <a href={routes.resources}>risorse</a>
+          <a href={routes.organizations()}>{t("navbar.organizations")}</a>
         </li>
-        <li class="hidden xs:block">
-          <a href={routes.contribute}>contribuisci</a>
-        </li>
+        <!-- <li class="hidden xs:block">
+          <a href={routes.about}>{t("navbar.about-us")}</a>
+        </li> -->
+        <!-- <li class="hidden md:block">
+          <a href={routes.resources}>{t("navbar.resources")}</a>
+        </li> -->
+        <!-- <li class="hidden md:block">
+        <a href={routes.contacts}>{t("navbar.contacts")}</a>
+      </li> -->
         <li class="hidden md:block">
-          <a href={routes.contacts}>contatti</a>
+          <a href={routes.contribute}>{t("navbar.contributes")}</a>
         </li>
       </ul>
     </nav>

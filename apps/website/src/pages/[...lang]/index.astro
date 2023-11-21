@@ -12,7 +12,14 @@ import Carousel from "@/components/ux/carousel/Carousel.astro";
 import CarouselItem from "@/components/ux/carousel/CarouselItem.astro";
 import HomeLayout from "@/layouts/HomeLayout.astro";
 import { errorResponse } from "@/lib/server/error-response";
-import { checkLangParam } from "@/lib/server/lang/lang";
+import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
+import { throwError } from "@/lib/shared/error";
+import supabase from "@/lib/shared/supabase";
+import {
+  eventsMapper,
+  eventsWithOrganizationsMapper,
+} from "@/lib/shared/supabase/events";
+import { livesMapper } from "@/lib/shared/supabase/live";
 import { getData } from "./_utils";
 
 /** Non so come evitare di scriverlo ogni volta */
@@ -20,15 +27,13 @@ if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
 }
 
-const { articles, scraped, organizations } = await getData();
+const { articles, scraped, organizations1, organizations2 } = await getData();
 
-console.log("guarda qua le associazioni:", organizations);
+const t = await getTranslations("pages/home", Astro.url);
 
-const halforganizations = Math.round(organizations.length / 2);
+console.log("TITOLO", t("main.title"));
+console.log("SOTTO-TITOLO", t("main.subtitle"));
 
-const organizations1 = organizations.slice(0, halforganizations);
-
-const organizations2 = organizations.slice(halforganizations);
 // const news = [];
 
 // const last24hArticles = articles.filter(
@@ -40,19 +45,46 @@ const organizations2 = organizations.slice(halforganizations);
 //   .sort((a, b) => Number(a.date) - Number(b.date))
 //   .slice(0, 4);
 
-const imgVideo = "/images/video-prova.jpg";
+const events = await supabase
+  .from("events")
+  .select("*, events_organizations(*, organizations(*))")
+  .limit(10)
+  .then(({ error, data }) => {
+    if (error) {
+      throwError("PAGE Events", "Error fetching events:" + error.message);
+    }
+    return data?.map(eventsWithOrganizationsMapper).map(eventsMapper) || [];
+  });
 
-// const organizations = await findAllOrganizations()
+// @ts-ignore
+events[0].organizations.push({
+  name: "demo",
+});
+
+const videolives = await supabase
+  .from("live_video")
+  .select()
+  .order("date", { ascending: false })
+  .limit(10)
+  .then(({ error, data }) => {
+    if (error) {
+      throwError("PAGE Home", "Error fetching lives:" + error.message);
+    }
+    return data?.map(livesMapper) || [];
+  });
+
+const imgVideo = "/images/video-prova.jpg";
 ---
 
 <HomeLayout
   title="Chabad | Homepage"
-  description="sito del portale kosher più in voga d'italia">
+  description="sito del portale kosher più in voga d'italia"
+>
   <div slot="content-1" class="flex flex-col gap-4">
     {
       articles.length > 0 && (
         <ArticleSection
-          title="Ultima ora"
+          title={t("main.title-latest")}
           icon="/images/icons/clock.svg"
           mainArticle={articles[0]}
           articles={articles.slice(1)}
@@ -61,10 +93,12 @@ const imgVideo = "/images/video-prova.jpg";
       )
     }
 
+    <!-- FIXME segna errore mainArticle e articles -->
+
     {
       scraped.length > 0 && (
         <ArticleSection
-          title="Notizie dal mondo"
+          title={t("main.title-scraped")}
           icon="/images/icons/blue-icons/globe-icon.svg"
           mainArticle={scraped[0]}
           articles={scraped.slice(1)}
@@ -74,8 +108,10 @@ const imgVideo = "/images/video-prova.jpg";
       )
     }
 
+    <!-- TODO: PAGINA A PARTE A CUI MANDARE PER TUTTE LE NOTIZIE DAL MONDO -->
+
     <ArticleSection
-      title="Articoli"
+      title={t("main.title-articles")}
       icon="/images/icons/pencil-icon.svg"
       mainArticle={articles[0]}
       articles={articles.slice(1)}
@@ -87,35 +123,22 @@ const imgVideo = "/images/video-prova.jpg";
   <section slot="sidebar" class="flex flex-col gap-4">
     <!-- VIDEOS -->
     <ShadowBox class="contents md:block">
-      <SidebarTitle title="Watch" img="/images/icons/video.svg" />
+      <SidebarTitle
+        title={t("sidebar.title-live")}
+        img="/images/icons/video.svg"
+      />
       <SidebarContainer>
-        <SidebarVideo
-          title="Perchè si legge Parà, una nuova religione"
-          img={imgVideo}
-          href="http://www.eurokosher.it"
-        />
-        <SidebarVideo
-          title="Perchè si legge Parà, una nuova religione"
-          img={imgVideo}
-          href="http://www.eurokosher.it"
-        />
+        <SidebarVideo />
       </SidebarContainer>
     </ShadowBox>
+
+    <!-- TODO: immettere video di categoria differente (abilitare il filtro categorie per i videolives) -->
 
     <!-- JIM TV -->
     <ShadowBox class="contents md:block">
       <SidebarTitle title="Jim TV" img="/images/icons/maghen-david.svg" />
       <SidebarContainer>
-        <SidebarVideo
-          title="Perchè si legge Parà, una nuova religione"
-          img={imgVideo}
-          href="http://www.eurokosher.it"
-        />
-        <SidebarVideo
-          title="Perchè si legge Parà, una nuova religione"
-          img={imgVideo}
-          href="http://www.eurokosher.it"
-        />
+        <SidebarVideo />
       </SidebarContainer>
     </ShadowBox>
 
@@ -136,25 +159,25 @@ const imgVideo = "/images/video-prova.jpg";
       <ShadowBox class="contents md:block md:p-4">
         <h2 class="mb-4 mt-2 ml-2 md:ml-4">
           <SectionTitle icon="/images/icons/synagogue.svg">
-            punti chabad
+            {t("chabad-section.title")}
           </SectionTitle>
         </h2>
-        <div class="relative px-2 md:px-4">
+        <div class="relative px-2 md:px-4 overflow-x-hidden">
           <Carousel nextArrowId="arrow-next" prevArrowId="arrow-previous">
             {
               organizations1.map((o) => (
                 <CarouselItem>
                   <a href="#">
-                    <div class="bg-white mr-5">
-                      <div class="w-40 md:w-60 aspect-[4/3] border border-black bg-slate-200">
-                        {o["main image"] && (
+                    <div class="bg-white w-40 md:w-60 mr-5">
+                      <div class=" aspect-[4/3] border border-black bg-slate-200">
+                        {o["main_image"] && (
                           <img
-                            src={o["main image"]}
+                            src={o["main_image"]}
                             class="w-full h-full object-cover bg-white"
                           />
                         )}
                       </div>
-                      <h3 class="font-display text-black uppercase text-base md:text-xl text-center">
+                      <h3 class="font-display text-black uppercase text-base md:text-xl text-center leading-5 md:leading-5 mt-1">
                         {o.name}
                       </h3>
                     </div>
@@ -170,13 +193,16 @@ const imgVideo = "/images/video-prova.jpg";
               organizations2.map((o) => (
                 <CarouselItem>
                   <a href="#">
-                    <div class="bg-white mr-5">
-                      <div class="w-40 md:w-60 aspect-[4/3] border border-black bg-slate-200">
-                        {o && (
-                          <img class="w-full h-full object-cover bg-white" />
+                    <div class="bg-white mr-5 w-40 md:w-60 leading-5">
+                      <div class="w-full aspect-[4/3] border border-black bg-slate-200">
+                        {o["main_image"] && (
+                          <img
+                            src={o["main_image"]}
+                            class="w-full h-full object-cover bg-white"
+                          />
                         )}
                       </div>
-                      <h3 class="font-display text-black uppercase text-base md:text-xl text-center">
+                      <h3 class="w-full font-display text-black uppercase text-base md:text-xl text-center leading-5 md:leading-5 mt-1">
                         {o.name}
                       </h3>
                     </div>
@@ -188,7 +214,8 @@ const imgVideo = "/images/video-prova.jpg";
         </div>
         <button
           id="arrow-previous"
-          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 left-0 md:-left-6 -translate-y-1/2 shadow">
+          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 left-0 md:-left-6 -translate-y-1/2 shadow"
+        >
           <img
             class="w-full"
             src="/images/icons/arrow-prev.svg"
@@ -197,7 +224,8 @@ const imgVideo = "/images/video-prova.jpg";
         </button>
         <button
           id="arrow-next"
-          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 right-0 md:-right-6 -translate-y-1/2 shadow">
+          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 right-0 md:-right-6 -translate-y-1/2 shadow"
+        >
           <img
             class="w-full"
             src="/images/icons/arrow-next.svg"
@@ -212,22 +240,25 @@ const imgVideo = "/images/video-prova.jpg";
       <ShadowBox class="contents md:block md:p-4">
         <h2 class="mb-4 mt-2 ml-2 md:ml-4">
           <SectionTitle icon="/images/icons/synagogue.svg">
-            punti chabad
+            {t("events-section.title")}
           </SectionTitle>
         </h2>
         <div class="relative">
           <Carousel
             nextArrowId="arrow-next-event"
-            prevArrowId="arrow-previous-event">
+            prevArrowId="arrow-previous-event"
+          >
             {
-              [...new Array(20)].map((p) => (
+              events.map((e) => (
                 <CarouselItem>
                   <EventsSection
-                    associazione="Beit chabad"
-                    nome="Seder di Rosh Hashanah"
-                    data="89/75/7805"
-                    immagine="../../images/parshat/acharei-kedoshim.jpeg"
-                    citta="Milano"
+                    associazione={e.organizations
+                      .map((o) => o.name)
+                      .join("<br />")}
+                    nome={e.name}
+                    data={e.date}
+                    immagine={e.main_image}
+                    citta={e.city}
                   />
                 </CarouselItem>
               ))
@@ -235,7 +266,8 @@ const imgVideo = "/images/video-prova.jpg";
           </Carousel>
           <button
             id="arrow-previous-event"
-            class="absolute rounded-[100%] w-12 h-12 shadow left-0 top-1/2 -translate-x-5 lg:-translate-x-8 -translate-y-1/2">
+            class="absolute rounded-[100%] w-12 h-12 shadow left-0 top-1/2 -translate-x-8 lg:-translate-x-10 -translate-y-1/2"
+          >
             <img
               class="w-full"
               src="/images/icons/arrow-prev.svg"
@@ -244,7 +276,8 @@ const imgVideo = "/images/video-prova.jpg";
           </button>
           <button
             id="arrow-next-event"
-            class="absolute rounded-[100%] w-12 h-12 z-10 shadow right-0 top-1/2 translate-x-5 lg:translate-x-9 -translate-y-1/2">
+            class="absolute rounded-[100%] w-12 h-12 z-10 shadow right-0 top-1/2 translate-x-7 lg:translate-x-11 -translate-y-1/2"
+          >
             <img
               class="w-full"
               src="/images/icons/arrow-next.svg"

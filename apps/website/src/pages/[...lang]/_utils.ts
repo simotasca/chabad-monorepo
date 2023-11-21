@@ -1,21 +1,26 @@
 import { articlesMapper } from "@/lib/shared/supabase/articles";
 import { throwError } from "@/lib/shared/error";
 import supabase from "@/lib/shared/supabase";
+import { eventsMapper } from "@/lib/shared/supabase/events";
 
 export async function getData() {
+  const organizations = await supabase
+    .from("organizations")
+    .select("*, contacts(*)")
+    .limit(20)
+    .then(({ data, error }) => {
+      if (error)
+        throwError(
+          "Page Index",
+          "Error fetching organizations:" + error.message
+        );
+      return data || [];
+    });
+  const halforganizations = Math.round(organizations.length / 2);
+
   return {
-    organizations: await supabase
-      .from("organizations")
-      .select("*, organization_contacts(*)")
-      .limit(20)
-      .then(({ data, error }) => {
-        if (error)
-          throwError(
-            "Page Index",
-            "Error fetching organizations:" + error.message
-          );
-        return data || [];
-      }),
+    organizations1: organizations.slice(0, halforganizations),
+    organizations2: organizations.slice(halforganizations),
     articles: await supabase
       .from("articles")
       .select("title, date, content, category, image, preview, slug")
@@ -45,6 +50,15 @@ export async function getData() {
             date: s.created_at,
           })) || []
         );
+      }),
+    events: await supabase
+      .from("events")
+      .select("name, date, main_image, slug")
+      .limit(10)
+      .then(({ data, error }) => {
+        if (error)
+          throwError("Page Index", "Error fetching events:" + error.message);
+        return data || [];
       }),
   };
 }

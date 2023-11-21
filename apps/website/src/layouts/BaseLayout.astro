@@ -1,7 +1,9 @@
 ---
 import BaseHead from "@/components/BaseHead.astro";
-import { getUrlLang } from "@/lib/server/lang/lang";
+import { getTranslations, getUrlLang } from "@/lib/server/lang/lang";
 import "@/styles/global.css";
+
+
 
 const lang = getUrlLang(Astro.url);
 

@@ -33,9 +33,11 @@ export function
           return;
         }
 
+      	console.log("INSERTING", JSON.stringify(insert, null, 2));
+
         supabase.from("scraped").insert(insert).then(({ error }) => {
           if (error) {
-            throw new Error(error);
+            throw new Error("error inserting scraped articles " + error.message);
           }
           console.log(insert.length, "articles for it.chabad.org successfully persisted");
           callback && callback(true);

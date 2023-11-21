@@ -9,7 +9,7 @@ export async function middleware(req: NextRequest) {
   const supabase = createMiddlewareClient<db.Database>({ req, res });
   await supabase.auth.signInWithPassword({
     email: "emanuele.hazan@gmail.com",
-    password: "blackleaf96"
+    password: "Blackleaf96!",
   });
   await supabase.auth.getSession();
   return res;

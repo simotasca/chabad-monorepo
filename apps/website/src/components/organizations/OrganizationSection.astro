@@ -1,0 +1,119 @@
+---
+import ShadowBox from "@/components/ui/ShadowBox.astro";
+import Tooltip from "@/components/ui/Tooltip.astro";
+import { throwError } from "@/lib/shared/error";
+import supabase from "@/lib/shared/supabase";
+import { organizationsMapper } from "@/lib/shared/supabase/organizations";
+
+// TODO :collegare i contatti alle organizzazioni
+
+const query = supabase.from("organizations").select().limit(10);
+const organizations = await query.then(({ error, data }) => {
+  if (error) {
+    throwError(
+      "PAGE Organizations",
+      "Error fetching organizations-by-city:" + error.message
+    );
+  }
+  return data?.map(organizationsMapper) || [];
+});
+---
+
+<style>
+  .shadow-button {
+    box-shadow: -2px -2px 2px rgba(0, 0, 0, 0.5); /* Ombra in alto a sinistra */
+  }
+</style>
+
+{
+  organizations.map((o) => (
+    <a href={o.url}>
+    <ShadowBox>
+      <section class="relative">
+        <div class="flex gap-2 sm:gap-4 px-4 xs:pr-2 sm:p-4">
+          {o.main_image && (
+            <img
+              class="hidden sm:block w-60 lg:w-80 aspect-video my-2"
+              src={o.main_image}
+              alt="main article image"
+            />
+          )}
+          <div class="lg:flex flex-col gap-2 py-1">
+            <div class="gap-2 items-center">
+              <h2 class="text-2xl font-display mt-2 sm:mt-0 font-medium uppercase">
+                {o.name}
+              </h2>
+              
+              <p class="text-blue-900  text-base lg:text-xl font-raleway font-bold uppercase leading-tight">
+                {o.city}
+              </p>
+            </div>
+
+            <div class="sm:hidden h-2" />
+
+            <img
+              class="sm:hidden w-full aspect-video"
+              src={o.main_image}
+              alt="main chabad organization image"
+            />
+
+            <div class="sm:hidden h-2" />
+
+            <div class="mb-2 sm:mb-0">
+              <h3 class="text-black font-display font-mediumg uppercase text-lg">
+                Contatti
+              </h3>
+              <ul class="text-black font-raleway text-sm leading-tight">
+                <li>{o.address}</li>
+                <li>tel:3333333333</li>
+                <li>email:hhhhhhhhhhhhh</li>
+              </ul>
+            </div>
+            <div class="xs:hidden xs:pb-2 pb-10 pt-1 flex w-24">
+              <img
+                src={"/images/icons/blue-icons/facebook.svg"}
+                alt="facebook icon"
+              />
+              <img
+                src="@/images/icons/blue-icons/facebook.svg"
+                alt="facebook icon"
+              />
+            </div>
+          </div>
+          <!-- FIXME : NON SI VEDONO I LOGHI -->
+          <div class="hidden xs:flex flex-col max-sm:my-auto mr-0 ml-auto max-sm:w-24">
+            <img
+              src="@/images/icons/blue-icons/facebook.svg"
+              alt="facebook icon"
+            />
+            <img
+              src="@/images/icons/blue-icons/facebook.svg"
+              alt="facebook icon"
+            />
+          </div>
+        </div>
+        <div class="absolute bg-blue-950 shadow-button mt-16 md:mt-0 px-3 pt-2 pb-1.5 -right-2 -bottom-2">
+          <button class="flex gap-3">
+            <p class="items-center font-raleway text-sm md:text-base text-white uppercase">
+              scopri
+            </p>
+            <Tooltip>
+              <img
+                class="-translate-y-0.5 w-6 items-center"
+                src="/images/icons/share.svg"
+                alt="share icon"
+              />
+
+              <div
+                class="bg-black bg-opacity-70 text-white px-2"
+                slot="tooltip"
+              >
+                share
+              </div>
+            </Tooltip>
+          </button>
+        </div>
+      </section>
+    </ShadowBox></a>
+  ))
+}

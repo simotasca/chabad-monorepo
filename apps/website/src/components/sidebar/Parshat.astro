@@ -1,16 +1,24 @@
 ---
 import ShadowBox from "@/components/ui/ShadowBox.astro";
+import { getParshat, getParshatImage, formatDate } from "@/lib/shared/calendar";
 
 const { title, date, image } = Astro.props;
+
+const today = new Date();
+const parshat = getParshat();
+const parshatImage = getParshatImage(parshat);
 ---
 
 <ShadowBox>
   <div class="py-3 px-4 lg:p-4">
     <h2
-      class="text-blue-950 font-medium font-display text-2xl md:text-xl lg:text-2xl leading-tight uppercase">
-      {title}
+      class="text-blue-950 font-medium font-display text-2xl md:text-xl lg:text-2xl leading-tight uppercase"
+    >
+      {parshat}
     </h2>
-    <p class="italic font-raleway text-neutral-500 text-sm mb-1">{date}</p>
-    <img src={image} alt="icon" />
+    <p class="italic font-raleway text-neutral-500 text-sm mb-1">
+      {formatDate(today)}
+    </p>
+    <img src={parshatImage} alt="icon" />
   </div>
 </ShadowBox>
