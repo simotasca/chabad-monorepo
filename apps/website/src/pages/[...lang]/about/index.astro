@@ -36,10 +36,12 @@ if (!checkLangParam(Astro)) {
 <PageLayout title="Articoli" description="bla bla bla">
   <section slot="title">
     <div
-      class="grid grid-cols-[1fr_auto_1fr] items-center pt-2 pb-[1px] sm:pt-4 sm:pb-3 px-8">
+      class="grid grid-cols-[1fr_auto_1fr] items-center pt-2 pb-[1px] sm:pt-4 sm:pb-3 px-8"
+    >
       <div class="h-0.5 bg-white mr-4 mb-2 ml-9 border-t"></div>
       <h1
-        class="text-2xl sm:text-4xl uppercase font-messiri text-white font-bold text-center">
+        class="text-2xl sm:text-4xl uppercase font-messiri text-white font-bold text-center"
+      >
         Chi siamo
       </h1>
       <div class="h-0.5 bg-white ml-4 mb-2 mr-9 border-t"></div>
@@ -53,279 +55,336 @@ if (!checkLangParam(Astro)) {
       </h2>
       <Image class="mb-4" src={imgFamily} alt="chabad family" />
       <p class="font-raleway">
-        Verso il 1940, il Rebbe di Lubavich iniziò a inviare alcuni Shluchim
-        (emissari) in tutto il mondo per rafforzare l'identità religiosa degli
-        ebrei, preparando così il popolo ebraico e l'umanità per l'imminente
-        arrivo del Mashiach (Messia). Uno dei primi emissari del Rebbe di
-        Lubavich in Italia, a Milano, fu Rav Gansburg, che venne a lavorare come
-        Shochet (macellatore rituale).
-      </p>
-      <div class="h-4"></div>
-      <h2 class="font-display text-2xl">L'inizio a Milano</h2>
-      <p class="font-raleway">
-        Successivamente, la famiglia Zippel scrisse al Rebbe con la richiesta di
-        inviare uno Shaliach che si occupasse di tutte le attività ebraiche in
-        Italia. Così, nell'anno 1958, il Rabbino Gershon Mendel Garelik, di
-        benedetta memoria, e sua moglie la Rebbezin Basya furono mandati a
-        Milano. Si stabilirono in un ampio appartamento, senza conoscere
-        praticamente nessuno, e iniziarono a tenere lezioni, conferenze ed
-        eventi, sviluppando molte attività ebraiche che hanno rafforzato molti
-        ebrei in Italia, facendoli ritornare alla loro vera essenza.
-      </p>
-      <Image class="mb-4" src={imgGarelik} alt="rav e signora garelik" />
-      <div class="h-4"></div>
-      <div>
-        <h2 class="font-display text-2xl leading-6 mb-2">
-          La Crescita a Milano
-        </h2>
-        <p class="font-raleway">
-          Quello stesso anno, iniziarono anche il primo campeggio Ebraico
-          Lubavich in Europa; un campeggio estivo ispirato e costruito tramite
-          gli insegnamenti della Torà e del Rebbe di Lubavich.
-        </p>
-        <div class="h-2"></div>
-        <p class="font-raleway">
-          Tra le altre istituzioni più importanti a Milano, troviamo una scuola
-          Ebraica per ragazzi e ragazze che ha fatto crescere giovani ebrei
-          ispirati ed educati secondo la Torà, le Mizvot (i precetti della Torà)
-          ed educati all'amore per il prossimo, e all'amore e al timore verso il
-          Creatore. L'anno successivo, arrivò a Milano Rav Lazar con il compito
-          di occuparsi della scuola Ebraica e del campeggio Gan Israel.
-        </p>
-      </div>
+        …
+        <PageLayout title="Articoli" description="bla bla bla">
+          <section slot="title">
+            <div
+              class="grid grid-cols-[1fr_auto_1fr] items-center pt-2 pb-[1px] sm:pt-4 sm:pb-3 px-8"
+            >
+              <div class="h-0.5 bg-white mr-4 mb-2 ml-9 border-t"></div>
+              <h1
+                class="text-2xl sm:text-4xl uppercase font-messiri text-white font-bold text-center"
+              >
+                Chi siamo
+              </h1>
+              <div class="h-0.5 bg-white ml-4 mb-2 mr-9 border-t"></div>
+            </div>
+          </section>
 
-      <div class="flex max-sm:flex-col max-sm:gap-y-4 sm:h-48 lg:h-64">
-        <div
-          class="relative sm:h-full sm:aspect-square flex-shrink-0 max-sm:flex">
-          <Image
-            class="sm:absolute w-full sm:h-full inset-0 object-cover xs:ml-8 sm:ml-0 filter brightness-75"
-            src={imgRavLazar}
-            alt="rav lazar"
-          />
-          <i
-            class="sm:hidden font-raleway text-light text-sm xs:min-w-[40vw] ml-2 flex-shrink-0">
-            Nella foto:Rav <br class="xs:hidden" /> Lazar
-          </i>
-        </div>
-        <div class="xs:px-8 sm:px-0">
-          <Image
-            class="w-full h-full object-cover"
-            src={imgCampeggi}
-            alt="campeggio chabad"
-          />
-        </div>
-      </div>
-      <div class="h-4"></div>
-      <div>
-        <p class="font-raleway mb-4">
-          Nell'anno 1961 il Rebbe, inviò un nuovo shaliach: Rav Yeshua Hadad di
-          benedetta memoria, per aiutare la comunità sefardita di Milano e per
-          migliorare la kasherut della città; Rav Haddad, con l'approvazione del
-          Rebbe, portò Rav Hezkia di benedetta memoria, con il compito di
-          lavorare con la comunità sefardita di Milano. Poi arrivo il rabbino
-          Menachem Mendel Elharrar, per lavorare come sofer (scriba di testi
-          sacri Ebraici) e per certificare la kasherut di determinati prodotti
-          alimentari; poi venne, Rav Belinov, per insegnare e per guidare, la
-          comunità persiana di via Piatti. Nel 1970 arrivò a Milano, Rav Rodal,
-          di benedetta memoria, per insegnare nella scuola ebraica, e per
-          pubblicare, per gli ebrei italiani diversi opuscoli.
-        </p>
-        <div class="grid grid-cols-[2fr_3fr_2fr] sm:h-52">
-          <Image
-            class="w-full h-full object-cover"
-            src={imgPrimaTriade}
-            alt="shaliach chabad"
-          />
-          <Image
-            class="w-full h-full object-cover"
-            src={imgSecondaTriade}
-            alt="shaliach chabad"
-          />
-          <Image
-            class="w-full h-full object-cover"
-            src={imgTerzaTriade}
-            alt="shaliach chabad"
-          />
-        </div>
-        <div class="px-8 md:px-16 mx-auto mt-4">
-          <Image
-            class="w-full object-cover"
-            src={imgRavRodal}
-            alt="rav rodal chabad"
-          />
-        </div>
-      </div>
-      <div class="h-4"></div>
-      <section>
-        <h2 class="font-display text-2xl leading-6 mb-2">
-          La Crescita a Bologna
-        </h2>
-        <div
-          class="xs:grid xs:grid-cols-[2fr_1fr] lg:grid-cols-[3fr_1fr] gap-4">
-          <div>
-            <p class="font-raleway">
-              Nel 1975, arrivò a Bologna Rav Borenstein per aiutare ed
-              avvicinare gli studenti israeliani e americani, gli studenti ebrei
-              di Bologna, e per tenere delle lezioni di Torà nei dintorni di
-              Bologna come a Firenze.
-            </p>
-            <div class="h-4"></div>
-            <Image
-              class="hidden xs:block w-96 ml-auto mr-0"
-              src={imgRavBorenstein}
-              alt="rav borenstein bologna"
+          <section slot="content-1">
+            <ShadowBox class="flex flex-col gap-4 p-6">
+              <h2 class="font-display text-3xl font-bold leading-6mb-2">
+                La storia di Chabad in Italia
+              </h2>
+              <Image class="mb-4" src={imgFamily} alt="chabad family" />
+              <p class="font-raleway">
+                Verso il 1940, il Rebbe di Lubavich iniziò a inviare alcuni
+                Shluchim (emissari) in tutto il mondo per rafforzare l'identità
+                religiosa degli ebrei, preparando così il popolo ebraico e
+                l'umanità per l'imminente arrivo del Mashiach (Messia). Uno dei
+                primi emissari del Rebbe di Lubavich in Italia, a Milano, fu Rav
+                Gansburg, che venne a lavorare come Shochet (macellatore
+                rituale).
+              </p>
+              <div class="h-4"></div>
+              <h2 class="font-display text-2xl">L'inizio a Milano</h2>
+              <p class="font-raleway">
+                Successivamente, la famiglia Zippel scrisse al Rebbe con la
+                richiesta di inviare uno Shaliach che si occupasse di tutte le
+                attività ebraiche in Italia. Così, nell'anno 1958, il Rabbino
+                Gershon Mendel Garelik, di benedetta memoria, e sua moglie la
+                Rebbezin Basya furono mandati a Milano. Si stabilirono in un
+                ampio appartamento, senza conoscere praticamente nessuno, e
+                iniziarono a tenere lezioni, conferenze ed eventi, sviluppando
+                molte attività ebraiche che hanno rafforzato molti ebrei in
+                Italia, facendoli ritornare alla loro vera essenza.
+              </p>
+              <Image
+                class="mb-4"
+                src={imgGarelik}
+                alt="rav e signora garelik"
+              />
+              <div class="h-4"></div>
+              <div>
+                <h2 class="font-display text-2xl leading-6 mb-2">
+                  La Crescita a Milano
+                </h2>
+                <p class="font-raleway">
+                  Quello stesso anno, iniziarono anche il primo campeggio
+                  Ebraico Lubavich in Europa; un campeggio estivo ispirato e
+                  costruito tramite gli insegnamenti della Torà e del Rebbe di
+                  Lubavich.
+                </p>
+                <div class="h-2"></div>
+                <p class="font-raleway">
+                  Tra le altre istituzioni più importanti a Milano, troviamo una
+                  scuola Ebraica per ragazzi e ragazze che ha fatto crescere
+                  giovani ebrei ispirati ed educati secondo la Torà, le Mizvot
+                  (i precetti della Torà) ed educati all'amore per il prossimo,
+                  e all'amore e al timore verso il Creatore. L'anno successivo,
+                  arrivò a Milano Rav Lazar con il compito di occuparsi della
+                  scuola Ebraica e del campeggio Gan Israel.
+                </p>
+              </div>
+
+              <div class="flex max-sm:flex-col max-sm:gap-y-4 sm:h-48 lg:h-64">
+                <div
+                  class="relative sm:h-full sm:aspect-square flex-shrink-0 max-sm:flex"
+                >
+                  <Image
+                    class="sm:absolute w-full sm:h-full inset-0 object-cover xs:ml-8 sm:ml-0 filter brightness-75"
+                    src={imgRavLazar}
+                    alt="rav lazar"
+                  />
+                  <i
+                    class="sm:hidden font-raleway text-light text-sm xs:min-w-[40vw] ml-2 flex-shrink-0"
+                  >
+                    Nella foto:Rav <br class="xs:hidden" /> Lazar
+                  </i>
+                </div>
+                <div class="xs:px-8 sm:px-0">
+                  <Image
+                    class="w-full h-full object-cover"
+                    src={imgCampeggi}
+                    alt="campeggio chabad"
+                  />
+                </div>
+              </div>
+              <div class="h-4"></div>
+              <div>
+                <p class="font-raleway mb-4">
+                  Nell'anno 1961 il Rebbe, inviò un nuovo shaliach: Rav Yeshua
+                  Hadad di benedetta memoria, per aiutare la comunità sefardita
+                  di Milano e per migliorare la kasherut della città; Rav
+                  Haddad, con l'approvazione del Rebbe, portò Rav Hezkia di
+                  benedetta memoria, con il compito di lavorare con la comunità
+                  sefardita di Milano. Poi arrivo il rabbino Menachem Mendel
+                  Elharrar, per lavorare come sofer (scriba di testi sacri
+                  Ebraici) e per certificare la kasherut di determinati prodotti
+                  alimentari; poi venne, Rav Belinov, per insegnare e per
+                  guidare, la comunità persiana di via Piatti. Nel 1970 arrivò a
+                  Milano, Rav Rodal, di benedetta memoria, per insegnare nella
+                  scuola ebraica, e per pubblicare, per gli ebrei italiani
+                  diversi opuscoli.
+                </p>
+                <div class="grid grid-cols-[2fr_3fr_2fr] sm:h-52">
+                  <Image
+                    class="w-full h-full object-cover"
+                    src={imgPrimaTriade}
+                    alt="shaliach chabad"
+                  />
+                  <Image
+                    class="w-full h-full object-cover"
+                    src={imgSecondaTriade}
+                    alt="shaliach chabad"
+                  />
+                  <Image
+                    class="w-full h-full object-cover"
+                    src={imgTerzaTriade}
+                    alt="shaliach chabad"
+                  />
+                </div>
+                <div class="px-8 md:px-16 mx-auto mt-4">
+                  <Image
+                    class="w-full object-cover"
+                    src={imgRavRodal}
+                    alt="rav rodal chabad"
+                  />
+                </div>
+              </div>
+              <div class="h-4"></div>
+              <section>
+                <h2 class="font-display text-2xl leading-6 mb-2">
+                  La Crescita a Bologna
+                </h2>
+                <div
+                  class="xs:grid xs:grid-cols-[2fr_1fr] lg:grid-cols-[3fr_1fr] gap-4"
+                >
+                  <div>
+                    <p class="font-raleway">
+                      Nel 1975, arrivò a Bologna Rav Borenstein per aiutare ed
+                      avvicinare gli studenti israeliani e americani, gli
+                      studenti ebrei di Bologna, e per tenere delle lezioni di
+                      Torà nei dintorni di Bologna come a Firenze.
+                    </p>
+                    <div class="h-4"></div>
+                    <Image
+                      class="hidden xs:block w-96 ml-auto mr-0"
+                      src={imgRavBorenstein}
+                      alt="rav borenstein bologna"
+                    />
+                  </div>
+
+                  <Image
+                    class="hidden xs:block object-cover h-full"
+                    src={imgBologna}
+                    alt="bologna"
+                  />
+                </div>
+                <div class="px-8 md:px-16 mx-auto"></div>
+                <Image
+                  class="w-full xs:hidden"
+                  src={imgRavBorenstein}
+                  alt="rav borenstein bologna"
+                />
+              </section>
+
+              <div class="h-4"></div>
+              <div>
+                <h2 class="font-display text-2xl leading-6 mb-2">
+                  Chabad a Roma
+                </h2>
+                <p class="font-raleway">
+                  Mentre su richiesta del rabbino Toaff, nel 1963, il Rebbe di
+                  Lubavich, inviò il rabbino Eliahu Ouazanna, una macellaio
+                  rituale e insegnante, a Roma, dove servì la comunità ebraica
+                  per oltre 50 anni. <div class="h-2"></div>
+                  <p class="font-raleway">
+                    Nel 1976, il Rebbe, inviò il rabbino e la signora a
+                    stabilire una presenza ufficiale di Chabad a Roma.
+                  </p>
+                  <div class="h-2"></div><p class="font-raleway">
+                    Nel 2000 Rabbi Shalom e la signora Hazan, Rabbi Ronnie e la
+                    signora Canarutto fondarono le loro Case Chabad a Roma sotto
+                    gli auspici del rabbino Itzchak Hazan.
+                  </p><div class="h-2"></div><p class="font-raleway">
+                    Poi nel 2008, viene fondata Chabad Piazza Bologna, da Rav
+                    Menachem e da Rivkie Lazar nel dicembre del 2008, Chanukkà
+                    5769, con l'auspicio del rabbino Chabad di Roma, Rav Itzchak
+                    Hazan.
+                  </p>
+                </p>
+              </div>
+              <div class="grid grid-cols-2 w-full">
+                <Image
+                  class="w-full h-full"
+                  src={imgSeferTorah}
+                  alt="shluchim roma"
+                />
+                <Image class="w-full h-full" src={imgRoma} alt="roma chabad" />
+              </div>
+              <div class="sm:px-16 lg:px-24">
+                <Image
+                  class="w-full aspect-video"
+                  src={imgCollage}
+                  alt="roma chabad"
+                />
+              </div>
+              <div class="h-4"></div>
+              <div>
+                <h2 class="font-display text-2xl leading-6 mb-2">
+                  Chabad a Milano: Crescita Continua
+                </h2>
+                <div class="flex max-xs:flex-col gap-4 xs:mb-4">
+                  <p class="font-raleway xs:w-96">
+                    Nel frattempo, a Milano Rav A. Hazan segue lo sviluppo delle
+                    attività ebraiche. Nel 1983, arriva Rav Shaikevitz per la
+                    yeshiva e per il Beit Chabad.
+                  </p>
+                  <Image
+                    class="w-full object-cover"
+                    src={imgRavHazan}
+                    alt="rav a. hazan chabad"
+                  />
+                </div>
+              </div>
+              <div class="grid grid-cols-[1fr_2fr] w-full h-52">
+                <Image
+                  class="w-full h-full object-cover"
+                  src={imgRavShaikevitz}
+                  alt="rav shaikevitz chabad"
+                />
+                <Image
+                  class="w-full h-full object-cover"
+                  src={imgBeitChabad}
+                  alt="rav shaikevitz chabad"
+                />
+              </div>
+              <div class="h-4"></div>
+              <div>
+                <h2 class="font-display text-2xl leading-6 mb-2">
+                  Chabad a Venezia
+                </h2>
+                <p class="font-raleway mb-4">
+                  Negli anni '90, arriva a Venezia Rav Rami Banin e la
+                  Rebbetyzin Banin per fondare il Beit Chabad di Venezia.
+                </p>
+                <div class="grid grid-cols-2 h-52">
+                  <Image
+                    class="w-full h-full object-cover"
+                    src={imgRamyBanin}
+                    alt="rav shaikevitz chabad"
+                  />
+                  <Image
+                    class="w-full h-full object-cover"
+                    src={imgVenezia}
+                    alt="rav shaikevitz chabad"
+                  />
+                </div>
+              </div>
+              <div class="h-4"></div>
+              <div>
+                <h2 class="font-display text-2xl leading-6 mb-2">
+                  Chabad a Trieste
+                </h2>
+                <p class="font-raleway mb-4">
+                  Anche a Trieste gli emissari del Rebbe arrivano con il Rabbino
+                  Hadad.
+                </p>
+                <div class="grid grid-cols-2 h-52">
+                  <Image
+                    class="w-full h-full object-cover"
+                    src={imgRavHadad}
+                    alt="rav shaikevitz chabad"
+                  />
+                  <Image
+                    class="w-full h-full object-cover"
+                    src={imgTrieste}
+                    alt="rav shaikevitz chabad"
+                  />
+                </div>
+              </div>
+              <div class="h-4"></div>
+              <div>
+                <h2 class="font-display text-2xl leading-6 mb-2">
+                  Continua l'afflusso di shluchim in Italia
+                </h2>
+                <p class="font-raleway mb-4">
+                  Sempre sotto l'approvazione del Rebbe, nel 1995 arriva a
+                  Milano Rav Igal Hazan, Rav Bechor e poi Rav Levi Hazan figlio
+                  di Rav Avraham Hazan e Rav Yoseph Hadad figlio di Rav Yeshua
+                  Hadad e molti altri. Gli Shluchim Chabad, inviati dal Rebbe in
+                  Italia, hanno avuto e tutt'ora hanno un incredibile impatto
+                  sull'ebraismo e sugli ebrei italiani, avvicinando giorno dopo
+                  giorno e rafforzando centinaia di ebrei in numerose città
+                  italiane, preparandoli così all'imminente arrivo del Messia.
+                </p>
+                <div class="sm:px-16 lg:px-24">
+                  <Image
+                    class="w-full object-cover"
+                    src={imgFamily2}
+                    alt="family chabad"
+                  />
+                </div>
+              </div>
+            </ShadowBox>
+          </section>
+
+          <section slot="sidebar" class="md:flex flex-col gap-4 mt-4">
+            <Parshat
+              title="acharei kedoshim"
+              date="15/giugno/2023"
+              image="images/parshat/acharei-kedoshim.jpeg"
             />
-          </div>
 
-          <Image
-            class="hidden xs:block object-cover h-full"
-            src={imgBologna}
-            alt="bologna"
-          />
-        </div>
-        <div class="px-8 md:px-16 mx-auto"></div>
-        <Image
-          class="w-full xs:hidden"
-          src={imgRavBorenstein}
-          alt="rav borenstein bologna"
-        />
-      </section>
+            <div class="md:hidden"></div>
 
-      <div class="h-4"></div>
-      <div>
-        <h2 class="font-display text-2xl leading-6 mb-2">Chabad a Roma</h2>
-        <p class="font-raleway">
-          Mentre su richiesta del rabbino Toaff, nel 1963, il Rebbe di Lubavich,
-          inviò il rabbino Eliahu Ouazanna, una macellaio rituale e insegnante,
-          a Roma, dove servì la comunità ebraica per oltre 50 anni. <div
-            class="h-2">
-          </div>
-          <p class="font-raleway">
-            Nel 1976, il Rebbe, inviò il rabbino e la signora a stabilire una
-            presenza ufficiale di Chabad a Roma.
-          </p>
-          <div class="h-2"></div><p class="font-raleway">
-            Nel 2000 Rabbi Shalom e la signora Hazan, Rabbi Ronnie e la signora
-            Canarutto fondarono le loro Case Chabad a Roma sotto gli auspici del
-            rabbino Itzchak Hazan.
-          </p><div class="h-2"></div><p class="font-raleway">
-            Poi nel 2008, viene fondata Chabad Piazza Bologna, da Rav Menachem e
-            da Rivkie Lazar nel dicembre del 2008, Chanukkà 5769, con l'auspicio
-            del rabbino Chabad di Roma, Rav Itzchak Hazan.
-          </p>
-        </p>
-      </div>
-      <div class="grid grid-cols-2 w-full">
-        <Image class="w-full h-full" src={imgSeferTorah} alt="shluchim roma" />
-        <Image class="w-full h-full" src={imgRoma} alt="roma chabad" />
-      </div>
-      <div class="px-8 md:px-16">
-        <Image class="w-full aspect-video" src={imgCollage} alt="roma chabad" />
-      </div>
-      <div class="h-4"></div>
-      <div>
-        <h2 class="font-display text-2xl leading-6 mb-2">
-          Chabad a Milano: Crescita Continua
-        </h2>
-        <div class="flex max-xs:flex-col gap-4 xs:mb-4">
-          <p class="font-raleway xs:w-96">
-            Nel frattempo, a Milano Rav A. Hazan segue lo sviluppo delle
-            attività ebraiche. Nel 1983, arriva Rav Shaikevitz per la yeshiva e
-            per il Beit Chabad.
-          </p>
-          <Image
-            class="w-full object-cover"
-            src={imgRavHazan}
-            alt="rav a. hazan chabad"
-          />
-        </div>
-      </div>
-      <div class="grid grid-cols-[1fr_2fr] w-full h-52">
-        <Image
-          class="w-full h-full object-cover"
-          src={imgRavShaikevitz}
-          alt="rav shaikevitz chabad"
-        />
-        <Image
-          class="w-full h-full object-cover"
-          src={imgBeitChabad}
-          alt="rav shaikevitz chabad"
-        />
-      </div>
-      <div class="h-4"></div>
-      <div>
-        <h2 class="font-display text-2xl leading-6 mb-2">Chabad a Venezia</h2>
-        <p class="font-raleway mb-4">
-          Negli anni '90, arriva a Venezia Rav Rami Banin e la Rebbetyzin Banin
-          per fondare il Beit Chabad di Venezia.
-        </p>
-        <div class="grid grid-cols-2 h-52">
-          <Image
-            class="w-full h-full object-cover"
-            src={imgRamyBanin}
-            alt="rav shaikevitz chabad"
-          />
-          <Image
-            class="w-full h-full object-cover"
-            src={imgVenezia}
-            alt="rav shaikevitz chabad"
-          />
-        </div>
-      </div>
-      <div class="h-4"></div>
-      <div>
-        <h2 class="font-display text-2xl leading-6 mb-2">Chabad a Trieste</h2>
-        <p class="font-raleway mb-4">
-          Anche a Trieste gli emissari del Rebbe arrivano con il Rabbino Hadad.
-        </p>
-        <div class="grid grid-cols-2 h-52">
-          <Image
-            class="w-full h-full object-cover"
-            src={imgRavHadad}
-            alt="rav shaikevitz chabad"
-          />
-          <Image
-            class="w-full h-full object-cover"
-            src={imgTrieste}
-            alt="rav shaikevitz chabad"
-          />
-        </div>
-      </div>
-      <div class="h-4"></div>
-      <div>
-        <h2 class="font-display text-2xl leading-6 mb-2">
-          Continua l'afflusso di shluchim in Italia
-        </h2>
-        <p class="font-raleway mb-4">
-          Sempre sotto l'approvazione del Rebbe, nel 1995 arriva a Milano Rav
-          Igal Hazan, Rav Bechor e poi Rav Levi Hazan figlio di Rav Avraham
-          Hazan e Rav Yoseph Hadad figlio di Rav Yeshua Hadad e molti altri. Gli
-          Shluchim Chabad, inviati dal Rebbe in Italia, hanno avuto e tutt'ora
-          hanno un incredibile impatto sull'ebraismo e sugli ebrei italiani,
-          avvicinando giorno dopo giorno e rafforzando centinaia di ebrei in
-          numerose città italiane, preparandoli così all'imminente arrivo del
-          Messia.
-        </p>
-        <Image
-          class="w-full object-cover"
-          src={imgFamily2}
-          alt="family chabad"
-        />
-      </div><div class="h-8"></div>
+            <div class="hidden md:block">
+              <Newsletter />
+            </div>
+          </section>
+        </PageLayout>
+      </p>
     </ShadowBox>
-  </section>
-
-  <section slot="sidebar" class="md:flex flex-col gap-4">
-    <Parshat
-      title="acharei kedoshim"
-      date="15/giugno/2023"
-      image="images/parshat/acharei-kedoshim.jpeg"
-    />
-
-    <div class="md:hidden"></div>
-
-    <div class="hidden md:block">
-      <Newsletter />
-    </div>
   </section>
 </PageLayout>
