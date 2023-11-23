@@ -1,0 +1,94 @@
+---
+import ShadowBox from "@/components/ui/ShadowBox.astro";
+import Tooltip from "@/components/ui/Tooltip.astro";
+import { getTranslations } from "@/lib/server/lang/lang";
+import type { Tables } from "@/db-types";
+
+const t = await getTranslations("pages/events", Astro.url);
+
+type Event = Pick<
+  Tables<"events">,
+  "name" | "main_image" | "markdown" | "date"
+> & {
+  url: string;
+};
+
+export type Props = {
+  event: Event;
+};
+
+const { event } = Astro.props;
+---
+
+<style>
+  .shadow-button {
+    box-shadow: -2px -2px 2px rgba(0, 0, 0, 0.5); /* Ombra in alto a sinistra */
+  }
+</style>
+
+<ShadowBox>
+  <section class="relative flex flex-col gap-y-1 p-4">
+    <p class="text-blue-800 text-sm font-raleway font-bold uppercase mb-2">
+      {""}
+    </p>
+
+    <h2
+      class="text-black text-2xl font-display font-medium uppercase leading-tight"
+    >
+      {event.name}
+    </h2>
+
+    <p class="text-gray-600 text-sm font-raleway">{event.date}</p>
+
+    {
+      event.main_image && (
+        <img
+          class="w-full aspect-video mt-2"
+          src={event.main_image}
+          alt="main article image"
+        />
+      )
+    }
+
+    <div class="bg-blue-950 h-[1px] w-[calc(100%-20%)] mx-auto my-2"></div>
+
+    <div class="pb-8 pt-4">
+      <h3 class="text-black font-raleway font-semibold uppercase text-lg">
+        {""}
+      </h3>
+      <ul class="text-black font-raleway text-sm leading-tight">
+        <li>
+          {""}
+        </li>
+        <li>
+          {""}
+        </li>
+        <li>
+          {""}
+        </li>
+        <li>
+          {""}
+        </li>
+      </ul>
+    </div>
+
+    <div
+      class="absolute bg-blue-950 shadow-button px-3 pt-2 pb-1.5 -right-2 -bottom-2"
+    >
+      <button class="flex gap-3">
+        <p class="font-raleway text-base text-white uppercase">discover</p>
+        <Tooltip>
+          <img
+            class="-translate-y-0.5"
+            src="/images/icons/share.svg"
+            alt="share icon"
+          />
+
+          <div class="bg-black bg-opacity-70 text-white px-2" slot="tooltip">
+            share
+          </div>
+        </Tooltip>
+      </button>
+    </div>
+  </section>
+</ShadowBox>

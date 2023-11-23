@@ -1,0 +1,199 @@
+---
+import ShadowBox from "@/components/ui/ShadowBox.astro";
+import Newsletter from "@/components/sidebar/Newsletter.astro";
+import Parshat from "@/components/sidebar/Parshat.astro";
+import PageLayout from "src/layouts/PageLayout.astro";
+import Tooltip from "@/components/ui/Tooltip.astro";
+import SectionTitle from "@/components/ui/SectionTitle.astro";
+import { articlesMapper } from "@/lib/shared/supabase/articles";
+
+import BaseHead from "@/components/BaseHead.astro";
+import { articleNotFoundResponse } from "@/lib/server/error-response";
+import { checkLangParam } from "@/lib/server/lang/lang";
+import { throwError } from "@/lib/shared/error";
+import supabase from "@/lib/server/supabase";
+import { compile, run } from "@mdx-js/mdx";
+import * as runtime from "react/jsx-runtime"; // Production.
+import { formatDate } from "@/lib/shared/calendar";
+// import * as runtime from 'react/jsx-dev-runtime' // Development.
+
+if (!checkLangParam(Astro)) {
+  return errorResponse(Astro.url);
+}
+
+const { slug } = Astro.params;
+const article = !slug
+  ? null
+  : await supabase
+      .from("articles")
+      .select("title, content, date, image, category")
+      .eq("slug", slug)
+      .then(({ data, error }) => {
+        if (error) {
+          throwError(
+            "Article page",
+            "Error fetching article: " + error.message
+          );
+        }
+        return !data?.length ? null : data[0];
+      });
+
+if (!article) {
+  return articleNotFoundResponse(Astro.url);
+}
+
+// funziona solo se i componenti sono importabili
+// per questo usare solo componenti di @chabad/ui condiviso tra questa repo e l'editor
+const code = !article
+  ? ""
+  : String(
+      await compile(article.content, {
+        outputFormat: "function-body",
+        development: false,
+        // ^-- Generate code for production.
+        // `false` if you use `/jsx-runtime` on client, `true` if you use
+        // `/jsx-dev-runtime`.
+        /* …otherOptions */
+      })
+    );
+
+const Content = (await run(code, runtime)).default || "div";
+
+const articles = await supabase
+  .from("articles")
+  .select()
+  .limit(10)
+  .then(({ error, data }) => {
+    if (error) {
+      throwError("PAGE Article", "Error fetching articles:" + error.message);
+    }
+    return data?.map(articlesMapper) || [];
+  });
+---
+
+<PageLayout title="Articolo" description="bla bla bla">
+  <section slot="title">
+    <div class="h-6"></div>
+  </section>
+
+  <section slot="content-1">
+    <ShadowBox>
+      <div class="pb-6 px-6 pt-4">
+        <article>
+          <div class="relative grid grid-cols-[1fr_auto_1fr] items-center mt-2">
+            <div class="absolute flex -top-1 w-full">
+              <img
+                class="w-20 mb-1"
+                src="/src/images/chabad-text-black.svg"
+                alt="logo chabad text black"
+              />
+              <i class="font-raleway text-sm font-light ml-auto mr-0"
+                >{formatDate(article.date)}</i
+              >
+            </div>
+            <div class="bg-black h-[1px] w-full"></div>
+            <div class="flex items-center gap-2 px-4">
+              <img
+                class="w-6"
+                src="/src/images/logo-black.svg"
+                alt="logo chabad black"
+              />
+            </div>
+            <div class="bg-black h-[1px] w-full mt-1"></div>
+          </div>
+
+          <div class="flex">
+            <div class="ml-0 mr-auto">
+              <p
+                class="font-raleway uppercase text-blue-950 font-bold items-end"
+              >
+                {article.category}
+              </p>
+            </div>
+            <div class="flex gap-1 justify-end items-center">
+              <span class="text-xs text-blue-950 font-medium font-raleway"
+                >share</span
+              >
+              <Tooltip>
+                <img
+                  class="sm:w-8"
+                  src="/images/icons/share.svg"
+                  alt="share icon"
+                />
+                <div
+                  class="bg-black bg-opacity-70 text-white px-2"
+                  slot="tooltip"
+                >
+                  share
+                </div>
+              </Tooltip>
+            </div>
+          </div>
+          <div class="font-display font-bold text-3xl sm:text-4xl pb-4 -mt-1">
+            <h1 class="leading-8">{article.title}</h1>
+          </div>
+
+          <div class="pb-6">
+            <img class="aspect-video" src={article.image} alt="bla bla bla" />
+          </div>
+          <div
+            class="pb-4 prose prose:text-black prose-h1:text-red-500 prose-h2:text-3xl prose:font-raleway prose:text-black prose-h2:font-display prose-h2:my-2 prose-h3:uppercase prose-h3:my-1"
+          >
+            <Content />
+          </div>
+        </article>
+      </div>
+    </ShadowBox>
+
+    <div class="h-4"></div>
+
+    <section slot="content-2">
+      <ShadowBox>
+        <div class="p-6">
+          <h1 class="mb-4">
+            <SectionTitle>Tutti gli articoli</SectionTitle>
+          </h1>
+          <div
+            class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-6"
+          >
+            <!-- TODO: SE getStrapiUrl da errore, l'errore risulta lanciato da questo file!!! -->
+            {
+              articles.map((a) => (
+                <>
+                  <a href={a.url}>
+                    <div>
+                      <img
+                        class="w-full aspect-video"
+                        src={a.image}
+                        alt="main article image"
+                      />
+                      <p class="text-lg font-display font-medium mt-2 leading-tight">
+                        {a.title}
+                      </p>
+                    </div>
+                  </a>
+                </>
+              ))
+            }
+          </div>
+        </div>
+      </ShadowBox>
+    </section>
+  </section>
+
+  <section slot="sidebar" class="md:flex flex-col gap-4">
+    <div class="max-sm:hidden">
+      <Parshat
+        title="acharei kedoshim"
+        date="15/giugno/2023"
+        image="images/parshat/acharei-kedoshim.jpeg"
+      />
+    </div>
+
+    <div class="md:hidden h-4"></div>
+
+    <div class="hidden md:block">
+      <Newsletter />
+    </div>
+  </section>
+</PageLayout>

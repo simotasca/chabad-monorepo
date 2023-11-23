@@ -1,0 +1,97 @@
+---
+import ShadowBox from "@/components/ui/ShadowBox.astro";
+import Newsletter from "@/components/sidebar/Newsletter.astro";
+import Parshat from "@/components/sidebar/Parshat.astro";
+import PageLayout from "src/layouts/PageLayout.astro";
+import PageArticleSection from "@/components/blog/PageArticleSection.astro";
+import SectionTitle from "@/components/ui/SectionTitle.astro";
+import { throwError } from "src/lib/shared/error";
+import supabase from "@/lib/server/supabase";
+import { articlesMapper } from "@/lib/shared/supabase/articles";
+import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
+import { errorResponse } from "@/lib/server/error-response";
+
+if (!checkLangParam(Astro)) {
+  return errorResponse(Astro.url);
+}
+
+const articles = await supabase
+  .from("articles")
+  .select()
+  .order("date", { ascending: false })
+  .limit(10)
+  .then(({ error, data }) => {
+    if (error) {
+      throwError("PAGE Articles", "Error fetching articles:" + error.message);
+    }
+    return data?.map(articlesMapper) || [];
+  });
+
+const mainArticle = articles.pop()!;
+
+const t = await getTranslations("pages/articles", Astro.url);
+
+console.log("TITOLO:", t("main.title"));
+console.log("SOTTO-TITOLO:", t("main.subtitle"));
+---
+
+<PageLayout title="Articoli" description="bla bla bla">
+  <section slot="title">
+    <div
+      class="grid grid-cols-[1fr_auto_1fr] items-center pt-2 pb-[1px] sm:pt-4 sm:pb-3 px-8"
+    >
+      <div class="h-0.5 bg-white mr-4 mb-2 ml-9 border-t"></div>
+      <h1
+        class="text-2xl sm:text-4xl uppercase font-messiri text-white font-bold text-center"
+      >
+        {t("main-title")}
+      </h1>
+      <div class="h-0.5 bg-white ml-4 mb-2 mr-9 border-t"></div>
+    </div>
+  </section>
+
+  <section slot="content-1" class="flex flex-col gap-4">
+    <PageArticleSection mainArticle={mainArticle} />
+
+    <ShadowBox>
+      <div class="p-6">
+        <h1 class="mb-4">
+          <SectionTitle>{t("articles-section.title")}</SectionTitle>
+        </h1>
+        <div
+          class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-6"
+        >
+          <!-- TODO: SE getStrapiUrl da errore, l'errore risulta lanciato da questo file!!! -->
+          {
+            articles.map((a) => (
+              <a href={a.url}>
+                <div>
+                  <img
+                    class="w-full aspect-video"
+                    src={a.image}
+                    alt="main article image"
+                  />
+                  <p class="text-lg font-display font-medium mt-2 leading-tight">
+                    {a.title}
+                  </p>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </ShadowBox>
+  </section>
+
+  <section slot="sidebar" class="md:flex flex-col gap-4">
+    <Parshat
+      title="acharei kedoshim"
+      date="15/giugno/2023"
+      image="images/parshat/acharei-kedoshim.jpeg"
+    />
+
+    <div class="hidden md:block">
+      <Newsletter />
+    </div>
+  </section>
+</PageLayout>

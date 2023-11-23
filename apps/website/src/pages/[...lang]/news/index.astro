@@ -1,0 +1,91 @@
+---
+import PageNewsSection from "@/components/blog/PageNewsSection.astro";
+import Newsletter from "@/components/sidebar/Newsletter.astro";
+import ShadowBox from "@/components/ui/ShadowBox.astro";
+import { errorResponse } from "@/lib/server/error-response";
+import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
+import { throwError } from "@/lib/shared/error";
+import supabase from "@/lib/server/supabase";
+import { newsMapper } from "@/lib/shared/supabase/news";
+import PageLayout from "src/layouts/PageLayout.astro";
+
+if (!checkLangParam(Astro)) {
+  return errorResponse(Astro.url);
+}
+
+const allNews = await supabase
+  .from("news")
+  .select()
+  .limit(10)
+  .then(({ error, data }) => {
+    if (error) {
+      throwError("Page News", "Error fetching news:" + error.message);
+    }
+    return data?.map(newsMapper) || [];
+  });
+
+const mainNews = allNews.pop()!;
+
+const t = await getTranslations("pages/news", Astro.url);
+---
+
+<PageLayout title="news" description="">
+  <section slot="title">
+    <div
+      class="grid grid-cols-[1fr_auto_1fr] items-center pt-2 pb-[1px] sm:pt-4 sm:pb-3 px-8"
+    >
+      <div class="h-0.5 bg-white mr-4 mb-2 ml-9 border-t"></div>
+      <h1
+        class="text-2xl sm:text-4xl uppercase font-messiri text-white font-bold text-center"
+      >
+        {t("main-title")}
+      </h1>
+      <div class="h-0.5 bg-white ml-4 mb-2 mr-9 border-t"></div>
+    </div>
+  </section>
+
+  <section slot="content-1" class="flex flex-col gap-4">
+    <PageNewsSection mainNews={mainNews} />
+
+    <ShadowBox>
+      <div class="p-6">
+        <h2
+          class="font-raleway text-2xl font-semibold text-blue-950 uppercase mb-4"
+        >
+          {t("all-news-section.title")}
+        </h2>
+        <div
+          class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-6"
+        >
+          {
+            allNews.map((n) => (
+              <a href={n.url}>
+                <div class="object-cover">
+                  <img
+                    class="w-full aspect-video"
+                    src={n.image}
+                    alt="main article image"
+                  />
+                  <p class="text-lg font-display font-medium mt-2 leading-tight">
+                    {n.title}
+                  </p>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </ShadowBox>
+  </section>
+
+  <!-- FIXME: EventsPageSection da errore -->
+  <section slot="sidebar" class="md:flex flex-col gap-4">
+    <div class="m-4 md:m-0">
+      <!-- <EventsPageSection /> -->
+    </div>
+
+    <div class="hidden md:block">
+      <Newsletter />
+    </div>
+  </section>
+</PageLayout>

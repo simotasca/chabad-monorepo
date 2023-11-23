@@ -1,0 +1,28 @@
+---
+import { throwError } from "@/lib/shared/error";
+import supabase from "@/lib/server/supabase";
+
+const videoLive = await supabase
+  .from("live_video")
+  .select("youtube_link, title")
+  .limit(4)
+  .then(({ data, error }) => {
+    if (error) {
+      throwError("Live page", "Error fetching lives: " + error.message);
+    }
+    return data || [];
+  });
+
+const imgVideo = "/images/video-prova.jpg";
+---
+
+{
+  videoLive.map((v) => (
+    <a href={v.youtube_link}>
+      <img class="w-full" src={imgVideo} alt="immagine video" />
+      <h2 class="text-xl leading-[1.2] xs:text-lg xs:leading-[1.2] font-display mt-2">
+        {v.title}
+      </h2>
+    </a>
+  ))
+}
