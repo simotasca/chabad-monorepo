@@ -1,0 +1,23 @@
+{
+    "menu-items": {
+        "feed": "Feed",
+        "newsletter": "Newsletter",
+        "login": "Accedi"
+    },
+
+    "dates": {
+        "fri": "VEN",
+        "sat": "SAB"
+    },
+
+    "navbar": {
+        "news": "Notizie",
+        "articles": "Articoli",
+        "video-live": "Live-Video",
+        "organizations": "Punti Chabad",
+        "events": "Eventi",
+        "about-us": "Chi siamo",
+        "resources": "Risorse",
+        "contributes": "Contribuisci"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "main-title": "Eventi",
+
+    "contacts": {
+         "title": "Contatti",
+         "email": "Email",
+         "telephone": "Telefono",
+         "address": "Indirizzo"
+    },
+
+    "all-events-title": "Tutti gli eventi",
+
+    "discover-button": "Scopri"
+}
