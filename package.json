@@ -1,8 +1,0 @@
-{
-  "license": "UNLICENSED",
-  "scripts": {
-    "dev": "docker compose up -d && yarn logs",
-    "logs": "docker compose logs website -f",
-    "stop": "docker compose down"
-  }
-}
