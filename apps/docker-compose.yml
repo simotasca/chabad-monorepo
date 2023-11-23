@@ -3,9 +3,7 @@ version: "3.8"
 services:
   website:
     hostname: website
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: ./website
     ports:
       - "${WEBSITE_PORT}:3000"
     depends_on:
@@ -26,7 +24,7 @@ services:
 
   scraper:
     hostname: scraper
-    build: .
+    build: ./scraper
     restart: unless-stopped
     ports:
       - "${SCRAPER_PORT}:3000"
