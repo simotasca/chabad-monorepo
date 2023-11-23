@@ -3,17 +3,19 @@ import Newsletter from "@/components/sidebar/Newsletter.astro";
 import PageLayout from "src/layouts/PageLayout.astro";
 import EventsPageSection from "@/components/events/EventsPageSection.astro";
 import ShadowBox from "@/components/ui/ShadowBox.astro";
-import { getTranslations } from "@/lib/server/lang/lang";
+import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
+import { errorResponse } from "@/lib/server/error-response";
+
+if (!checkLangParam(Astro)) {
+  return errorResponse(Astro.url);
+}
 
 const t = await getTranslations("pages/events", Astro.url);
 ---
 
 <PageLayout title="Event" description="">
   <section slot="title">
-    <div
-      class="h-6">
-      
-    </div>
+    <div class="h-6"></div>
   </section>
 
   <section slot="content-1">
@@ -90,7 +92,6 @@ const t = await getTranslations("pages/events", Astro.url);
         <li>
           <b>{t("contacts.address")}</b>: carlogrossi@venti.net
         </li>
-        
       </ul>
     </ShadowBox>
 

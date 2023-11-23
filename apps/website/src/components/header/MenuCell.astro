@@ -2,7 +2,7 @@
 import routes from "@/lib/shared/routes";
 import Widget from "./Widget.astro";
 
-import cities from "@/assets/cities.json";
+const { cities } = Astro.props;
 const stringCities = Object.keys(cities);
 ---
 

@@ -13,73 +13,32 @@ import CarouselItem from "@/components/ux/carousel/CarouselItem.astro";
 import HomeLayout from "@/layouts/HomeLayout.astro";
 import { errorResponse } from "@/lib/server/error-response";
 import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
-import { throwError } from "@/lib/shared/error";
-import supabase from "@/lib/shared/supabase";
-import {
-  eventsMapper,
-  eventsWithOrganizationsMapper,
-} from "@/lib/shared/supabase/events";
-import { livesMapper } from "@/lib/shared/supabase/live";
 import { getData } from "./_utils";
 
-/** Non so come evitare di scriverlo ogni volta */
 if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
 }
 
-const { articles, scraped, organizations1, organizations2 } = await getData();
+let metrics = Date.now();
+
+console.log("started at ", metrics);
+
+const { articles, scraped, organizations1, organizations2, events } =
+  await getData();
+
+console.log("get data", Date.now() - metrics, "ms");
+metrics = Date.now();
 
 const t = await getTranslations("pages/home", Astro.url);
 
-console.log("TITOLO", t("main.title"));
-console.log("SOTTO-TITOLO", t("main.subtitle"));
-
-// const news = [];
-
-// const last24hArticles = articles.filter(
-//   (a) => Number(a.date) > Date.now() - 1000 * 60 * 60 * 24
-// );
-
-// notizie + articoli recenti
-// const ultimaOra = new Array(...news, ...last24hArticles)
-//   .sort((a, b) => Number(a.date) - Number(b.date))
-//   .slice(0, 4);
-
-const events = await supabase
-  .from("events")
-  .select("*, events_organizations(*, organizations(*))")
-  .limit(10)
-  .then(({ error, data }) => {
-    if (error) {
-      throwError("PAGE Events", "Error fetching events:" + error.message);
-    }
-    return data?.map(eventsWithOrganizationsMapper).map(eventsMapper) || [];
-  });
-
-// @ts-ignore
-events[0].organizations.push({
-  name: "demo",
-});
-
-const videolives = await supabase
-  .from("live_video")
-  .select()
-  .order("date", { ascending: false })
-  .limit(10)
-  .then(({ error, data }) => {
-    if (error) {
-      throwError("PAGE Home", "Error fetching lives:" + error.message);
-    }
-    return data?.map(livesMapper) || [];
-  });
+console.log("translations", Date.now() - metrics, "ms");
 
 const imgVideo = "/images/video-prova.jpg";
 ---
 
 <HomeLayout
   title="Chabad | Homepage"
-  description="sito del portale kosher più in voga d'italia"
->
+  description="sito del portale kosher più in voga d'italia">
   <div slot="content-1" class="flex flex-col gap-4">
     {
       articles.length > 0 && (
@@ -214,8 +173,7 @@ const imgVideo = "/images/video-prova.jpg";
         </div>
         <button
           id="arrow-previous"
-          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 left-0 md:-left-6 -translate-y-1/2 shadow"
-        >
+          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 left-0 md:-left-6 -translate-y-1/2 shadow">
           <img
             class="w-full"
             src="/images/icons/arrow-prev.svg"
@@ -224,8 +182,7 @@ const imgVideo = "/images/video-prova.jpg";
         </button>
         <button
           id="arrow-next"
-          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 right-0 md:-right-6 -translate-y-1/2 shadow"
-        >
+          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 right-0 md:-right-6 -translate-y-1/2 shadow">
           <img
             class="w-full"
             src="/images/icons/arrow-next.svg"
@@ -246,8 +203,7 @@ const imgVideo = "/images/video-prova.jpg";
         <div class="relative">
           <Carousel
             nextArrowId="arrow-next-event"
-            prevArrowId="arrow-previous-event"
-          >
+            prevArrowId="arrow-previous-event">
             {
               events.map((e) => (
                 <CarouselItem>
@@ -266,8 +222,7 @@ const imgVideo = "/images/video-prova.jpg";
           </Carousel>
           <button
             id="arrow-previous-event"
-            class="absolute rounded-[100%] w-12 h-12 shadow left-0 top-1/2 -translate-x-8 lg:-translate-x-10 -translate-y-1/2"
-          >
+            class="absolute rounded-[100%] w-12 h-12 shadow left-0 top-1/2 -translate-x-8 lg:-translate-x-10 -translate-y-1/2">
             <img
               class="w-full"
               src="/images/icons/arrow-prev.svg"
@@ -276,8 +231,7 @@ const imgVideo = "/images/video-prova.jpg";
           </button>
           <button
             id="arrow-next-event"
-            class="absolute rounded-[100%] w-12 h-12 z-10 shadow right-0 top-1/2 translate-x-7 lg:translate-x-11 -translate-y-1/2"
-          >
+            class="absolute rounded-[100%] w-12 h-12 z-10 shadow right-0 top-1/2 translate-x-7 lg:translate-x-11 -translate-y-1/2">
             <img
               class="w-full"
               src="/images/icons/arrow-next.svg"

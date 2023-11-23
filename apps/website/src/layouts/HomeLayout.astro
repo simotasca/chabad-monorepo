@@ -32,32 +32,26 @@ const cities = [
   <slot name="title" />
 
   <div
-    class="relative chabad-container grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-2 lg:gap-4 my-4 mx-auto"
-  >
+    class="relative chabad-container grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-2 lg:gap-4 my-4 mx-auto">
     <!-- VERTICAL-LINE -->
     <div
-      class="absolute w-[1px] h-full left-[6px] sm:left-3 md:-left-[1px] top-0 bg-blue-900 -z-[60]"
-    >
+      class="absolute w-[1px] h-full left-[6px] sm:left-3 md:-left-[1px] top-0 bg-blue-900 -z-[60]">
     </div>
     <!-- VERTICAL-LINE -->
     <div
-      class="hidden md:block absolute w-[1px] h-full -right-[1px] top-0 bg-blue-900 -z-[60]"
-    >
+      class="hidden md:block absolute w-[1px] h-full -right-[1px] top-0 bg-blue-900 -z-[60]">
     </div>
 
     <!-- VERTICAL-LINE -->
     <div
-      class="md:hidden absolute w-[1px] h-full right-[6px] sm:right-3 md:-right-[1px] top-0 bg-blue-900 -z-[60]"
-    >
+      class="md:hidden absolute w-[1px] h-full right-[6px] sm:right-3 md:-right-[1px] top-0 bg-blue-900 -z-[60]">
     </div>
 
     <div
-      class="relative bg-white md:bg-transparent lg:bg-white mx-2 sm:mx-4 md:m-0 p-5 md:px-4 md:py-0 lg:p-5 col-span-3 flex flex-col gap-6"
-    >
+      class="relative bg-white md:bg-transparent lg:bg-white mx-2 sm:mx-4 md:m-0 p-5 md:px-4 md:py-0 lg:p-5 col-span-3 flex flex-col gap-6">
       <!-- VERTICAL-LINE -->
       <div
-        class="hidden md:block absolute w-[1px] h-full -right-[2px] md:right-0 lg:-right-[2px] top-0 bg-blue-900 -z-[60]"
-      >
+        class="hidden md:block absolute w-[1px] h-full -right-[2px] md:right-0 lg:-right-[2px] top-0 bg-blue-900 -z-[60]">
       </div>
 
       <!-- CONTENT-1 -->
@@ -65,12 +59,10 @@ const cities = [
     </div>
 
     <div
-      class="max-md:relative max-md:flex flex-col max-md:col-span-2 lg:bg-white md:bg-transparent bg-white mx-2 sm:mx-4 md:mx-0 px-2 lg:px-4 pt-3 md:pt-0 lg:pt-5 row-span-2"
-    >
+      class="max-md:relative max-md:flex flex-col max-md:col-span-2 lg:bg-white md:bg-transparent bg-white mx-2 sm:mx-4 md:mx-0 px-2 lg:px-4 pt-3 md:pt-0 lg:pt-5 row-span-2">
       <!-- VERTICAL-LINE -->
       <div
-        class="absolute w-[1px] h-full left-[6px] sm:left-3 md:-left-[1px] top-0 bg-blue-900 -z-[60]"
-      >
+        class="absolute w-[1px] h-full left-[6px] sm:left-3 md:-left-[1px] top-0 bg-blue-900 -z-[60]">
       </div>
       <!-- SIDEBAR -->
       <slot name="menu-article" />
@@ -78,30 +70,25 @@ const cities = [
     </div>
 
     <div
-      class="relative bg-transparent p-5 col-span-3 flex flex-col gap-6 z-[0]"
-    >
+      class="relative bg-transparent p-5 col-span-3 flex flex-col gap-6 z-[0]">
       <div
-        class="md:hidden absolute w-[1px] h-full -translate-y-4 -translate-x-[14px] sm:-translate-x-[8px] top-0 bg-blue-900 z-[0]"
-      >
+        class="md:hidden absolute w-[1px] h-full -translate-y-4 -translate-x-[14px] sm:-translate-x-[8px] top-0 bg-blue-900 z-[0]">
       </div>
 
       <!-- CONTENT-2 -->
       <slot name="content-2" />
 
       <div
-        class="hidden md:block absolute w-[1px] h-[calc(100%+3%)] -translate-y-8 md:right-0 lg:-right-[2px] sm:right-[8 px] top-0 bg-blue-900 z-[0]"
-      >
+        class="hidden md:block absolute w-[1px] h-[calc(100%+3%)] -translate-y-8 md:right-0 lg:-right-[2px] sm:right-[8 px] top-0 bg-blue-900 z-[0]">
       </div>
     </div>
 
     <!-- NEWSLETTER -->
     <div
-      class="md:hidden relative bg-white mx-2 sm:mx-4 md:m-0 p-3 col-span-3 flex flex-col gap-6"
-    >
+      class="md:hidden relative bg-white mx-2 sm:mx-4 md:m-0 p-3 col-span-3 flex flex-col gap-6">
       <!-- VERTICAL-LINE -->
       <div
-        class="absolute w-[1px] h-full -translate-x-[16px] left-[14px] sm:left-3 md:-left-[1px] top-0 -translate-y-20 bg-blue-900"
-      >
+        class="absolute w-[1px] h-full -translate-x-[16px] left-[14px] sm:left-3 md:-left-[1px] top-0 -translate-y-20 bg-blue-900">
       </div>
       <Newsletter />
       <!-- <div
@@ -113,11 +100,9 @@ const cities = [
   <div class="relative chabad-container md:hidden my-4 mx-auto"></div>
 
   <div
-    style="background: linear-gradient(0.83deg, #001C46 5.69%, rgba(0, 52, 128, 0.44) 208.16%)"
-  >
+    style="background: linear-gradient(0.83deg, #001C46 5.69%, rgba(0, 52, 128, 0.44) 208.16%)">
     <div
-      class="w-full px-14 xs:px-24 lg:px-16 xl:px-24 py-16 md:grid grid-cols-[auto_auto_auto] gap-16 lg:gap-12 xl:gap-24 mx-auto"
-    >
+      class="w-full px-14 xs:px-24 lg:px-16 xl:px-24 py-16 md:grid grid-cols-[auto_auto_auto] gap-16 lg:gap-12 xl:gap-24 mx-auto">
       <div class="xs:grid grid-cols-2 md:block lg:flex gap-8">
         <div class="flex gap-2 xs:justify-end md:justify-start">
           <img
@@ -126,8 +111,7 @@ const cities = [
             class="w-5 translate-y-[5px] mb-auto mt-0"
           />
           <h3
-            class="uppercase text-2xl xs:text-right md:text-left pb-1 items-start text-white font-raleway font-semibold"
-          >
+            class="uppercase text-2xl xs:text-right md:text-left pb-1 items-start text-white font-raleway font-semibold">
             {t("contacts.title")}
           </h3>
         </div>
@@ -160,16 +144,14 @@ const cities = [
             class="w-5 translate-y-[6px] mb-auto mt-0"
           />
           <h3
-            class="uppercase text-2xl xs:text-right md:text pb-1 items-start text-white font-raleway font-semibold"
-          >
+            class="uppercase text-2xl xs:text-right md:text pb-1 items-start text-white font-raleway font-semibold">
             {t("locations-title")}
           </h3>
         </div>
         <div class="flex lg:block gap-3 xs:gap-0 md:gap-3">
           <div class="lg:hidden w-5 md:w-5"></div>
           <ul
-            class="flex flex-col gap-2 font-raleway text-white uppercase items-start translate-y-1"
-          >
+            class="flex flex-col gap-2 font-raleway text-white uppercase items-start translate-y-1">
             <li>Milano</li>
             <li>roma</li>
             <li>venezia</li>
@@ -192,14 +174,12 @@ const cities = [
             class="w-5 translate-y-[5px] mb-auto mt-0"
           />
           <h3
-            class="uppercase text-2xl xs:text-right md:text-left pb-1 items-start text-white font-raleway font-semibold"
-          >
+            class="uppercase text-2xl xs:text-right md:text-left pb-1 items-start text-white font-raleway font-semibold">
             Social <br />Network:
           </h3>
         </div>
         <div
-          class="flex gap-2 ml-0 mr-auto lg:translate-y-6 lg:mb-auto mt-1 xs:mt-auto xs:mb-0 md:mt-1 lg:mt-0 xs:-translate-y-2 md:translate-y-0"
-        >
+          class="flex gap-2 ml-0 mr-auto lg:translate-y-6 lg:mb-auto mt-1 xs:mt-auto xs:mb-0 md:mt-1 lg:mt-0 xs:-translate-y-2 md:translate-y-0">
           <div class="lg:hidden w-5 xs:w-3 md:w-5"></div>
           <img
             class="w-6 lg:translate-y-[12px]"
@@ -221,12 +201,10 @@ const cities = [
     </div>
     <div
       style={{ boxShadow: "0px 0px 4px #0F60DD" }}
-      class="w-full h-[2px] bg-[#3363AC]"
-    >
+      class="w-full h-[2px] bg-[#3363AC]">
     </div>
     <div
-      class="max-md:hidden bg-gray-100 z-10 p-8 grid grid-cols-2 items-center gap-16"
-    >
+      class="max-md:hidden bg-gray-100 z-10 p-8 grid grid-cols-2 items-center gap-16">
       <div class="font-raleway text-blue-950 ml-auto mr-0">
         <div class="flex gap-3">
           <img
@@ -244,8 +222,7 @@ const cities = [
       </div>
       <div class="flex">
         <div
-          class="flex w-80 focus-within:ring-1 focus-within:ring-blue-900 focus-within:outline-none border border-neutral-200 rounded-lg shadow-md"
-        >
+          class="flex w-80 focus-within:ring-1 focus-within:ring-blue-900 focus-within:outline-none border border-neutral-200 rounded-lg shadow-md">
           <p class="ml-2 mr-1 my-1 text-blue-950">@</p>
           <p class="my-1 mr-1 text-blue-950">|</p>
           <input
@@ -263,13 +240,11 @@ const cities = [
     </div>
     <div
       style={{ boxShadow: "0px 0px 4px #0F60DD" }}
-      class="max-md:hidden w-full h-[2px] bg-[#3363AC]"
-    >
+      class="max-md:hidden w-full h-[2px] bg-[#3363AC]">
     </div>
     <div class="xs:flex sm:pt-3 max-sm:pt-6 pb-8 px-8 gap-8">
       <div
-        class="grid max-sm:grid-cols-[auto_auto] sm:grid-cols-[auto_auto_auto] md:flex flex-wrap gap-y-4 gap-x-14 text-white text-xs font-montserrat uppercase"
-      >
+        class="grid max-sm:grid-cols-[auto_auto] sm:grid-cols-[auto_auto_auto] md:flex flex-wrap gap-y-4 gap-x-14 text-white text-xs font-montserrat uppercase">
         <span>{t("navbar-menu.home")}</span>
         <span>{t("navbar-menu.news")}</span>
         <span>{t("navbar-menu.articles")}</span>
@@ -281,14 +256,12 @@ const cities = [
         <span>{t("navbar-menu.contributes")}</span>
       </div>
       <button
-        class="block bg-blue-950 border border-white text-white font-raleway uppercase font-semibold px-8 py-1 mx-auto xs:ml-auto xs:mr-0 mt-9 xs:mt-2 sm:mt-0 lg:mt-2"
-      >
+        class="block bg-blue-950 border border-white text-white font-raleway uppercase font-semibold px-8 py-1 mx-auto xs:ml-auto xs:mr-0 mt-9 xs:mt-2 sm:mt-0 lg:mt-2">
         <p>{t("donate-button")}</p>
       </button>
     </div>
     <div
-      class="flex w-fit gap-1 font-montserrat text-white text-xs mx-auto pb-4"
-    >
+      class="flex w-fit gap-1 font-montserrat text-white text-xs mx-auto pb-4">
       <p>{t("terms-and-conditions")}</p>
       <p>-</p>
       <p>Privacy Policy</p>

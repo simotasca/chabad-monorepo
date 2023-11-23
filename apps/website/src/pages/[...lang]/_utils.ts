@@ -1,7 +1,11 @@
 import { articlesMapper } from "@/lib/shared/supabase/articles";
 import { throwError } from "@/lib/shared/error";
 import supabase from "@/lib/shared/supabase";
-import { eventsMapper } from "@/lib/shared/supabase/events";
+import {
+  eventsMapper,
+  eventsWithOrganizationsMapper,
+} from "@/lib/shared/supabase/events";
+import { livesMapper } from "@/lib/shared/supabase/live";
 
 export async function getData() {
   const organizations = await supabase
@@ -19,6 +23,16 @@ export async function getData() {
   const halforganizations = Math.round(organizations.length / 2);
 
   return {
+    events: await supabase
+      .from("events")
+      .select("*, events_organizations(*, organizations(*))")
+      .limit(10)
+      .then(({ error, data }) => {
+        if (error) {
+          throwError("PAGE Events", "Error fetching events:" + error.message);
+        }
+        return data?.map(eventsWithOrganizationsMapper).map(eventsMapper) || [];
+      }),
     organizations1: organizations.slice(0, halforganizations),
     organizations2: organizations.slice(halforganizations),
     articles: await supabase
@@ -50,15 +64,6 @@ export async function getData() {
             date: s.created_at,
           })) || []
         );
-      }),
-    events: await supabase
-      .from("events")
-      .select("name, date, main_image, slug")
-      .limit(10)
-      .then(({ data, error }) => {
-        if (error)
-          throwError("Page Index", "Error fetching events:" + error.message);
-        return data || [];
       }),
   };
 }

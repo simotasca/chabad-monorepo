@@ -6,12 +6,11 @@ import { formatDate } from "@/lib/shared/calendar.js";
 import type { Tables } from "@chabad/types/src/database";
 import { articleLinkTarget } from "@/lib/shared/supabase/articles";
 
-type Categories = "casa" | "giardinaggio" | "musica";
-
-type Article = Pick<
-  Tables<"articles">,
-  "title" | "date" | "image" | "preview" | "category"
-> & { url: string };
+type Article = Pick<Tables<"articles">, "title" | "date" | "image"> & {
+  url: string;
+  category: string;
+  preview?: string;
+};
 
 export type Props = {
   mainArticle: Article;
@@ -40,8 +39,7 @@ const {
       <a
         href={mainArticle.url}
         class="cursor-pointer"
-        target={articleLinkTarget(mainArticle)}
-      >
+        target={articleLinkTarget(mainArticle)}>
         <article class="lg:grid grid-cols-5 flex-row-reverse gap-4">
           <div
             class:list={[
@@ -49,8 +47,7 @@ const {
               "lg:block",
               "col-span-3",
               reverse && "order-1",
-            ]}
-          >
+            ]}>
             <img
               class="w-full aspect-video"
               src={mainArticle?.image}
@@ -77,18 +74,20 @@ const {
                 />
                 <div
                   class="bg-black bg-opacity-70 text-white px-2"
-                  slot="tooltip"
-                >
+                  slot="tooltip">
                   share
                 </div>
               </Tooltip>
             </div>
-            <p class="text-base text-gray-900 font-raleway leading-tight mb-4">
-              {mainArticle.preview}
-            </p>
+            {
+              mainArticle.preview && (
+                <p class="text-base text-gray-900 font-raleway leading-tight mb-4">
+                  {mainArticle.preview}
+                </p>
+              )
+            }
             <div
-              class:list={["pb-2 lg:hidden col-span-3", reverse && "order-1"]}
-            >
+              class:list={["pb-2 lg:hidden col-span-3", reverse && "order-1"]}>
               <img
                 class:list={[
                   "w-full aspect-video",
@@ -109,8 +108,7 @@ const {
             <a
               href={a.url}
               class="cursor-pointer"
-              target={articleLinkTarget(a)}
-            >
+              target={articleLinkTarget(a)}>
               <article>
                 <div class="flex gap-2 items-center py-0 font-display lg:text-xl md:text-lg text-xl leading-tight">
                   <div class="hidden md:block h-16 lg:h-8 w-[3px] bg-blue-950" />
