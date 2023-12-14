@@ -1,11 +1,12 @@
 ---
+import EventsSection from "@/components/events/EventsSection.astro";
 import OrganizationSection from "@/components/organizations/OrganizationSection.astro";
 import Newsletter from "@/components/sidebar/Newsletter.astro";
-import EventsSection from "@/components/events/EventsSection.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
-import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
-import supabase from "@/lib/shared/supabase";
 import { errorResponse } from "@/lib/server/error-response";
+import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
+
+import imageAcaso from "@/images/family-2.jpg";
 
 if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
@@ -13,20 +14,22 @@ if (!checkLangParam(Astro)) {
 
 const t = await getTranslations("pages/organizations", Astro.url);
 
-const cityFilter = Astro.url.searchParams.get("city");
-const query = supabase.from("organizations").select().limit(10);
-if (cityFilter) {
-  query.like("city", cityFilter);
-}
+// const cityFilter = Astro.url.searchParams.get("city");
+// const query = supabase.from("organizations").select().limit(10);
+// if (cityFilter) {
+//   query.like("city", cityFilter);
+// }
 ---
 
 <PageLayout title="deo" description="demo">
   <section slot="title">
     <div
-      class="grid grid-cols-[1fr_auto_1fr] items-center pt-2 pb-[1px] sm:pt-4 sm:pb-3 px-4">
+      class="grid grid-cols-[1fr_auto_1fr] items-center pt-2 pb-[1px] sm:pt-4 sm:pb-3 px-4"
+    >
       <div class="h-0.5 bg-white mr-4 mb-2 ml-9 border-t"></div>
       <h1
-        class="text-2xl sm:text-4xl uppercase font-messiri text-white font-bold text-center">
+        class="text-2xl sm:text-4xl uppercase font-messiri text-white font-bold text-center"
+      >
         {t("main-title")}
       </h1>
       <div class="h-0.5 bg-white ml-4 mb-2 mr-9 border-t"></div>
@@ -38,7 +41,7 @@ if (cityFilter) {
   </section>
   <section slot="sidebar" class="md:flex flex-col gap-4">
     <div class="m-4 md:m-0">
-      <EventsSection />
+      <EventsSection immagine={imageAcaso} />
     </div>
 
     <div class="hidden md:block">

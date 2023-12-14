@@ -38,7 +38,8 @@ const imgVideo = "/images/video-prova.jpg";
 
 <HomeLayout
   title="Chabad | Homepage"
-  description="sito del portale kosher più in voga d'italia">
+  description="sito ufficiale di chabad in italia"
+>
   <div slot="content-1" class="flex flex-col gap-4">
     {
       articles.length > 0 && (
@@ -51,8 +52,6 @@ const imgVideo = "/images/video-prova.jpg";
         />
       )
     }
-
-    <!-- FIXME segna errore mainArticle e articles -->
 
     {
       scraped.length > 0 && (
@@ -127,12 +126,12 @@ const imgVideo = "/images/video-prova.jpg";
               organizations1.map((o) => (
                 <CarouselItem>
                   <a href="#">
-                    <div class="bg-white w-40 md:w-60 mr-5">
+                    <div class=" w-40 md:w-60 mr-5">
                       <div class=" aspect-[4/3] border border-black bg-slate-200">
                         {o["main_image"] && (
                           <img
                             src={o["main_image"]}
-                            class="w-full h-full object-cover bg-white"
+                            class="w-full h-full  object-cover bg-white"
                           />
                         )}
                       </div>
@@ -157,7 +156,7 @@ const imgVideo = "/images/video-prova.jpg";
                         {o["main_image"] && (
                           <img
                             src={o["main_image"]}
-                            class="w-full h-full object-cover bg-white"
+                            class="w-[100%] h-full object-cover bg-white mx-auto"
                           />
                         )}
                       </div>
@@ -173,7 +172,8 @@ const imgVideo = "/images/video-prova.jpg";
         </div>
         <button
           id="arrow-previous"
-          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 left-0 md:-left-6 -translate-y-1/2 shadow">
+          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 left-0 md:-left-6 -translate-y-1/2 shadow"
+        >
           <img
             class="w-full"
             src="/images/icons/arrow-prev.svg"
@@ -182,7 +182,8 @@ const imgVideo = "/images/video-prova.jpg";
         </button>
         <button
           id="arrow-next"
-          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 right-0 md:-right-6 -translate-y-1/2 shadow">
+          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 right-0 md:-right-6 -translate-y-1/2 shadow"
+        >
           <img
             class="w-full"
             src="/images/icons/arrow-next.svg"
@@ -203,18 +204,19 @@ const imgVideo = "/images/video-prova.jpg";
         <div class="relative">
           <Carousel
             nextArrowId="arrow-next-event"
-            prevArrowId="arrow-previous-event">
+            prevArrowId="arrow-previous-event"
+          >
             {
-              events.map((e) => (
+              events.map((evento) => (
                 <CarouselItem>
                   <EventsSection
-                    associazione={e.organizations
+                    associazione={evento.organizations
                       .map((o) => o.name)
                       .join("<br />")}
-                    nome={e.name}
-                    data={e.date}
-                    immagine={e.main_image}
-                    citta={e.city}
+                    nome={evento.name}
+                    data={evento.date}
+                    immagine={evento.main_image}
+                    citta={evento.city}
                   />
                 </CarouselItem>
               ))
@@ -222,7 +224,8 @@ const imgVideo = "/images/video-prova.jpg";
           </Carousel>
           <button
             id="arrow-previous-event"
-            class="absolute rounded-[100%] w-12 h-12 shadow left-0 top-1/2 -translate-x-8 lg:-translate-x-10 -translate-y-1/2">
+            class="absolute rounded-[100%] w-12 h-12 shadow left-0 top-1/2 -translate-x-8 lg:-translate-x-10 -translate-y-1/2"
+          >
             <img
               class="w-full"
               src="/images/icons/arrow-prev.svg"
@@ -231,7 +234,8 @@ const imgVideo = "/images/video-prova.jpg";
           </button>
           <button
             id="arrow-next-event"
-            class="absolute rounded-[100%] w-12 h-12 z-10 shadow right-0 top-1/2 translate-x-7 lg:translate-x-11 -translate-y-1/2">
+            class="absolute rounded-[100%] w-12 h-12 z-10 shadow right-0 top-1/2 translate-x-7 lg:translate-x-11 -translate-y-1/2"
+          >
             <img
               class="w-full"
               src="/images/icons/arrow-next.svg"

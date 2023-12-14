@@ -7,6 +7,10 @@ import {
 } from "@/lib/shared/supabase/events";
 import { livesMapper } from "@/lib/shared/supabase/live";
 
+function salutami() {
+  return "cuai";
+}
+
 export async function getData() {
   const organizations = await supabase
     .from("organizations")

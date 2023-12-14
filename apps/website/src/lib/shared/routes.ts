@@ -19,6 +19,7 @@ const routes = {
   resources: "resources",
   contribute: "/contribute",
   contacts: "/contacts",
+  about: "/about"
 } as const;
 
 export default routes;

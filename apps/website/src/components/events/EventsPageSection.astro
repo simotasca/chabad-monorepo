@@ -1,15 +1,16 @@
 ---
 import ShadowBox from "@/components/ui/ShadowBox.astro";
 import Tooltip from "@/components/ui/Tooltip.astro";
-import { getTranslations } from "@/lib/server/lang/lang";
 import type { Tables } from "@/db-types";
+import { getTranslations } from "@/lib/server/lang/lang";
+import type {
+  EventsMapperResult,
+  EventWithOrganizations,
+} from "@/lib/shared/supabase/events";
 
 const t = await getTranslations("pages/events", Astro.url);
 
-type Event = Pick<
-  Tables<"events">,
-  "name" | "main_image" | "markdown" | "date"
-> & {
+type Event = EventsMapperResult<Tables<"events"> & EventWithOrganizations> & {
   url: string;
 };
 
@@ -29,7 +30,7 @@ const { event } = Astro.props;
 <ShadowBox>
   <section class="relative flex flex-col gap-y-1 p-4">
     <p class="text-blue-800 text-sm font-raleway font-bold uppercase mb-2">
-      {""}
+      {event.organizations}
     </p>
 
     <h2

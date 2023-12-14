@@ -1,40 +1,53 @@
 ---
 import ShadowBox from "@/components/ui/ShadowBox.astro";
+import supabase from "@/lib/server/supabase";
+import { throwError } from "@/lib/shared/error";
+import { organizationsMapper } from "@/lib/shared/supabase/organizations";
 const { associazione, città, immagine, testo, rabbini } = Astro.props;
+
+const query = supabase.from("organizations").select();
+const organizations = await query.then(({ error, data }) => {
+  if (error) {
+    throwError(
+      "PAGE Organizations",
+      "Error fetching organizations-by-city:" + error.message
+    );
+  }
+  return data?.map(organizationsMapper) || [];
+});
 ---
 
-<ShadowBox class="p-4">
-  <section>
-    {
-      immagine && (
-        <img
-          class="w-full aspect-video my-2"
-          src={immagine}
-          alt="main article image"
-        />
-      )
-    }
+{
+  organizations.map((o) => (
+    <ShadowBox class="p-4">
+      <section>
+        {o.main_image && (
+          <img
+            class="w-full aspect-video my-2"
+            src={o.main_image}
+            alt="main article image"
+          />
+        )}
 
-    <h2 class="mt-2 text-2xl font-display">
-      {testo}
-    </h2>
+        <h2 class="mt-2 text-2xl font-display">{o.name}</h2>
 
-    <div class="flex gap-2 items-center font-raleway text-blue-950 uppercase">
-      <h2 class="whitespace-nowrap font-bold">
-        {associazione}
-      </h2>
-      <p class="font-medium">
-        {città}
-      </p>
+        <div class="flex gap-2 items-center font-raleway text-blue-950 uppercase">
+          <h2 class="whitespace-nowrap font-bold" />
+          <p class="font-medium">{o.city}</p>
 
-      <div class="w-full"></div>
-    </div>
-    <div class="flex">
-      <p class="text-xs font-raleway font-medium">Rav A.Hazan, Rav Kaplan</p>
-      <button
-        class="justify-end bg-blue-950 border border-white text-white font-raleway uppercase font-semibold px-16 py-2 mt-4 ml-auto mr-0">
-        <p>dona</p></button
-      >
-    </div>
-  </section>
-</ShadowBox>
+          <div class="w-full" />
+        </div>
+        <div class="flex">
+          <p class="text-xs font-raleway font-medium">
+            Rav A.Hazan, Rav Kaplan
+          </p>
+          <button class="justify-end bg-blue-950 border border-white text-white font-raleway uppercase font-semibold px-16 py-2 mt-4 ml-auto mr-0">
+            <a href={o.link_donate}>
+              <p>dona</p>
+            </a>
+          </button>
+        </div>
+      </section>
+    </ShadowBox>
+  ))
+}

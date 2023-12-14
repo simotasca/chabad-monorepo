@@ -5,6 +5,8 @@ import EventsPageSection from "@/components/events/EventsPageSection.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
 import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
 import { errorResponse } from "@/lib/server/error-response";
+import { Image } from "astro:assets";
+import imageCasuale from "@/images/parshat/acharei-kedoshim.jpeg";
 
 if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
@@ -24,7 +26,8 @@ const t = await getTranslations("pages/contribute", Astro.url);
         class="w-full object-cover aspect-[9/4]"
       />
       <div
-        class="absolute flex items-center gap-3 w-full h-fit bg-blue-950 opacity-60 bottom-0 px-6 py-4 z-10">
+        class="absolute flex items-center gap-3 w-full h-fit bg-blue-950 opacity-60 bottom-0 px-6 py-4 z-10"
+      >
         <div>
           <img
             class="w-24 flex-grow shadow-md"
@@ -35,86 +38,20 @@ const t = await getTranslations("pages/contribute", Astro.url);
 
         <h1
           class="text-white font-raleway font-bold text-2xl uppercase flex-shrink shadow-md"
-          style="text-shadow: 0 0 5px rgb(37, 37, 37)">
+          style="text-shadow: 0 0 5px rgb(37, 37, 37)"
+        >
           {t("main-title")}
         </h1>
       </div>
     </div>
 
     <div class="grid grid-cols-2 gap-4">
-      <ContributeSection
-        progetto="Portiamo le matzot alle famiglie"
-        associazione="Beit chabad"
-        città="Milano"
-        immagine="../../images/parshat/acharei-kedoshim.jpeg"
-        testo="Portiamo le Matzot agli anziani e ai disabili"
-        rabbini="Rav Nazrolai, Rav Canarutto, Rav Igal Hazan"
-      />
-      <ContributeSection
-        progetto="Portiamo le matzot alle famiglie"
-        associazione="Beit chabad"
-        città="Milano"
-        immagine="../../images/parshat/acharei-kedoshim.jpeg"
-        testo="Portiamo le Matzot agli anziani e ai disabili"
-        rabbini="Rav Nazrolai, Rav Canarutto, Rav Igal Hazan"
-      />
-      <ContributeSection
-        progetto="Portiamo le matzot alle famiglie"
-        associazione="Beit chabad"
-        città="Milano"
-        immagine="../../images/parshat/acharei-kedoshim.jpeg"
-        testo="Portiamo le Matzot agli anziani e ai disabili"
-        rabbini="Rav Nazrolai, Rav Canarutto, Rav Igal Hazan"
-      />
-      <ContributeSection
-        progetto="Portiamo le matzot alle famiglie"
-        associazione="Beit chabad"
-        città="Milano"
-        immagine="../../images/parshat/acharei-kedoshim.jpeg"
-        testo="Portiamo le Matzot agli anziani e ai disabili"
-        rabbini="Rav Nazrolai, Rav Canarutto, Rav Igal Hazan"
-      />
-      <ContributeSection
-        progetto="Portiamo le matzot alle famiglie"
-        associazione="Beit chabad"
-        città="Milano"
-        immagine="../../images/parshat/acharei-kedoshim.jpeg"
-        testo="Portiamo le Matzot agli anziani e ai disabili"
-        rabbini="Rav Nazrolai, Rav Canarutto, Rav Igal Hazan"
-      />
-      <ContributeSection
-        progetto="Portiamo le matzot alle famiglie"
-        associazione="Beit chabad"
-        città="Milano"
-        immagine="../../images/parshat/acharei-kedoshim.jpeg"
-        testo="Portiamo le Matzot agli anziani e ai disabili"
-        rabbini="Rav Nazrolai, Rav Canarutto, Rav Igal Hazan"
-      />
-      <ContributeSection
-        progetto="Portiamo le matzot alle famiglie"
-        associazione="Beit chabad"
-        città="Milano"
-        immagine="../../images/parshat/acharei-kedoshim.jpeg"
-        testo="Portiamo le Matzot agli anziani e ai disabili"
-        rabbini="Rav Nazrolai, Rav Canarutto, Rav Igal Hazan"
-      />
-      <ContributeSection
-        progetto="Portiamo le matzot alle famiglie"
-        associazione="Beit chabad"
-        città="Milano"
-        immagine="../../images/parshat/acharei-kedoshim.jpeg"
-        testo="lorem ipsum febricitante godet ad quiqueris adipiscebant promisque aedificaverunt probandus est. aliquid abstinentia moverit legit probandae. lorem ipsum febricitante godet ad quiqueris adipiscebant promisque aedificaverunt probandus est. aliquid abstinentia moverit legit probandae. lorem ipsum febricitante godet ad quiqueris adipiscebant promisque aedificaverunt probandus est. aliquid abstinentia moverit legit probandae."
-        rabbini="Rav Nazrolai, Rav Canarutto, Rav Igal Hazan"
-      />
+      <ContributeSection />
     </div>
   </section>
   <section slot="sidebar" class="md:flex flex-col gap-4">
     <div class="m-4 md:m-0">
-      <EventsPageSection
-        associazione="Beit chabad"
-        nome="Seder di Rosh Hashanah"
-        data="89/75/7805"
-      />
+      <!-- <EventsPageSection /> -->
     </div>
 
     <div class="hidden md:block">

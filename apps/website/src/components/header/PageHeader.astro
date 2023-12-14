@@ -10,19 +10,21 @@ const t = await getTranslations("components/header", Astro.url);
     <div
       class="chabad-container grid grid-cols-[auto_1fr_auto] xs:grid-cols-[1fr_auto_1fr] gap-x-10 xs:gap-x-0 items-center py-2 mx-auto"
     >
-      <div class="flex justify-start -translate-y-px pl-2">
-        <img
-          src="/images/logo.svg"
-          class="h-8 xs:h-10 -m-1"
-          alt="chabad logo icon"
-        />
+      <a href={routes.home}
+        ><div class="flex justify-start -translate-y-px pl-2">
+          <img
+            src="/images/logo.svg"
+            class="h-8 xs:h-10 -m-1"
+            alt="chabad logo icon"
+          />
 
-        <img
-          src="/images/logo-text.svg"
-          alt="chabad.it"
-          class="w-24 xs:w-28 translate-y-[4px]"
-        />
-      </div>
+          <img
+            src="/images/logo-text.svg"
+            alt="chabad.it"
+            class="w-24 xs:w-28 translate-y-[4px]"
+          />
+        </div></a
+      >
       <ul
         class="hidden sm:flex items-center gap-8 text-slate-200 font-raleway text-sm justify-center translate-y-px"
       >
@@ -116,9 +118,9 @@ const t = await getTranslations("components/header", Astro.url);
       <li class="hidden md:block">
         <a href={routes.organizations()}>{t("navbar.organizations")}</a>
       </li>
-      <!-- <li class="hidden xs:block">
+      <li class="hidden xs:block">
         <a href={routes.about}>{t("navbar.about-us")}</a>
-      </li> -->
+      </li>
       <!-- <li class="hidden md:block">
         <a href={routes.resources}>{t("navbar.resources")}</a>
       </li> -->

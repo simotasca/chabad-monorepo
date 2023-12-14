@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "db:types": "supabase gen types typescript --local --schema=storage,public > ./src/lib/shared/supabase/types.ts"
+    "db:types": "supabase gen types typescript --db-url postgres://postgres:your-super-secret-and-long-postgres-password@localhost:5432/postgres > ./src/db-types/generated.ts"
   },
   "dependencies": {
     "@astrojs/node": "^6.0.3",
@@ -27,6 +27,6 @@
   "devDependencies": {
     "@types/react": "^18.2.27",
     "@types/react-dom": "^18.2.12",
-    "supabase": "^1.100.1"
+    "supabase": "^1.123.4"
   }
 }

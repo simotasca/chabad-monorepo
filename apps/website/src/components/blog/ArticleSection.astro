@@ -5,6 +5,8 @@ import Tooltip from "@/components/ui/Tooltip.astro";
 import { formatDate } from "@/lib/shared/calendar.js";
 import type { Tables } from "@/db-types";
 import { articleLinkTarget } from "@/lib/shared/supabase/articles";
+import { Image } from "astro:assets";
+import iconShare from "@/images/icons/share.svg";
 
 type Article = Pick<Tables<"articles">, "title" | "date" | "image"> & {
   url: string;
@@ -69,9 +71,9 @@ const {
                 {mainArticle.category}
               </p>
               <Tooltip>
-                <img
+                <Image
                   class="-translate-y-0.5"
-                  src="/images/icons/share.svg"
+                  src={iconShare}
                   alt="share icon"
                 />
                 <div
@@ -123,9 +125,9 @@ const {
                   <p class="font-raleway uppercase text-blue-900 text-xs font-bold">
                     {a.category}
                   </p>
-                  <img
+                  <Image
                     class="-translate-y-1"
-                    src="/images/icons/share.svg"
+                    src={iconShare}
                     alt="share button"
                   />
                 </div>

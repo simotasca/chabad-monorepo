@@ -1,14 +1,9 @@
-import type { Tables } from "@/db-types";
-
-type WithSlug = Pick<Tables<"organizations">, "slug">;
-
-export function organizationsUrl({ slug }: WithSlug) {
-  return `/organizations/${slug}`;
-}
+import type { WithSlug } from "../routes";
+import routes from "../routes";
 
 /**
  * maps the new's **slug** to the corresponding **Astro url**
  */
 export function organizationsMapper<T extends WithSlug>(o: T) {
-  return { ...o, url: organizationsUrl(o) };
+  return { ...o, url: routes.organization(o) };
 }

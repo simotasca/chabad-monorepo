@@ -4,6 +4,7 @@ import Newsletter from "@/components/sidebar/Newsletter.astro";
 import Parshat from "@/components/sidebar/Parshat.astro";
 import PageLayout from "src/layouts/PageLayout.astro";
 import SectionTitle from "@/components/ui/SectionTitle.astro";
+import Tooltip from "@/components/ui/Tooltip.astro";
 import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
 import supabase from "@/lib/server/supabase";
 import { livesMapper } from "@/lib/shared/supabase/live";
@@ -28,16 +29,7 @@ const videolives = await supabase
     return data?.map(livesMapper) || [];
   });
 
-type VideoLive = Pick<Tables<"live_video">, "title" | "youtube_link"> & {
-  category: string;
-  url: string;
-};
-
 const mainVideoLive = videolives.pop()!;
-
-interface Props {
-  mainVideoLive: VideoLive;
-}
 ---
 
 <PageLayout title="Live & Video" description="bla bla bla">
@@ -59,9 +51,27 @@ interface Props {
     <ShadowBox>
       <div class="p-6">
         <a href={mainVideoLive.url}>
-          <h2 class="mb-4">
-            {mainVideoLive.title}
-          </h2>
+          <div class="flex">
+            <h2 class="mb-4 font-display text-3xl font-bold">
+              {mainVideoLive.title}
+            </h2><div class="ml-auto mr-0">
+              <Tooltip>
+                <button>
+                  <img
+                    class="-translate-y-0.5"
+                    src="/images/icons/share.svg"
+                    alt="share icon"
+                  />
+                </button>
+                <div
+                  class="bg-black bg-opacity-70 text-white px-2"
+                  slot="tooltip"
+                >
+                  share
+                </div>
+              </Tooltip>
+            </div>
+          </div>
         </a>
         <div>{mainVideoLive.youtube_link}</div>
       </div>

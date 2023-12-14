@@ -1,6 +1,7 @@
 import type { Functions, Tables } from "@/db-types";
 import type { WithSlug } from "../routes";
 import routes from "../routes";
+import type { Prettify } from "../types";
 
 /**
  * maps the event's **slug** to the corresponding **Astro url**
@@ -9,17 +10,21 @@ export function eventsMapper<T extends WithSlug>(a: T) {
   return { ...a, url: routes.event(a) };
 }
 
-type EventWithOrganizations = {
+export type EventWithOrganizations = {
   events_organizations: {
     organizations: Tables<"organizations"> | null;
   }[];
 };
 
+export type EventsMapperResult<T> = Prettify<
+  Omit<T, "events_organizations"> & {
+    organizations: Tables<"organizations">[];
+  }
+>;
+
 export function eventsWithOrganizationsMapper<T extends EventWithOrganizations>(
   a: T
-): Omit<T, "events_organizations"> & {
-  organizations: Tables<"organizations">[];
-} {
+): EventsMapperResult<T> {
   const { events_organizations, ...withoutEO } = a;
   // @ts-ignore
   return {
