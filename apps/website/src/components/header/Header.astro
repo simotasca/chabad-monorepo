@@ -97,8 +97,12 @@ const t = await getTranslations("components/header", Astro.url);
             <div class="hidden md:flex items-end font-raleway">
               <ul class="flex gap-2 text-sm">
                 <!-- <MenuItem>{t("menu-items.feed")}</MenuItem> -->
-                <MenuItem>{t("menu-items.newsletter")}</MenuItem>
-                <MenuItem>{t("menu-items.contact")}</MenuItem>
+                <a href="#footer"
+                  ><MenuItem>{t("menu-items.newsletter")}</MenuItem></a
+                >
+                <a href="#footer"
+                  ><MenuItem>{t("menu-items.contact")}</MenuItem></a
+                >
               </ul>
             </div>
           </div>
@@ -112,9 +116,9 @@ const t = await getTranslations("components/header", Astro.url);
             <li>
               <button>English</button>
             </li>
-            <li>
+            <!-- <li>
               <button>עברית</button>
-            </li>
+            </li> -->
             <li class="md:pl-3 lg:pl-16 text-white">ב"ה</li>
           </ul>
         </div>

@@ -16,6 +16,7 @@ import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
 import { getData } from "./_utils";
 import { organizationsMapper } from "@/lib/shared/supabase/organizations";
 import routes from "@/lib/shared/routes";
+import upcomingEvent from "@/images/icons/blue-icons/event-upcoming.svg";
 
 if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
@@ -228,7 +229,7 @@ const imgVideo = "/images/video-prova.jpg";
     <section>
       <ShadowBox class="contents md:block md:p-4">
         <h2 class="mb-4 mt-2 ml-2 md:ml-4">
-          <SectionTitle icon="/images/icons/synagogue.svg">
+          <SectionTitle icon={"/images/icons/blue-icons/event-upcoming.svg"}>
             {t("events-section.title")}
           </SectionTitle>
         </h2>
