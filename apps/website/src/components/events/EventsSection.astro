@@ -11,28 +11,28 @@ const { associazione, nome, data, immagine, citta, url } = Astro.props;
       class="w-full h-full opacity-80"
     />
     <div class="w-full h-full bg-black opacity-50"></div>
-    <div class="z-10 flex flex-col justify-center gap-y-1">
+    <div class="z-10 flex flex-col justify-center gap-y-1 px-2">
       <h3
-        class="text-white font-display text-2xl uppercase text-center"
+        class="text-white font-display text-xl lg:text-2xl uppercase text-center leading-[1.1]"
         style="text-shadow: 0 0 5px rgb(37, 37, 37)"
       >
         {nome}
       </h3>
       <div class="flex flex-col gap-1 items-center justify-center">
         <p
-          class="text-white font-display text-sm md:text-base uppercase text-center [text-shadow:0_0_5px_#252525]"
+          class="text-white font-display text-sm lg:text-base uppercase text-center [text-shadow:0_0_5px_#252525]"
           set:html={associazione}
         />
         <div class="bg-white h-[1px] w-1"></div>
         <p
-          class="text-white font-raleway font-semibold text-sm uppercase"
+          class="text-white font-raleway font-semibold text-xs lg:text-sm uppercase"
           style="text-shadow: 0 0 5px rgb(37, 37, 37)"
         >
           {citta}
         </p>
       </div>
       <p
-        class="text-white font-display text-sm md:text-base uppercase mx-auto"
+        class="text-white font-display text-sm md:text-sm lg:text-base uppercase mx-auto"
         style="text-shadow: 0 0 5px rgb(37, 37, 37)"
       >
         {data}
