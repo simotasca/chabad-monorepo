@@ -7,6 +7,8 @@ import type {
   EventsMapperResult,
   EventWithOrganizations,
 } from "@/lib/shared/supabase/events";
+import { Image } from "astro:assets";
+import shareIcon from "@/images/icons/share.svg";
 
 const t = await getTranslations("pages/events", Astro.url);
 
@@ -57,11 +59,7 @@ const { event } = Astro.props;
       <button class="flex gap-3">
         <p class="font-raleway text-base text-white uppercase">discover</p>
         <Tooltip>
-          <img
-            class="-translate-y-0.5"
-            src="/images/icons/share.svg"
-            alt="share icon"
-          />
+          <Image class="-translate-y-0.5" src={shareIcon} alt="share icon" />
 
           <div class="bg-black bg-opacity-70 text-white px-2" slot="tooltip">
             share
