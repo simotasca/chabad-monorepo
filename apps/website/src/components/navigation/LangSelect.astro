@@ -1,0 +1,38 @@
+---
+import { config } from "@/lib/shared/config";
+import { currLang } from "@/lib/shared/lang";
+
+type Props = { class?: string };
+const { class: className } = Astro.props;
+---
+
+<x-lang-select class="contents">
+  <select class={className}>
+    {
+      config.lang.locales.map((lang) => (
+        <option selected={lang === currLang(Astro.url)} value={lang}>
+          {config.lang.fullNames.get(lang)}
+        </option>
+      ))
+    }
+  </select>
+</x-lang-select>
+
+<script>
+  import { translateRoute } from "@/lib/shared/lang";
+  customElements.define(
+    "x-lang-select",
+    class extends HTMLElement {
+      constructor() {
+        super();
+        const select = this.querySelector("select")!;
+        select.addEventListener("change", (e) => {
+          window.location.href = translateRoute(
+            { lang: select.value },
+            new URL(window.location.href)
+          );
+        });
+      }
+    }
+  );
+</script>

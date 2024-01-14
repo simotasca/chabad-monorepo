@@ -1,6 +1,9 @@
 ---
 import routes from "@/lib/shared/routes";
 import Widget from "./Widget.astro";
+import { config } from "@/lib/shared/config";
+import { currLang } from "@/lib/shared/lang";
+import LangSelect from "../navigation/LangSelect.astro";
 
 const { cities } = Astro.props;
 const stringCities = Object.keys(cities);
@@ -53,9 +56,7 @@ const stringCities = Object.keys(cities);
         </div>
         <div
           class="md:hidden flex items-center justify-end gap-4 text-sm sm:text-base text-white font-montserrat">
-          <select class="bg-transparent" id="language-select">
-            <option selected value="">Italiano</option>
-          </select>
+          <LangSelect class="bg-transparent" />
           <span>ב"ה</span>
         </div>
       </div>
