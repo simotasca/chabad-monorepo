@@ -54,7 +54,7 @@ console.log("SOTTO-TITOLO:", t("main.subtitle"));
     <PageArticleSection mainArticle={mainArticle} />
 
     <ShadowBox>
-      <div class="p-6">
+      <div class="p-6 bg-slate-50">
         <h1 class="mb-4">
           <SectionTitle>{t("articles-section.title")}</SectionTitle>
         </h1>
@@ -81,6 +81,7 @@ console.log("SOTTO-TITOLO:", t("main.subtitle"));
         </div>
       </div>
     </ShadowBox>
+    <div class="max-md:hidden lg:hidden h-1"></div>
   </section>
 
   <section slot="sidebar" class="md:flex flex-col gap-4">
