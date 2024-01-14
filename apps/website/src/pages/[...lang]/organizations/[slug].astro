@@ -11,9 +11,10 @@ import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
 import supabase from "@/lib/server/supabase";
 import { throwError } from "@/lib/shared/error";
 import { splitContacts } from "@/lib/shared/supabase/contacts";
-import logoFacebook from "@/images/icons/blue-icons/facebook.svg";
-import logoInstagram from "@/images/icons/instagram.svg";
+import logoFacebook from "@/images/icons/facebook-white.svg";
+import logoInstagram from "@/images/icons/instagram-white.svg";
 import { Image } from "astro:assets";
+import { getData } from "../_utils";
 
 if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
@@ -53,7 +54,10 @@ const organization = !slug
       .eq("slug", slug)
       .then(({ data, error }) => {
         if (error) {
-          throwError("organization page", "Error fetching organization: " + error.message);
+          throwError(
+            "organization page",
+            "Error fetching organization: " + error.message
+          );
         }
         return !data?.length ? null : data[0];
       });
@@ -63,6 +67,8 @@ if (!organization) {
 }
 
 const { contacts, social, iban } = splitContacts(organization.contacts);
+
+const { events } = await getData();
 ---
 
 <PageLayout title="demo" description="demo">
@@ -71,18 +77,29 @@ const { contacts, social, iban } = splitContacts(organization.contacts);
   </section>
 
   <section slot="content-1">
-    <ShadowBox class="pb-4 bg-slate-50">
+    <ShadowBox class="mb-4 bg-slate-50">
       <div
-        class="grid grid-cols-2 w-full items-center bg-[#031B4D] border-b-white border-b-[1px] text-white pl-3 pt-3 pr-6">
-        <div class="flex justify-start items-center h-full -translate-y-px gap-3">
-          <img src={organization.logo} class="h-10 aspect-square object-cover" alt="chabad logo icon" />
+        class="grid grid-cols-2 w-full items-center bg-[#031B4D] border-b-white border-b-[1px] text-white pl-3 pt-3 pr-6"
+      >
+        <div
+          class="flex justify-start items-center h-full -translate-y-px gap-3"
+        >
+          <img
+            src={organization.logo}
+            class="h-10 aspect-square object-cover"
+            alt="chabad logo icon"
+          />
 
-          <h2 class="font-display text-lg md:text-2xl uppercase leading-4 md:leading-6">
+          <h2
+            class="font-display text-lg md:text-2xl uppercase leading-4 md:leading-6"
+          >
             {organization.name}
           </h2>
         </div>
 
-        <div class="flex gap-6 justify-end font-montserrat font-medium text-base">
+        <div
+          class="flex gap-6 justify-end font-montserrat font-medium text-base"
+        >
           {
             organization.website && (
               <a href={organization.website}>
@@ -94,16 +111,24 @@ const { contacts, social, iban } = splitContacts(organization.contacts);
         </div>
       </div>
       <div class="stack place-items-center">
-        <img src={organization.main_image} alt="immagine a caso" class="w-full object-cover aspect-[9/4]" />
+        <img
+          src={organization.main_image}
+          alt="immagine a caso"
+          class="w-full object-cover aspect-[9/4]"
+        />
         <div class="w-full h-full bg-blue-950 opacity-60"></div>
         <div class="z-10 flex flex-col justify-center gap-y-1">
           <h3
             class="text-white font-display font-bold text-5xl uppercase text-center text mx-auto"
-            style="text-shadow: 0 0 5px rgb(37, 37, 37)">
+            style="text-shadow: 0 0 5px rgb(37, 37, 37)"
+          >
             {organization.name}
           </h3>
 
-          <p class="text-white font-display font-medium text-2xl mx-auto" style="text-shadow: 0 0 5px rgb(37, 37, 37)">
+          <p
+            class="text-white font-display font-medium text-2xl mx-auto"
+            style="text-shadow: 0 0 5px rgb(37, 37, 37)"
+          >
             {organization.slogan && organization.slogan}
           </p>
 
@@ -137,8 +162,13 @@ const { contacts, social, iban } = splitContacts(organization.contacts);
       {
         !!organization.events_organizations?.length && (
           <div class="relative pt-4 pb-8 pl-4 pr-8">
-            <h3 class="text-blue-950 uppercase text-xl ml-6 mb-4">{t("single-project-page.events-section-title")}</h3>
-            <Carousel nextArrowId="arrow-next-event" prevArrowId="arrow-previous-event">
+            <h3 class="text-blue-950 uppercase text-xl ml-6 mb-4">
+              {t("single-project-page.events-section-title")}
+            </h3>
+            <Carousel
+              nextArrowId="arrow-next-event"
+              prevArrowId="arrow-previous-event"
+            >
               {organization.events_organizations.map(({ events: e }) => (
                 <CarouselItem>
                   <EventsSection
@@ -153,13 +183,23 @@ const { contacts, social, iban } = splitContacts(organization.contacts);
             </Carousel>
             <button
               id="arrow-previous-event"
-              class="absolute rounded-[100%] w-12 h-12 shadow left-0 top-1/2 -translate-x-5 lg:-translate-x-8 -translate-y-1/2">
-              <img class="w-full" src="/images/icons/arrow-prev.svg" alt="carousel icon" />
+              class="absolute rounded-[100%] w-12 h-12 shadow left-0 top-1/2 -translate-x-5 lg:-translate-x-8 -translate-y-1/2"
+            >
+              <img
+                class="w-full"
+                src="/images/icons/arrow-prev.svg"
+                alt="carousel icon"
+              />
             </button>
             <button
               id="arrow-next-event"
-              class="absolute rounded-[100%] w-12 h-12 z-10 shadow right-0 top-1/2 translate-x-5 lg:translate-x-9 -translate-y-1/2">
-              <img class="w-full" src="/images/icons/arrow-next.svg" alt="icona carousel" />
+              class="absolute rounded-[100%] w-12 h-12 z-10 shadow right-0 top-1/2 translate-x-5 lg:translate-x-9 -translate-y-1/2"
+            >
+              <img
+                class="w-full"
+                src="/images/icons/arrow-next.svg"
+                alt="icona carousel"
+              />
             </button>
           </div>
         )
@@ -171,11 +211,14 @@ const { contacts, social, iban } = splitContacts(organization.contacts);
 
       <div
         id="contacts"
-        class="bg-[#18315E] px-10 py-6 grid grid-cols-3 gap-4 text-white font-montserrat mt-6 scroll-m-10">
+        class="bg-[#18315E] px-10 py-6 grid grid-cols-3 gap-4 text-white font-montserrat mt-6 scroll-m-10"
+      >
         {
           (contacts.length || social.length || iban.length) && (
             <ul>
-              <li class="text-lg uppercase font-semibold">{t("contacts.title")}</li>
+              <li class="text-lg uppercase font-semibold">
+                {t("contacts.title")}
+              </li>
 
               <li class="flex flex-col gap-1 text-sm">
                 {contacts.map(({ key, value }) => (
@@ -185,17 +228,19 @@ const { contacts, social, iban } = splitContacts(organization.contacts);
                   </p>
                 ))}
               </li>
-
-              <li class="flex gap-3 items-center">
+              <li class="flex gap-3 items-center pt-2">
                 {social.map((s) => (
                   <a
                     href={s.value}
                     target="_blank"
-                    class="[&_img]:h-8 [&_img]:w-8 [&_img]:object-cover [&_img]:object-center">
+                    class="[&_img]:h-5 [&_img]:w-5 [&_img]:object-cover [&_img]:object-center"
+                  >
                     {
                       {
                         facebook: <Image src={logoFacebook} alt="facebook" />,
-                        instagram: <Image src={logoInstagram} alt="instagram" />,
+                        instagram: (
+                          <Image src={logoInstagram} alt="instagram" />
+                        ),
                       }[s.key]
                     }
                   </a>
@@ -241,13 +286,27 @@ const { contacts, social, iban } = splitContacts(organization.contacts);
   </section>
 
   <section slot="sidebar" class="md:flex flex-col gap-4">
+    <ShadowBox class="max-md:hidden bg-slate-50">
+      <div class="py-5">
+        <EventsSection
+          nome={events[0].name}
+          data={events[0].date}
+          immagine={events[0].main_image}
+          citta={events[0].city}
+          url={events[0].url}
+        />
+      </div>
+    </ShadowBox>
+
     <div class="hidden md:block">
       <Newsletter />
     </div>
   </section>
 
   <section slot="elenco-cell" class="sm:px-4 pb-8">
-    <h2 class="font-raleway uppercase text-blue-950 font-semibold text-2xl mb-2">
+    <h2
+      class="font-raleway uppercase text-blue-950 font-semibold text-2xl mb-2"
+    >
       {t("single-project-page.chabad-projects-section-title")}
     </h2>
     <div class="flex flex-col gap-6">
@@ -257,7 +316,9 @@ const { contacts, social, iban } = splitContacts(organization.contacts);
 
   <section slot="elenco-desktop">
     <ShadowBox class="mx-5 md:px-6 lg:px-12 pb-8">
-      <h2 class="font-raleway uppercase text-blue-950 font-bold text-2xl mt-8 mb-4">
+      <h2
+        class="font-raleway uppercase text-blue-950 font-bold text-2xl mt-8 mb-4"
+      >
         {t("single-project-page.chabad-projects-section-title")}
       </h2>
       <div class="flex flex-col gap-6">
