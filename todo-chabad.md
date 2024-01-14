@@ -74,13 +74,13 @@ HEADER (DESKTOP)
 - [x] Button contattaci, manca href (eh)
 - [x] Button newsletter, manca href (eh)
 - [x] Non va il tasto delle lingue (st)
-  - [ ] sostituire tutti gli <a /> con <Link />
+  - [ ] sostituire tutti gli <a> con <Link> (eh)
 - [x] Togliere lingua ebraica finche non la si usa (eh)
 
 HEADER (MOBILE)
 
 - [x] Dropdown delle lingue non funziona (st)
-  - [ ] sistemare ovunque c'è un elenco di lingue con il config
+  - [x] Sistemare ovunque c'è un elenco di lingue con il config
 - [ ] Manca il cursor pointer sull'hamburger (eh)
 - [~] Scegliere con cognizione le voci che compaiono/scompaiono sulla navbar mentre si ridimensiona (eh)
 - [ ] sistemare la lente piccola in PageHeader
