@@ -29,8 +29,8 @@ const { event } = Astro.props;
 
 <ShadowBox>
   <section class="relative flex flex-col gap-y-1 p-4">
-    <p class="text-blue-800 text-sm font-raleway font-bold uppercase mb-2">
-      {event.organizations}
+    <p class="text-blue-800 text-xs font-raleway font-bold uppercase mb-2">
+      {event.organizations.map((o) => o.name).join(", ")}
     </p>
 
     <h2
@@ -50,28 +50,6 @@ const { event } = Astro.props;
         />
       )
     }
-
-    <div class="bg-blue-950 h-[1px] w-[calc(100%-20%)] mx-auto my-2"></div>
-
-    <div class="pb-8 pt-4">
-      <h3 class="text-black font-raleway font-semibold uppercase text-lg">
-        {""}
-      </h3>
-      <ul class="text-black font-raleway text-sm leading-tight">
-        <li>
-          {""}
-        </li>
-        <li>
-          {""}
-        </li>
-        <li>
-          {""}
-        </li>
-        <li>
-          {""}
-        </li>
-      </ul>
-    </div>
 
     <div
       class="absolute bg-blue-950 shadow-button px-3 pt-2 pb-1.5 -right-2 -bottom-2"

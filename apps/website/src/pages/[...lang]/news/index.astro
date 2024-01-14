@@ -8,10 +8,15 @@ import { throwError } from "@/lib/shared/error";
 import supabase from "@/lib/server/supabase";
 import { newsMapper } from "@/lib/shared/supabase/news";
 import PageLayout from "src/layouts/PageLayout.astro";
+import EventsSection from "@/components/events/EventsSection.astro";
+import { getData } from "../_utils";
+import Parshat from "@/components/sidebar/Parshat.astro";
 
 if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
 }
+
+const { events } = await getData();
 
 const allNews = await supabase
   .from("news")
@@ -36,7 +41,7 @@ const t = await getTranslations("pages/news", Astro.url);
     >
       <div class="h-0.5 bg-white mr-4 mb-2 ml-9 border-t"></div>
       <h1
-        class="text-2xl sm:text-4xl uppercase font-messiri text-white font-bold text-center"
+        class="text-2xl sm:text-3xl uppercase font-messiri text-white font-extrabold text-center"
       >
         {t("main-title")}
       </h1>
@@ -80,8 +85,24 @@ const t = await getTranslations("pages/news", Astro.url);
 
   <!-- FIXME: EventsPageSection da errore -->
   <section slot="sidebar" class="md:flex flex-col gap-4">
-    <div class="m-4 md:m-0">
-      <!-- <EventsPageSection /> -->
+    <ShadowBox>
+      <div class="py-5">
+        <EventsSection
+          nome={events[0].name}
+          data={events[0].date}
+          immagine={events[0].main_image}
+          citta={events[0].city}
+          url={events[0].url}
+        />
+      </div>
+    </ShadowBox>
+
+    <div class="max-sm:hidden">
+      <Parshat
+        title="acharei kedoshim"
+        date="15/giugno/2023"
+        image="images/parshat/acharei-kedoshim.jpeg"
+      />
     </div>
 
     <div class="hidden md:block">

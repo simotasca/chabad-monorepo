@@ -8,10 +8,12 @@ import CarouselItem from "@/components/ux/carousel/CarouselItem.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
 import { errorResponse } from "@/lib/server/error-response";
 import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
-import { throwError } from "@/lib/shared/error";
 import supabase from "@/lib/server/supabase";
-import type { GetStaticPaths } from "astro";
-import type { Tables } from "@/db-types";
+import { throwError } from "@/lib/shared/error";
+import { splitContacts } from "@/lib/shared/supabase/contacts";
+import logoFacebook from "@/images/icons/blue-icons/facebook.svg";
+import logoInstagram from "@/images/icons/instagram.svg";
+import { Image } from "astro:assets";
 
 if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
@@ -47,7 +49,7 @@ const organization = !slug
   ? null
   : await supabase
       .from("organizations")
-      .select("*,events_organizations(*, events(*))")
+      .select("*,events_organizations(*, events(*)), contacts(*)")
       .eq("slug", slug)
       .then(({ data, error }) => {
         if (error) {
@@ -62,6 +64,8 @@ const organization = !slug
 if (!organization) {
   return errorResponse(Astro.url);
 }
+
+const { contacts, social, iban } = splitContacts(organization.contacts);
 ---
 
 <PageLayout title="demo" description="demo">
@@ -72,12 +76,14 @@ if (!organization) {
   <section slot="content-1">
     <ShadowBox class="pb-4">
       <div
-        class="grid grid-cols-2 w-full items-center bg-[#031B4D] border-b-white border-b-[1px] text-white px-6 py-3"
+        class="grid grid-cols-2 w-full items-center bg-[#031B4D] border-b-white border-b-[1px] text-white pl-3 py-3 pr-6"
       >
-        <div class="flex justify-start items-center -translate-y-px gap-3">
+        <div
+          class="flex justify-start items-center h-full -translate-y-px gap-3"
+        >
           <img
             src={organization.logo}
-            class="h-8 xs:h-10 -m-1"
+            class="h-10 aspect-square object-cover"
             alt="chabad logo icon"
           />
 
@@ -91,8 +97,14 @@ if (!organization) {
         <div
           class="flex gap-6 justify-end font-montserrat font-medium text-base"
         >
-          <p>Website</p>
-          <p>Contatti</p>
+          {
+            organization.website && (
+              <a href={organization.website}>
+                <span>Website</span>
+              </a>
+            )
+          }
+          <a href="#contacts"><span>Contatti</span></a>
         </div>
       </div>
       <div class="stack place-items-center">
@@ -114,16 +126,21 @@ if (!organization) {
             class="text-white font-display font-medium text-2xl mx-auto"
             style="text-shadow: 0 0 5px rgb(37, 37, 37)"
           >
-            {organization.slogan}
+            {organization.slogan && organization.slogan}
           </p>
 
           <div class="h-10"></div>
 
-          <button
-            class="bg-blue-950 border border-white text-white font-raleway uppercase font-semibold px-16 py-2 mx-auto"
-          >
-            <a href={organization.link_donate}> <p>DONATE</p></a>
-          </button>
+          {
+            organization.link_donate && (
+              <button class="bg-blue-950 border border-white text-white font-raleway uppercase font-semibold px-16 py-2 mx-auto">
+                <a href={organization.link_donate}>
+                  {" "}
+                  <p>{t("contacts.donate")}</p>
+                </a>
+              </button>
+            )
+          }
         </div>
       </div>
       <div class="h-14 bg-[#18315E] w-full border-t-[1px] border-t-white"></div>
@@ -140,83 +157,116 @@ if (!organization) {
           {organization.markdown}
         </div>
       </div>
-      <div class="relative pt-4 pb-8 pl-4 pr-8">
-        <h3 class="text-blue-950 uppercase text-xl ml-6 mb-4">
-          {t("single-project-page.events-section-title")}
-        </h3>
-        <Carousel
-          nextArrowId="arrow-next-event"
-          prevArrowId="arrow-previous-event"
-        >
-          {
-            [...new Array(20)].map((p) => (
-              <CarouselItem>
-                <EventsSection
-                  associazione="Beit chabad"
-                  nome="Seder di Rosh Hashanah"
-                  data="89/75/7805"
-                  immagine="../../images/parshat/acharei-kedoshim.jpeg"
-                  città="Milano"
-                />
-              </CarouselItem>
-            ))
-          }
-        </Carousel>
-        <button
-          id="arrow-previous-event"
-          class="absolute rounded-[100%] w-12 h-12 shadow left-0 top-1/2 -translate-x-5 lg:-translate-x-8 -translate-y-1/2"
-        >
-          <img
-            class="w-full"
-            src="/images/icons/arrow-prev.svg"
-            alt="carousel icon"
-          />
-        </button>
-        <button
-          id="arrow-next-event"
-          class="absolute rounded-[100%] w-12 h-12 z-10 shadow right-0 top-1/2 translate-x-5 lg:translate-x-9 -translate-y-1/2"
-        >
-          <img
-            class="w-full"
-            src="/images/icons/arrow-next.svg"
-            alt="icona carousel"
-          />
-        </button>
-      </div>
+      {
+        !!organization.events_organizations?.length && (
+          <div class="relative pt-4 pb-8 pl-4 pr-8">
+            <h3 class="text-blue-950 uppercase text-xl ml-6 mb-4">
+              {t("single-project-page.events-section-title")}
+            </h3>
+            <Carousel
+              nextArrowId="arrow-next-event"
+              prevArrowId="arrow-previous-event"
+            >
+              {organization.events_organizations.map(({ events: e }) => (
+                <CarouselItem>
+                  <EventsSection
+                    associazione={organization.name}
+                    nome={e?.name}
+                    data={e?.date}
+                    immagine={e?.main_image}
+                    città={e?.city}
+                  />
+                </CarouselItem>
+              ))}
+            </Carousel>
+            <button
+              id="arrow-previous-event"
+              class="absolute rounded-[100%] w-12 h-12 shadow left-0 top-1/2 -translate-x-5 lg:-translate-x-8 -translate-y-1/2"
+            >
+              <img
+                class="w-full"
+                src="/images/icons/arrow-prev.svg"
+                alt="carousel icon"
+              />
+            </button>
+            <button
+              id="arrow-next-event"
+              class="absolute rounded-[100%] w-12 h-12 z-10 shadow right-0 top-1/2 translate-x-5 lg:translate-x-9 -translate-y-1/2"
+            >
+              <img
+                class="w-full"
+                src="/images/icons/arrow-next.svg"
+                alt="icona carousel"
+              />
+            </button>
+          </div>
+        )
+      }
+
+      <!-- <pre>
+        {JSON.stringify(organization, null, 2)}
+      </pre> -->
 
       <div
-        class="bg-[#18315E] px-10 py-6 grid grid-cols-3 gap-4 text-white font-montserrat mt-6"
+        id="contacts"
+        class="bg-[#18315E] px-10 py-6 grid grid-cols-3 gap-4 text-white font-montserrat mt-6 scroll-m-10"
       >
+        {
+          contacts && (
+            <ul>
+              <li class="text-lg uppercase font-semibold">
+                {t("contacts.title")}
+              </li>
+
+              <li class="flex flex-col gap-1 text-sm">{contacts}</li>
+              <li class="flex gap-3">
+                {social.map((s) => (
+                  <a href={s.value}>
+                    {
+                      {
+                        facebook: <Image src={logoFacebook} alt="facebook" />,
+                        instagram: (
+                          <Image src={logoInstagram} alt="instagram" />
+                        ),
+                      }[s.key]
+                    }
+                  </a>
+                ))}
+              </li>
+            </ul>
+          )
+        }
         <ul>
-          <li class="text-lg uppercase font-semibold">contatti</li>
-          <li class="flex items-center gap-1 text-sm">
-            <div class="bg-white h-[1px] w-1"></div>chabadmilano@minvento.com
+          <li class="text-lg uppercase font-semibold">
+            {t("contacts.location")}
           </li>
-          <li class="flex items-center gap-1 text-sm">
-            <div class="bg-white h-[1px] w-1"></div>345678912
+          <li class="flex items-start gap-1 text-sm">
+            <b>{organization.city}</b>, {organization.address}
           </li>
         </ul>
         <ul>
-          <li class="text-lg uppercase font-semibold">sede</li>
-          <li class="flex items-center gap-1 text-sm">
-            <div class="bg-white h-[1px] w-1"></div><b>Milano</b>, via dei
-            molari degli spini 39
-          </li>
-        </ul>
-        <ul>
-          <li class="text-lg uppercase font-semibold">contatti</li>
-          <li class="flex items-center gap-1 text-sm">
-            <div class="bg-white h-[1px] w-1"></div><b>Iban</b>:
-            12345tre5678uyt86543333333
+          <li class="text-lg uppercase font-semibold">
+            {t("contacts.contribute")}
           </li>
           <li class="flex items-center gap-1 text-sm">
-            <button
-              class="bg-blue-950 border border-white text-white font-raleway uppercase font-semibold px-16 py-2 mt-2"
-            >
-              <p>dona</p></button
-            >
+            <>
+              <b>Iban</b>
+            </>
+             : {iban}
           </li>
-        </ul>
+          <li class="flex items-center gap-1 text-sm">
+            {
+              organization.link_donate && (
+                <button class="bg-blue-950 border border-white text-white font-raleway uppercase font-semibold px-10 py-2 mt-2">
+                  <a href={organization.link_donate}>
+                    {" "}
+                    <p>{t("contacts.donate")}</p>
+                  </a>
+                </button>
+              )
+            }
+          </li>
+        </ul>{" "}
       </div>
     </ShadowBox>
   </section>

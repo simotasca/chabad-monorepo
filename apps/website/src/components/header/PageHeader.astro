@@ -105,7 +105,7 @@ const t = await getTranslations("components/header", Astro.url);
 <div class="bg-slate-100 border-y border-blue-950 py-2">
   <nav class="chabad-container px-4 mx-auto">
     <ul
-      class="flex justify-center gap-8 lg:gap-14 text-base md:text-lg lg:text-xl text-blue-950 font-semibold font-montserrat uppercase translate-y-px"
+      class="flex justify-center gap-6 lg:gap-14 text-sm lg:text-base text-blue-950 font-semibold font-montserrat uppercase translate-y-px"
     >
       <li class="md:hidden">
         <a href={routes.live} class="text-red-800">live</a>
@@ -117,6 +117,9 @@ const t = await getTranslations("components/header", Astro.url);
       </li>
       <li class="hidden md:block">
         <a href={routes.organizations()}>{t("navbar.organizations")}</a>
+      </li>
+      <li class="hidden md:block">
+        <a href={routes.events}>{t("navbar.events")}</a>
       </li>
       <li class="hidden xs:block">
         <a href={routes.about}>{t("navbar.about-us")}</a>

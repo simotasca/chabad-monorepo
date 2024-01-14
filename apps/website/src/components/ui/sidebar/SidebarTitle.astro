@@ -1,17 +1,18 @@
 ---
 interface Props {
-  title: string
-  img: string
-  alt?: string
+  title: string;
+  img: string;
+  alt?: string;
 }
 
-const { title, img, alt } = Astro.props
+const { title, img, alt } = Astro.props;
 ---
 
 <div class="px-4 pt-6 md:pt-4">
   <div class="flex gap-2 pb-2">
     <h1
-      class="text-blue-950 font-semibold font-raleway text-2xl md:text-xl lg:text-2xl leading-tight uppercase">
+      class="text-blue-950 font-semibold font-raleway text-2xl md:text-xl leading-tight uppercase"
+    >
       {title}
     </h1>
     <img src={img} alt={alt} />

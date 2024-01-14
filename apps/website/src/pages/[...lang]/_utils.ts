@@ -6,10 +6,13 @@ import {
   eventsWithOrganizationsMapper,
 } from "@/lib/shared/supabase/events";
 import { livesMapper } from "@/lib/shared/supabase/live";
+import { organizationsMapper } from "@/lib/shared/supabase/organizations";
 
-function salutami() {
-  return "cuai";
-}
+const formatter = new Intl.DateTimeFormat("en", {
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+});
 
 export async function getData() {
   const organizations = await supabase
@@ -22,14 +25,21 @@ export async function getData() {
           "Page Index",
           "Error fetching organizations:" + error.message
         );
-      return data || [];
+      return data ? data.map(organizationsMapper) : [];
     });
   const halforganizations = Math.round(organizations.length / 2);
+
+  let date = new Date();
+  date.setHours(0);
+  date.setMinutes(0);
+  console.log("ERRORRRR", formatter.format(date));
 
   return {
     events: await supabase
       .from("events")
       .select("*, events_organizations(*, organizations(*))")
+      .order("date", { ascending: true })
+      .gte("date", formatter.format(date))
       .limit(10)
       .then(({ error, data }) => {
         if (error) {
@@ -37,8 +47,10 @@ export async function getData() {
         }
         return data?.map(eventsWithOrganizationsMapper).map(eventsMapper) || [];
       }),
+
     organizations1: organizations.slice(0, halforganizations),
     organizations2: organizations.slice(halforganizations),
+
     articles: await supabase
       .from("articles")
       .select("title, date, content, category, image, preview, slug")
@@ -48,6 +60,7 @@ export async function getData() {
           throwError("Page Index", "Error fetching articles:" + error.message);
         return data?.map(articlesMapper) || [];
       }),
+
     scraped: await supabase
       .from("scraped")
       .select("title, url, image, created_at")

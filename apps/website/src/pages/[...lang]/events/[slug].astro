@@ -8,6 +8,10 @@ import { errorResponse } from "@/lib/server/error-response";
 import supabase from "@/lib/server/supabase";
 import { throwError } from "@/lib/shared/error";
 import { eventsWithOrganizationsMapper } from "@/lib/shared/supabase/events";
+import { splitContacts } from "@/lib/shared/supabase/contacts";
+import logoFacebook from "@/images/icons/blue-icons/facebook.svg";
+import logoInstagram from "@/images/icons/instagram.svg";
+import { Image } from "astro:assets";
 
 if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
@@ -22,7 +26,7 @@ const event = !slug
   : await supabase
       .from("events")
       .select(
-        "name, city, date, main_image, markdown, slug, events_organizations(*, organizations(*))"
+        "name, city, date, main_image, markdown, slug, events_organizations(*, organizations(*)), contacts(*)"
       )
       .eq("slug", slug)
       .then(({ data, error }) => {
@@ -35,6 +39,8 @@ const event = !slug
 if (!event) {
   return errorResponse(Astro.url);
 }
+
+const { contacts, social } = splitContacts(event.contacts);
 ---
 
 <PageLayout title="Event" description="">
@@ -44,10 +50,14 @@ if (!event) {
 
   <section slot="content-1">
     <ShadowBox class="relative flex flex-col gap-y-1 p-4">
-      <p class="text-blue-800 text-sm font-raleway font-bold uppercase mb-2">
-        {event.organizations}
-        {event.city}
-      </p>
+      <div>
+        <p class="text-blue-800 text-sm font-raleway font-bold uppercase">
+          {event.organizations.map((o) => o.name).join(", ")}
+        </p>
+        <p class="text-xl font-bold text-blue-800 font-raleway mb-2 uppercase">
+          {event.city}
+        </p>
+      </div>
 
       <h2
         class="text-black text-3xl md:text-4xl font-display font-semibold leading-tight"
@@ -74,24 +84,29 @@ if (!event) {
   </section>
 
   <section slot="sidebar" class="md:flex flex-col gap-4">
-    <ShadowBox class="m-5 md:m-0 p-4">
-      <h3
-        class="text-blue-950 font-raleway font-semibold uppercase text-2xl md:text-xl lg:text-2xl leading-tight mb-2"
-      >
-        {t("contacts.title")}
-      </h3>
-      <ul class="text-black font-raleway text-sm">
-        <li>
-          <b>{t("contacts.email")}</b>: carlogrossi@venti.net
-        </li>
-        <li>
-          <b>{t("contacts.telephone")}</b>: 34567891234
-        </li>
-        <li>
-          <b>{t("contacts.address")}</b>: carlogrossi@venti.net
-        </li>
-      </ul>
-    </ShadowBox>
+    {
+      event.contacts && (
+        <ShadowBox class="m-5 md:m-0 p-4">
+          <h3 class="text-blue-950 font-raleway font-semibold uppercase text-2xl md:text-xl lg:text-2xl leading-tight mb-2">
+            {t("contacts.title")}
+          </h3>
+
+          <ul class="text-black font-raleway text-sm">
+            <li>{contacts}</li>
+          </ul>
+          {social.map((s) => (
+            <a href={s.value}>
+              {
+                {
+                  facebook: <Image src={logoFacebook} alt="facebook" />,
+                  instagram: <Image src={logoInstagram} alt="instagram" />,
+                }[s.key]
+              }
+            </a>
+          ))}
+        </ShadowBox>
+      )
+    }
 
     <div class="hidden md:block">
       <Newsletter />

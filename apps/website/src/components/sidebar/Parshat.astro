@@ -11,14 +11,18 @@ const parshatImage = getParshatImage(parshat);
 
 <ShadowBox>
   <div class="py-3 px-4 lg:p-4">
-    <h2
-      class="text-blue-950 font-medium font-display text-2xl md:text-xl lg:text-2xl leading-tight uppercase"
+    <a
+      href="https://it.chabad.org/parshah/default_cdo/jewish/Torah-Portions.htm"
     >
-      {parshat}
-    </h2>
-    <p class="italic font-raleway text-neutral-500 text-sm mb-1">
-      {formatDate(today)}
-    </p>
-    <img src={parshatImage} alt="icon" />
+      <h2
+        class="text-blue-950 font-medium font-display text-2xl md:text-xl lg:text-2xl leading-tight uppercase"
+      >
+        {parshat}
+      </h2>
+      <p class="italic font-raleway text-neutral-500 text-sm mb-1">
+        {formatDate(today)}
+      </p>
+      <img src={parshatImage} alt="icon" /></a
+    >
   </div>
 </ShadowBox>

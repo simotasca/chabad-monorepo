@@ -14,6 +14,13 @@ import * as runtime from "react/jsx-runtime"; // Production.
 import { formatDate } from "@/lib/shared/calendar";
 import { newsMapper } from "@/lib/shared/supabase/news";
 import { errorResponse } from "@/lib/server/error-response";
+import { Image } from "astro:assets";
+import logoText from "@/images/logo/chabad-text-black.svg";
+import logoChabad from "@/images/logo/logo-black.svg";
+import iconShare from "@/images/icons/share.svg";
+import routes from "@/lib/shared/routes";
+import EventsSection from "@/components/events/EventsSection.astro";
+import { getData } from "../_utils";
 // import * as runtime from 'react/jsx-dev-runtime' // Development.
 
 if (!checkLangParam(Astro)) {
@@ -38,6 +45,8 @@ const news = !slug
 if (!news) {
   return errorResponse(Astro.url);
 }
+
+const { events } = await getData();
 
 const allNews = await supabase
   .from("news")
@@ -75,13 +84,13 @@ const Content = (await run(code, runtime)).default || "div";
 
   <section slot="content-1">
     <ShadowBox>
-      <div class="pb-6 px-6 pt-4">
+      <div class="pb-6 px-6 pt-4 bg-stone-50">
         <article>
           <div class="relative grid grid-cols-[1fr_auto_1fr] items-center mt-2">
             <div class="absolute flex -top-1 w-full">
-              <img
+              <Image
                 class="w-20 mb-1"
-                src="/src/images/chabad-text-black.svg"
+                src={logoText}
                 alt="logo chabad text black"
               />
               <i class="font-raleway text-sm font-light ml-auto mr-0"
@@ -90,11 +99,7 @@ const Content = (await run(code, runtime)).default || "div";
             </div>
             <div class="bg-black h-[1px] w-full"></div>
             <div class="flex items-center gap-2 px-4">
-              <img
-                class="w-6"
-                src="/src/images/logo-black.svg"
-                alt="logo chabad black"
-              />
+              <Image class="w-6" src={logoChabad} alt="logo chabad black" />
             </div>
             <div class="bg-black h-[1px] w-full mt-1"></div>
           </div>
@@ -112,11 +117,7 @@ const Content = (await run(code, runtime)).default || "div";
                 >share</span
               >
               <Tooltip>
-                <img
-                  class="sm:w-8"
-                  src="/images/icons/share.svg"
-                  alt="share icon"
-                />
+                <Image class="sm:w-8" src={iconShare} alt="share icon" />
                 <div
                   class="bg-black bg-opacity-70 text-white px-2"
                   slot="tooltip"
@@ -152,7 +153,9 @@ const Content = (await run(code, runtime)).default || "div";
       <ShadowBox>
         <div class="p-6">
           <h1 class="mb-4">
-            <SectionTitle>Tutti gli articoli</SectionTitle>
+            <a href={routes.news}>
+              <SectionTitle>Tutte le notizie</SectionTitle></a
+            >
           </h1>
           <div
             class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-6"
@@ -162,7 +165,7 @@ const Content = (await run(code, runtime)).default || "div";
               allNews.map((n) => (
                 <div>
                   <img
-                    class="w-full aspect-video"
+                    class="w-full aspect-[8/3]"
                     src={n.image}
                     alt="main article image"
                   />
@@ -179,6 +182,18 @@ const Content = (await run(code, runtime)).default || "div";
   </section>
 
   <section slot="sidebar" class="md:flex flex-col gap-4">
+    <ShadowBox>
+      <div class="py-5">
+        <EventsSection
+          nome={events[0].name}
+          data={events[0].date}
+          immagine={events[0].main_image}
+          citta={events[0].city}
+          url={events[0].url}
+        />
+      </div>
+    </ShadowBox>
+
     <div class="max-sm:hidden">
       <Parshat
         title="acharei kedoshim"

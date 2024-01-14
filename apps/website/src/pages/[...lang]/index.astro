@@ -14,6 +14,8 @@ import HomeLayout from "@/layouts/HomeLayout.astro";
 import { errorResponse } from "@/lib/server/error-response";
 import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
 import { getData } from "./_utils";
+import { organizationsMapper } from "@/lib/shared/supabase/organizations";
+import routes from "@/lib/shared/routes";
 
 if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
@@ -40,42 +42,71 @@ const imgVideo = "/images/video-prova.jpg";
   title="Chabad | Homepage"
   description="sito ufficiale di chabad in italia"
 >
-  <div slot="content-1" class="flex flex-col gap-4">
-    {
-      articles.length > 0 && (
+  <section slot="content-1" class="flex flex-col gap-4">
+    <ShadowBox class="contents md:block">
+      <div class="py-1 md:p-4">
+        <h1 class="pb-2">
+          <a href={routes.news}>
+            <SectionTitle icon="/images/icons/clock.svg">
+              {t("main.title-latest")}
+            </SectionTitle>
+          </a>
+        </h1>
+        {
+          articles.length > 0 && (
+            <ArticleSection
+              mainArticle={articles[0]}
+              articles={articles.slice(1)}
+              reverse={true}
+            />
+          )
+        }
+      </div>
+    </ShadowBox>
+
+    <ShadowBox class="contents md:block">
+      <div class="py-1 md:p-4">
+        <h1 class="pb-2">
+          <a href="https://www.chabad.org/">
+            <SectionTitle icon="/images/icons/blue-icons/globe-icon.svg">
+              {t("main.title-scraped")}
+            </SectionTitle></a
+          >
+        </h1>
+
+        {
+          scraped.length > 0 && (
+            <ArticleSection
+              mainArticle={scraped[0]}
+              articles={scraped.slice(1)}
+              reverse={false}
+              hideImageOnMobile={true}
+            />
+          )
+        }
+      </div>
+    </ShadowBox>
+
+    <!-- TODO: PAGINA A PARTE A CUI MANDARE PER TUTTE LE NOTIZIE DAL MONDO -->
+
+    <ShadowBox class="contents md:block">
+      <div class="py-1 md:p-4">
+        <h1 class="pb-2">
+          <a href={routes.articles}>
+            <SectionTitle icon="/images/icons/pencil-icon.svg">
+              {t("main.title-articles")}
+            </SectionTitle></a
+          >
+        </h1>
+
         <ArticleSection
-          title={t("main.title-latest")}
-          icon="/images/icons/clock.svg"
           mainArticle={articles[0]}
           articles={articles.slice(1)}
           reverse={true}
         />
-      )
-    }
-
-    {
-      scraped.length > 0 && (
-        <ArticleSection
-          title={t("main.title-scraped")}
-          icon="/images/icons/blue-icons/globe-icon.svg"
-          mainArticle={scraped[0]}
-          articles={scraped.slice(1)}
-          reverse={false}
-          hideImageOnMobile={true}
-        />
-      )
-    }
-
-    <!-- TODO: PAGINA A PARTE A CUI MANDARE PER TUTTE LE NOTIZIE DAL MONDO -->
-
-    <ArticleSection
-      title={t("main.title-articles")}
-      icon="/images/icons/pencil-icon.svg"
-      mainArticle={articles[0]}
-      articles={articles.slice(1)}
-      reverse={true}
-    />
-  </div>
+      </div>
+    </ShadowBox>
+  </section>
 
   <!-- SIDEBAR -->
   <section slot="sidebar" class="flex flex-col gap-4">
@@ -125,13 +156,13 @@ const imgVideo = "/images/video-prova.jpg";
             {
               organizations1.map((o) => (
                 <CarouselItem>
-                  <a href="#">
-                    <div class=" w-40 md:w-60 mr-5">
-                      <div class=" aspect-[4/3] border border-black bg-slate-200">
+                  <a href={o.url}>
+                    <div class="w-40 md:w-60 mr-5 overflow-hidden">
+                      <div class="relative aspect-[4/3] border border-black bg-slate-200">
                         {o["main_image"] && (
                           <img
                             src={o["main_image"]}
-                            class="w-full h-full  object-cover bg-white"
+                            class="absolute inset-0 w-full h-full object-cover"
                           />
                         )}
                       </div>
@@ -150,17 +181,17 @@ const imgVideo = "/images/video-prova.jpg";
             {
               organizations2.map((o) => (
                 <CarouselItem>
-                  <a href="#">
-                    <div class="bg-white mr-5 w-40 md:w-60 leading-5">
-                      <div class="w-full aspect-[4/3] border border-black bg-slate-200">
+                  <a href={o.url}>
+                    <div class="w-40 md:w-60 mr-5 overflow-hidden">
+                      <div class="relative aspect-[4/3] border border-black bg-slate-200">
                         {o["main_image"] && (
                           <img
                             src={o["main_image"]}
-                            class="w-[100%] h-full object-cover bg-white mx-auto"
+                            class="absolute inset-0 w-full h-full object-cover"
                           />
                         )}
                       </div>
-                      <h3 class="w-full font-display text-black uppercase text-base md:text-xl text-center leading-5 md:leading-5 mt-1">
+                      <h3 class="font-display text-black uppercase text-base md:text-xl text-center leading-5 md:leading-5 mt-1">
                         {o.name}
                       </h3>
                     </div>
@@ -212,11 +243,13 @@ const imgVideo = "/images/video-prova.jpg";
                   <EventsSection
                     associazione={evento.organizations
                       .map((o) => o.name)
+
                       .join("<br />")}
                     nome={evento.name}
                     data={evento.date}
                     immagine={evento.main_image}
                     citta={evento.city}
+                    url={evento.url}
                   />
                 </CarouselItem>
               ))

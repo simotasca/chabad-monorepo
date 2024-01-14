@@ -20,7 +20,12 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/typography"),
-    plugin(({ addComponents, addVariant, theme }) => {
+    plugin(({ addComponents, addVariant, addBase, theme }) => {
+      addBase({
+        select: {
+          fontSize: "unset",
+        },
+      });
       addComponents({
         ".stack": {
           display: "grid",

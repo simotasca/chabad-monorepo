@@ -132,6 +132,8 @@ export function getParshatImage(parshat: string[]) {
 
 const holidayCalendar = Array.from(
   HebrewCalendar.calendar({
+    start: new Date(),
+    end: new Date(Date.now() + 365 * 1000 * 60 * 60 * 24),
     candlelighting: false,
     sedrot: false,
     noMinorFast: true,
