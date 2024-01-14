@@ -44,7 +44,7 @@ const imgVideo = "/images/video-prova.jpg";
   description="sito ufficiale di chabad in italia"
 >
   <section slot="content-1" class="flex flex-col gap-4">
-    <ShadowBox class="contents md:block">
+    <ShadowBox class="contents md:block bg-slate-50">
       <div class="py-1 md:p-4">
         <h1 class="pb-2">
           <a href={routes.news}>
@@ -65,7 +65,7 @@ const imgVideo = "/images/video-prova.jpg";
       </div>
     </ShadowBox>
 
-    <ShadowBox class="contents md:block">
+    <ShadowBox class="contents md:block bg-slate-50">
       <div class="py-1 md:p-4">
         <h1 class="pb-2">
           <a href="https://www.chabad.org/">
@@ -90,7 +90,7 @@ const imgVideo = "/images/video-prova.jpg";
 
     <!-- TODO: PAGINA A PARTE A CUI MANDARE PER TUTTE LE NOTIZIE DAL MONDO -->
 
-    <ShadowBox class="contents md:block">
+    <ShadowBox class="contents md:block bg-slate-50">
       <div class="py-1 md:p-4">
         <h1 class="pb-2">
           <a href={routes.articles}>
@@ -112,7 +112,7 @@ const imgVideo = "/images/video-prova.jpg";
   <!-- SIDEBAR -->
   <section slot="sidebar" class="flex flex-col gap-4">
     <!-- VIDEOS -->
-    <ShadowBox class="contents md:block">
+    <ShadowBox class="contents md:block bg-slate-50">
       <SidebarTitle
         title={t("sidebar.title-live")}
         img="/images/icons/video.svg"
@@ -125,7 +125,7 @@ const imgVideo = "/images/video-prova.jpg";
     <!-- TODO: immettere video di categoria differente (abilitare il filtro categorie per i videolives) -->
 
     <!-- JIM TV -->
-    <ShadowBox class="contents md:block">
+    <ShadowBox class="contents md:block bg-slate-50">
       <SidebarTitle title="Jim TV" img="/images/icons/maghen-david.svg" />
       <SidebarContainer>
         <SidebarVideo />
@@ -137,20 +137,21 @@ const imgVideo = "/images/video-prova.jpg";
       date="15/giugno/2023"
       image="images/parshat/acharei-kedoshim.jpeg"
     />
+    <div class="contents bg-slate-50">
+      <ShadowBox>
+        <div class="py-5">
+          <EventsSection
+            nome={events[0].name}
+            data={events[0].date}
+            immagine={events[0].main_image}
+            citta={events[0].city}
+            url={events[0].url}
+          />
+        </div>
+      </ShadowBox>
+    </div>
 
-    <ShadowBox>
-      <div class="py-5">
-        <EventsSection
-          nome={events[0].name}
-          data={events[0].date}
-          immagine={events[0].main_image}
-          citta={events[0].city}
-          url={events[0].url}
-        />
-      </div>
-    </ShadowBox>
-
-    <div class="hidden md:block">
+    <div class="hidden md:block bg-slate-50">
       <Newsletter />
     </div>
   </section>
