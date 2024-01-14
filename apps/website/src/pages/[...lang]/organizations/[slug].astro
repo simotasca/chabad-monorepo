@@ -74,9 +74,9 @@ const { contacts, social, iban } = splitContacts(organization.contacts);
   </section>
 
   <section slot="content-1">
-    <ShadowBox class="pb-4">
+    <ShadowBox class="pb-4 bg-slate-50">
       <div
-        class="grid grid-cols-2 w-full items-center bg-[#031B4D] border-b-white border-b-[1px] text-white pl-3 py-3 pr-6"
+        class="grid grid-cols-2 w-full items-center bg-[#031B4D] border-b-white border-b-[1px] text-white pl-3 pt-3 pr-6"
       >
         <div
           class="flex justify-start items-center h-full -translate-y-px gap-3"
@@ -252,7 +252,7 @@ const { contacts, social, iban } = splitContacts(organization.contacts);
             <>
               <b>Iban</b>
             </>
-             : {iban}
+            : {iban}
           </li>
           <li class="flex items-center gap-1 text-sm">
             {

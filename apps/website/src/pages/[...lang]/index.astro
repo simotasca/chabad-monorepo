@@ -138,29 +138,28 @@ const imgVideo = "/images/video-prova.jpg";
       date="15/giugno/2023"
       image="images/parshat/acharei-kedoshim.jpeg"
     />
-    <div class="contents bg-slate-50">
-      <ShadowBox>
-        <div class="py-5">
-          <EventsSection
-            nome={events[0].name}
-            data={events[0].date}
-            immagine={events[0].main_image}
-            citta={events[0].city}
-            url={events[0].url}
-          />
-        </div>
-      </ShadowBox>
-    </div>
 
-    <div class="hidden md:block bg-slate-50">
-      <Newsletter />
-    </div>
+    <ShadowBox class="bg-slate-50 max-md:hidden">
+      <div class="py-5">
+        <EventsSection
+          nome={events[0].name}
+          data={events[0].date}
+          immagine={events[0].main_image}
+          citta={events[0].city}
+          url={events[0].url}
+        />
+      </div>
+    </ShadowBox>
   </section>
+
+  <div class="hidden md:block bg-slate-50">
+    <Newsletter />
+  </div>
 
   <div slot="content-2" class="flex flex-col gap-4">
     <!-- PUNTI CHABAD -->
     <section class="relative">
-      <ShadowBox class="contents md:block md:p-4">
+      <ShadowBox class="contents md:block md:p-4 bg-slate-50">
         <h2 class="mb-4 mt-2 ml-2 md:ml-4">
           <SectionTitle icon="/images/icons/synagogue.svg">
             {t("chabad-section.title")}
@@ -218,7 +217,7 @@ const imgVideo = "/images/video-prova.jpg";
         </div>
         <button
           id="arrow-previous"
-          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 left-0 md:-left-6 -translate-y-1/2 shadow"
+          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 -left-3 md:-left-4 -translate-y-1/2 shadow"
         >
           <img
             class="w-full"
@@ -228,7 +227,7 @@ const imgVideo = "/images/video-prova.jpg";
         </button>
         <button
           id="arrow-next"
-          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 right-0 md:-right-6 -translate-y-1/2 shadow"
+          class="absolute rounded-[100%] w-12 h-12 z-50 top-1/2 -right-3 md:-right-4 -translate-y-1/2 shadow"
         >
           <img
             class="w-full"
@@ -241,7 +240,7 @@ const imgVideo = "/images/video-prova.jpg";
 
     <!-- EVENTI -->
     <section>
-      <ShadowBox class="contents md:block md:p-4">
+      <ShadowBox class="contents md:block md:p-4 bg-slate-50">
         <h2 class="mb-4 mt-2 ml-2 md:ml-4">
           <SectionTitle icon={"/images/icons/blue-icons/event-upcoming.svg"}>
             {t("events-section.title")}
@@ -272,7 +271,7 @@ const imgVideo = "/images/video-prova.jpg";
           </Carousel>
           <button
             id="arrow-previous-event"
-            class="absolute rounded-[100%] w-12 h-12 shadow left-0 top-1/2 -translate-x-8 lg:-translate-x-10 -translate-y-1/2"
+            class="absolute rounded-[100%] w-12 h-12 shadow top-1/2 -left-3 md:-left-8 -translate-y-1/2"
           >
             <img
               class="w-full"
@@ -282,7 +281,7 @@ const imgVideo = "/images/video-prova.jpg";
           </button>
           <button
             id="arrow-next-event"
-            class="absolute rounded-[100%] w-12 h-12 z-10 shadow right-0 top-1/2 translate-x-7 lg:translate-x-11 -translate-y-1/2"
+            class="absolute rounded-[100%] w-12 h-12 z-10 shadow top-1/2 -right-3 md:-right-8 -translate-y-1/2"
           >
             <img
               class="w-full"
