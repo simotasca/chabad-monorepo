@@ -8,10 +8,15 @@ const userConfig = JSON.parse(
 function parseConfig(userConfig: any): {
   canonical: string;
   languages: string[];
+  fullNames: Map<string, string>;
 } {
+  const canonical = userConfig.canonical || "en";
+  const languages = userConfig.languages || ["en"];
+  const fullNames = userConfig["full-names"] || userConfig.languages;
   return {
-    canonical: userConfig.canonical || "en",
-    languages: userConfig.languages || ["en"],
+    canonical,
+    languages,
+    fullNames: new Map(fullNames.map((f, i) => [languages[i], f]))
   };
 }
 

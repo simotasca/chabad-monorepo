@@ -32,7 +32,6 @@ export async function getData() {
   let date = new Date();
   date.setHours(0);
   date.setMinutes(0);
-  console.log("ERRORRRR", formatter.format(date));
 
   return {
     events: await supabase
