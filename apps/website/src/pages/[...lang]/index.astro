@@ -17,6 +17,7 @@ import { getData } from "./_utils";
 import { organizationsMapper } from "@/lib/shared/supabase/organizations";
 import routes from "@/lib/shared/routes";
 import upcomingEvent from "@/images/icons/blue-icons/event-upcoming.svg";
+import Link from "@/components/navigation/Link.astro";
 
 if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
@@ -47,11 +48,11 @@ const imgVideo = "/images/video-prova.jpg";
     <ShadowBox class="contents md:block bg-slate-50">
       <div class="py-1 md:p-4">
         <h1 class="pb-2">
-          <a href={routes.news}>
+          <Link href={routes.news}>
             <SectionTitle icon="/images/icons/clock.svg">
               {t("main.title-latest")}
             </SectionTitle>
-          </a>
+          </Link>
         </h1>
         {
           articles.length > 0 && (

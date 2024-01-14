@@ -1,6 +1,9 @@
 ---
 import routes from "@/lib/shared/routes";
 import { getTranslations } from "@/lib/server/lang/lang";
+import { config } from "@/lib/shared/config";
+import Link from "../navigation/Link.astro";
+import { currLang } from "@/lib/shared/lang";
 
 const t = await getTranslations("components/header", Astro.url);
 ---
@@ -28,15 +31,13 @@ const t = await getTranslations("components/header", Astro.url);
       <ul
         class="hidden sm:flex items-center gap-8 text-slate-200 font-raleway text-sm justify-center translate-y-px"
       >
-        <li class="font-bold text-white">
-          <button>Italiano</button>
-        </li>
-        <li>
-          <button>English</button>
-        </li>
-        <li>
-          <button>עברית</button>
-        </li>
+      {
+        config.lang.locales.map((lang) => (
+          <li class={currLang(Astro.url) === lang ? "font-bold text-white" : ""}>
+            <Link lang={lang}>{config.lang.fullNames.get(lang)}</Link>
+          </li>
+        ))
+      }
       </ul>
       <div
         class="sm:hidden flex items-center xs:justify-center gap-1 text-sm sm:text-base text-white font-montserrat font-medium translate-y-[2px]"

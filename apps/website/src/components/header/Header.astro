@@ -11,7 +11,9 @@ import iconSearch from "@/images/icons/blue-icons/search.png";
 import imgLogoText from "@/images/logo/logo-text.svg";
 import imgLogo from "@/images/logo/logo.svg";
 import { getTranslations } from "@/lib/server/lang/lang";
-import { config } from "@/lib/server/lang/config";
+import { currLang } from "@/lib/shared/lang";
+import { config } from "@/lib/shared/config";
+import Link from "../navigation/Link.astro";
 
 const stringCities = Object.keys(cities);
 const t = await getTranslations("components/header", Astro.url);
@@ -62,23 +64,15 @@ const t = await getTranslations("components/header", Astro.url);
           </div>
 
           <div class="md:hidden flex items-center gap-4 text-sm text-white font-montserrat ml-auto mr-2">
-            <select class="bg-transparent" id="language-select">
+            <select class="bg-transparent" data-language-select>
               {
-                config.languages.map((lang) => (
-                  <option selected={false} value={lang}>
-                    {config.fullNames.get(lang)}
+                config.lang.locales.map((lang) => (
+                  <option selected={lang === currLang(Astro.url)} value={lang}>
+                    {config.lang.fullNames.get(lang)}
                   </option>
                 ))
               }
             </select>
-            <script>
-              const langSelect = document.
-              querySelector<HTMLSelectElement>("select.language-select")!;
-              langSelect.addEventListener("change", (e) => {
-                // navigate
-                langSelect.value;
-              });
-            </script>
             <span>ב"ה</span>
           </div>
         </div>
@@ -102,12 +96,13 @@ const t = await getTranslations("components/header", Astro.url);
           </div>
 
           <ul class="hidden pr-8 pb-1 md:flex items-end ml-auto mr-0 gap-8 text-slate-200 font-raleway text-xs">
-            <li class="font-bold text-white">
-              <button>Italiano</button>
-            </li>
-            <li>
-              <button>English</button>
-            </li>
+            {
+              config.lang.locales.map((lang) => (
+                <li class={currLang(Astro.url) === lang ? "font-bold text-white" : ""}>
+                  <Link lang={lang}>{config.lang.fullNames.get(lang)}</Link>
+                </li>
+              ))
+            }
             <!-- <li>
               <button>עברית</button>
             </li> -->
@@ -265,6 +260,17 @@ const t = await getTranslations("components/header", Astro.url);
       }
     </style>
   </div>
+
+  <script>
+    // navigate on lang select change
+    import { translateRoute } from "@/lib/shared/lang";
+    const langSelects = document.querySelectorAll<HTMLSelectElement>("select[data-language-select]")!;
+      for (const langSelect of langSelects) {
+      langSelect.addEventListener("change", (e) => {
+        window.location.href = translateRoute({ lang: langSelect.value }, new URL(window.location.href));
+      });
+    }
+  </script>
 
   <script>
     const select = document.querySelectorAll<HTMLSelectElement>("[data-cities-select]");
