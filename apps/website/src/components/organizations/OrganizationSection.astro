@@ -33,7 +33,7 @@ const organizations = await query.then(({ error, data }) => {
   organizations.map((o) => (
     <a href={o.url}>
       <ShadowBox>
-        <section class="relative">
+        <section class="relative bg-slate-50">
           <div class="flex gap-2 sm:gap-4 px-4 xs:pr-2 sm:p-4">
             {o.main_image && (
               <img
