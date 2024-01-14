@@ -17,16 +17,24 @@ export default defineConfig({
     tailwind(),
     react(),
     {
-      name: "demo-intl-production",
+      name: "reload-lang-config",
       hooks: {
-        "astro:config:setup": ({ injectRoute }) => {
-          injectRoute({
-            entryPoint: "src/pages/[...lang]/index.astro",
-            prerender: false,
-            pattern: "/hr/",
-          });
-        },
-      },
-    },
+        "astro:config:setup": ({addWatchFile}) =>{
+          addWatchFile("./lang.config.json")
+        }
+      }
+    }
+    // {
+    //   name: "demo-intl-production",
+    //   hooks: {
+    //     "astro:config:setup": ({ injectRoute }) => {
+    //       injectRoute({
+    //         entryPoint: "src/pages/[...lang]/index.astro",
+    //         prerender: false,
+    //         pattern: "/hr/",
+    //       });
+    //     },
+    //   },
+    // },
   ],
 });

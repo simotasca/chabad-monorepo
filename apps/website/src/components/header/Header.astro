@@ -1,10 +1,6 @@
 ---
 import cities from "@/assets/province.json";
-import {
-  getParshat,
-  hebDateFormat,
-  upcomingEvent,
-} from "@/lib/shared/calendar";
+import { getParshat, hebDateFormat, upcomingEvent } from "@/lib/shared/calendar";
 import routes from "@/lib/shared/routes";
 import { Image } from "astro:assets";
 import MenuCell from "./MenuCell.astro";
@@ -15,6 +11,7 @@ import iconSearch from "@/images/icons/blue-icons/search.png";
 import imgLogoText from "@/images/logo/logo-text.svg";
 import imgLogo from "@/images/logo/logo.svg";
 import { getTranslations } from "@/lib/server/lang/lang";
+import { config } from "@/lib/server/lang/config";
 
 const stringCities = Object.keys(cities);
 const t = await getTranslations("components/header", Astro.url);
@@ -28,15 +25,12 @@ const t = await getTranslations("components/header", Astro.url);
     <div class="chabad-container pl-2 xs:pl-4 pr-4 md:px-4 mx-auto">
       <div class="grid h-8 md:h-10">
         <!-- CELLULARE -->
-        <div
-          class="md:hidden flex gap-x-3 sm:gap-x-5 justify-start items-center cursor-pointer"
-        >
+        <div class="md:hidden flex gap-x-3 sm:gap-x-5 justify-start items-center cursor-pointer">
           <div>
             <Widget icon="/images/icons/location.svg">
               <select
                 data-cities-select
-                class="bg-transparent border rounded-sm border-white border-opacity-40 text-white cursor-pointer w-12 sm:w-18 overflow-ellipsis uppercase text-xs xr-1 sm:pr-1"
-              >
+                class="bg-transparent border rounded-sm border-white border-opacity-40 text-white cursor-pointer w-12 sm:w-18 overflow-ellipsis uppercase text-xs xr-1 sm:pr-1">
                 <option selected value="">---</option>
                 {
                   stringCities.map((c) => (
@@ -67,49 +61,47 @@ const t = await getTranslations("components/header", Astro.url);
             </Widget>
           </div>
 
-          <div
-            class="md:hidden flex items-center gap-4 text-sm text-white font-montserrat ml-auto mr-2"
-          >
+          <div class="md:hidden flex items-center gap-4 text-sm text-white font-montserrat ml-auto mr-2">
             <select class="bg-transparent" id="language-select">
-              <option selected value="">Italiano</option>
+              {
+                config.languages.map((lang) => (
+                  <option selected={false} value={lang}>
+                    {config.fullNames.get(lang)}
+                  </option>
+                ))
+              }
             </select>
+            <script>
+              const langSelect = document.
+              querySelector<HTMLSelectElement>("select.language-select")!;
+              langSelect.addEventListener("change", (e) => {
+                // navigate
+                langSelect.value;
+              });
+            </script>
             <span>ב"ה</span>
           </div>
         </div>
 
         <!-- DESKTOP -->
         <div class="hidden md:flex">
-          <div
-            class="pr-8 md:grid grid-cols-[60px_auto] md:gap-3 lg:gap-20 xs:gap-16"
-          >
+          <div class="pr-8 md:grid grid-cols-[60px_auto] md:gap-3 lg:gap-20 xs:gap-16">
             <div class="hidden md:flex items-center">
-              <button
-                class="w-8 aspect-square bg-white border-blue-800 rounded-full p-2 my-1"
-              >
-                <Image
-                  class="w-full h-full translate-x-px translate-y-px"
-                  src={iconSearch}
-                  alt="search icon"
-                />
+              <button class="w-6 aspect-square bg-white border-blue-800 rounded-full p-1.5 mt-1">
+                <Image class="w-full h-full translate-x-px translate-y-px" src={iconSearch} alt="search icon" />
               </button>
             </div>
 
             <div class="hidden md:flex items-end font-raleway">
               <ul class="flex gap-2 text-sm">
                 <!-- <MenuItem>{t("menu-items.feed")}</MenuItem> -->
-                <a href="#footer"
-                  ><MenuItem>{t("menu-items.newsletter")}</MenuItem></a
-                >
-                <a href="#footer"
-                  ><MenuItem>{t("menu-items.contact")}</MenuItem></a
-                >
+                <a href="#footer"><MenuItem>{t("menu-items.newsletter")}</MenuItem></a>
+                <a href="#footer"><MenuItem>{t("menu-items.contact")}</MenuItem></a>
               </ul>
             </div>
           </div>
 
-          <ul
-            class="hidden pr-8 pb-1 md:flex items-end ml-auto mr-0 gap-8 text-slate-200 font-raleway text-xs"
-          >
+          <ul class="hidden pr-8 pb-1 md:flex items-end ml-auto mr-0 gap-8 text-slate-200 font-raleway text-xs">
             <li class="font-bold text-white">
               <button>Italiano</button>
             </li>
@@ -123,28 +115,19 @@ const t = await getTranslations("components/header", Astro.url);
           </ul>
         </div>
       </div>
-      <div
-        style={{ boxShadow: "0px 0px 4px #0F60DD" }}
-        class="w-full h-[2px] bg-[#3363AC]"
-      >
-      </div>
+      <div style={{ boxShadow: "0px 0px 4px #0F60DD" }} class="w-full h-[2px] bg-[#3363AC]"></div>
     </div>
 
     <!-- 2° RIGA -->
     <div class="relative chabad-container px-4 mx-auto">
       <!-- ELLISSE -->
-      <div
-        class="absolute top-0 left-1/2 -translate-y-1/2 -translate-x-1/2 -z-50"
-      >
+      <div class="absolute top-0 left-1/2 -translate-y-1/2 -translate-x-1/2 -z-50">
         <div
-          class="w-[calc(120vw+3rem)] lg:w-[calc(170vw+3rem)] h-[calc(90vw+3rem)] lg:h-[calc(70vw+3rem)] bg-white rounded-[100%]"
-        >
+          class="w-[calc(120vw+3rem)] lg:w-[calc(170vw+3rem)] h-[calc(90vw+3rem)] lg:h-[calc(70vw+3rem)] bg-white rounded-[100%]">
         </div>
       </div>
 
-      <div
-        class="absolute top-0 left-1/2 -translate-y-1/2 -translate-x-1/2 -z-50"
-      >
+      <div class="absolute top-0 left-1/2 -translate-y-1/2 -translate-x-1/2 -z-50">
         {
           /* <div
         style={{ boxShadow: "inset 0 0 20rem 2rem black" }}
@@ -155,15 +138,13 @@ const t = await getTranslations("components/header", Astro.url);
             background:
               "radial-gradient(46.4% 56.57% at 50.47% 39.48%, #00378A 0%, #002D70 37.48%, #002D70 81.75%, #001C46 96.02%)",
           }}
-          class="w-[120vw] lg:w-[170vw] h-[90vw] lg:h-[70vw] rounded-[100%]"
-        >
+          class="w-[120vw] lg:w-[170vw] h-[90vw] lg:h-[70vw] rounded-[100%]">
         </div>
       </div>
 
       <!-- GRIDROW -->
       <div
-        class="grid grid-cols-[1fr_auto_1fr] gap-x-10 xs:gap-x-16 md:gap-x-10 lg:gap-x-16 items-center md:pt-4 max-xl:pb-1"
-      >
+        class="grid grid-cols-[1fr_auto_1fr] gap-x-10 xs:gap-x-16 md:gap-x-10 lg:gap-x-16 items-center md:pt-4 max-xl:pb-1">
         <!-- DESKTOP -->
         <div class="hidden md:block">
           <ul class="flex flex-wrap gap-6 gap-y-1 justify-end">
@@ -177,14 +158,8 @@ const t = await getTranslations("components/header", Astro.url);
 
         <!-- CELLULARE -->
         <div class="flex md:hidden items-center xs:pl-4">
-          <button
-            class="w-8 aspect-square bg-white border-blue-800 rounded-full p-2"
-          >
-            <Image
-              class="w-full h-full translate-y-px translate-x-px"
-              src={iconSearch}
-              alt="search icon"
-            />
+          <button class="w-8 aspect-square bg-white border-blue-800 rounded-full p-2">
+            <Image class="w-full h-full translate-y-px translate-x-px" src={iconSearch} alt="search icon" />
           </button>
         </div>
 
@@ -216,8 +191,7 @@ const t = await getTranslations("components/header", Astro.url);
             <Widget icon="/images/icons/location.svg">
               <select
                 data-cities-select
-                class="bg-transparent border rounded-sm border-white border-opacity-40 text-white cursor-pointer w-24 overflow-ellipsis uppercase pr-1"
-              >
+                class="bg-transparent border rounded-sm border-white border-opacity-40 text-white cursor-pointer w-24 overflow-ellipsis uppercase pr-1">
                 <option selected value="">---</option>
                 {
                   stringCities.map((c) => (
@@ -240,10 +214,7 @@ const t = await getTranslations("components/header", Astro.url);
         </div>
 
         <!-- CELLULARE -->
-        <div
-          data-sidebar-toggle
-          class="md:hidden flex h-7 ml-auto xs:mr-4 items-center justify-end"
-        >
+        <div data-sidebar-toggle class="md:hidden flex h-7 ml-auto xs:mr-4 items-center justify-end">
           <Image src={iconMenu} alt="hamburger menu" />
         </div>
       </div>
@@ -253,8 +224,7 @@ const t = await getTranslations("components/header", Astro.url);
     <div class="bg-slate-100 border-y border-blue-950 py-1 md:py-2 xl:mt-1">
       <nav class="chabad-container mx-auto">
         <ul
-          class="flex justify-center gap-5 xs:gap-8 md:gap-6 lg:gap-8 text-sm lg:text-base text-blue-950 font-semibold font-montserrat translate-y-px uppercase"
-        >
+          class="flex justify-center gap-5 xs:gap-8 md:gap-6 lg:gap-8 text-sm lg:text-base text-blue-950 font-semibold font-montserrat translate-y-px uppercase">
           <li class="md:hidden">
             <a href={routes.live} class="text-red-800">live</a>
           </li>
@@ -297,9 +267,7 @@ const t = await getTranslations("components/header", Astro.url);
   </div>
 
   <script>
-    const select = document.querySelectorAll<HTMLSelectElement>(
-      "[data-cities-select]"
-    );
+    const select = document.querySelectorAll<HTMLSelectElement>("[data-cities-select]");
     const shabbesStart = document.querySelectorAll("[data-shabbes-start]");
     const shabbesEnd = document.querySelectorAll("[data-shabbes-end]");
 
@@ -309,12 +277,8 @@ const t = await getTranslations("components/header", Astro.url);
         select.forEach((s) => {
           s.value = currItem;
           fetchCandles(s, ({ start, end }) => {
-            shabbesStart.forEach(
-              (ss) => (ss.textContent = formatTime(new Date(start)))
-            );
-            shabbesEnd.forEach(
-              (se) => (se.textContent = formatTime(new Date(end)))
-            );
+            shabbesStart.forEach((ss) => (ss.textContent = formatTime(new Date(start))));
+            shabbesEnd.forEach((se) => (se.textContent = formatTime(new Date(end))));
           });
         });
       }
@@ -337,23 +301,15 @@ const t = await getTranslations("components/header", Astro.url);
             select.forEach((s) => (s.disabled = false));
             if (!data) return;
             const { start, end } = data;
-            shabbesStart.forEach(
-              (ss) => (ss.textContent = formatTime(new Date(start)))
-            );
-            shabbesEnd.forEach(
-              (se) => (se.textContent = formatTime(new Date(end)))
-            );
+            shabbesStart.forEach((ss) => (ss.textContent = formatTime(new Date(start))));
+            shabbesEnd.forEach((se) => (se.textContent = formatTime(new Date(end))));
           });
         });
       });
     });
 
     function formatTime(date: Date) {
-      return (
-        String(date.getHours()).padStart(2, "0") +
-        ":" +
-        String(date.getMinutes()).padStart(2, "0")
-      );
+      return String(date.getHours()).padStart(2, "0") + ":" + String(date.getMinutes()).padStart(2, "0");
     }
 
     function fetchCandles(sel: HTMLSelectElement, cb: Function) {
@@ -375,9 +331,7 @@ const t = await getTranslations("components/header", Astro.url);
           // disable scroll
           document.documentElement.classList.toggle("max-md:overflow-hidden");
           // toggle sidebar
-          document
-            .querySelector("#menu-cell")
-            ?.classList?.toggle("translate-x-full");
+          document.querySelector("#menu-cell")?.classList?.toggle("translate-x-full");
         });
       });
     })();

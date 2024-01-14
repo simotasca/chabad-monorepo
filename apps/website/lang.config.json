@@ -1,4 +1,5 @@
 {
   "canonical": "it",
-  "languages": ["it", "en", "he"]
+  "languages": ["it", "en"],
+  "full-names": ["Italiano", "English"]
 }
