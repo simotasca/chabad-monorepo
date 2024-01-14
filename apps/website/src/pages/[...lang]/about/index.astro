@@ -27,10 +27,14 @@ import imgFamily2 from "@/images/family-2.jpg";
 import { checkLangParam } from "@/lib/server/lang/lang";
 
 import { Image } from "astro:assets";
+import EventsSection from "@/components/events/EventsSection.astro";
+import { getData } from "../_utils";
 
 if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
 }
+
+const { events } = await getData();
 ---
 
 <PageLayout title="Articoli" description="bla bla bla">
@@ -323,13 +327,18 @@ if (!checkLangParam(Astro)) {
     </ShadowBox>
   </section>
 
-  <section slot="sidebar" class="md:flex flex-col gap-4 mt-4">
-    <Parshat
-      title="acharei kedoshim"
-      date="15/giugno/2023"
-      image="images/parshat/acharei-kedoshim.jpeg"
-    />
-
+  <section slot="sidebar" class="md:flex flex-col gap-4">
+    <ShadowBox>
+      <div class="py-5">
+        <EventsSection
+          nome={events[0].name}
+          data={events[0].date}
+          immagine={events[0].main_image}
+          citta={events[0].city}
+          url={events[0].url}
+        />
+      </div>
+    </ShadowBox>
     <div class="md:hidden"></div>
 
     <div class="hidden md:block">

@@ -7,12 +7,17 @@ import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
 import { errorResponse } from "@/lib/server/error-response";
 import { Image } from "astro:assets";
 import imageCasuale from "@/images/parshat/acharei-kedoshim.jpeg";
+import ShadowBox from "@/components/ui/ShadowBox.astro";
+import EventsSection from "@/components/events/EventsSection.astro";
+import { getData } from "../_utils";
 
 if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
 }
 
 const t = await getTranslations("pages/contribute", Astro.url);
+
+const { events } = await getData();
 ---
 
 <PageLayout title="Contribute" description="bla bla">
@@ -50,11 +55,19 @@ const t = await getTranslations("pages/contribute", Astro.url);
     </div>
   </section>
   <section slot="sidebar" class="md:flex flex-col gap-4">
-    <div class="m-4 md:m-0">
-      <!-- <EventsPageSection /> -->
-    </div>
-
     <div class="hidden md:block">
+      <ShadowBox>
+        <div class="py-5">
+          <EventsSection
+            nome={events[0].name}
+            data={events[0].date}
+            immagine={events[0].main_image}
+            citta={events[0].city}
+            url={events[0].url}
+          />
+        </div>
+      </ShadowBox>
+      <div class="h-4"></div>
       <Newsletter />
     </div>
   </section>
