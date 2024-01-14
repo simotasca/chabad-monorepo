@@ -14,6 +14,7 @@ import { getTranslations } from "@/lib/server/lang/lang";
 import { currLang } from "@/lib/shared/lang";
 import { config } from "@/lib/shared/config";
 import Link from "../navigation/Link.astro";
+import LangSelect from "../navigation/LangSelect.astro";
 
 const stringCities = Object.keys(cities);
 const t = await getTranslations("components/header", Astro.url);
@@ -64,15 +65,7 @@ const t = await getTranslations("components/header", Astro.url);
           </div>
 
           <div class="md:hidden flex items-center gap-4 text-sm text-white font-montserrat ml-auto mr-2">
-            <select class="bg-transparent" data-language-select>
-              {
-                config.lang.locales.map((lang) => (
-                  <option selected={lang === currLang(Astro.url)} value={lang}>
-                    {config.lang.fullNames.get(lang)}
-                  </option>
-                ))
-              }
-            </select>
+            <LangSelect class="bg-transparent" />
             <span>ב"ה</span>
           </div>
         </div>
@@ -260,17 +253,6 @@ const t = await getTranslations("components/header", Astro.url);
       }
     </style>
   </div>
-
-  <script>
-    // navigate on lang select change
-    import { translateRoute } from "@/lib/shared/lang";
-    const langSelects = document.querySelectorAll<HTMLSelectElement>("select[data-language-select]")!;
-      for (const langSelect of langSelects) {
-      langSelect.addEventListener("change", (e) => {
-        window.location.href = translateRoute({ lang: langSelect.value }, new URL(window.location.href));
-      });
-    }
-  </script>
 
   <script>
     const select = document.querySelectorAll<HTMLSelectElement>("[data-cities-select]");

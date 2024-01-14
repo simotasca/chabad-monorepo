@@ -73,8 +73,8 @@ HEADER (DESKTOP)
 
 - [x] Button contattaci, manca href (eh)
 - [x] Button newsletter, manca href (eh)
-- [ ] Non va il tasto delle lingue (st)
-  - [ ] in generale tutti i link devono essere internazionalizzati
+- [x] Non va il tasto delle lingue (st)
+  - [ ] sostituire tutti gli <a /> con <Link />
 - [x] Togliere lingua ebraica finche non la si usa (eh)
 
 HEADER (MOBILE)
