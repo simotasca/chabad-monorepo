@@ -53,7 +53,7 @@ const { events } = await getData();
   </section>
 
   <section slot="content-1">
-    <ShadowBox class="flex flex-col gap-4 p-6">
+    <ShadowBox class="flex flex-col gap-4 p-6 bg-slate-50">
       <h2 class="font-display text-3xl font-bold leading-6mb-2">
         La storia di Chabad in Italia
       </h2>
@@ -328,8 +328,8 @@ const { events } = await getData();
   </section>
 
   <section slot="sidebar" class="md:flex flex-col gap-4">
-    <ShadowBox>
-      <div class="py-5">
+    <ShadowBox class="max-md:hidden">
+      <div class="py-5 bg-slate-50">
         <EventsSection
           nome={events[0].name}
           data={events[0].date}

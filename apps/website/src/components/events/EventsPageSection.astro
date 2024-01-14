@@ -28,7 +28,7 @@ const { event } = Astro.props;
 </style>
 
 <ShadowBox>
-  <section class="relative flex flex-col gap-y-1 p-4">
+  <section class="relative flex flex-col gap-y-1 p-4 bg-slate-50">
     <p class="text-blue-800 text-xs font-raleway font-bold uppercase mb-2">
       {event.organizations.map((o) => o.name).join(", ")}
     </p>

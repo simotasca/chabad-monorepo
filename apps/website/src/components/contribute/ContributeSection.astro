@@ -19,7 +19,7 @@ const organizations = await query.then(({ error, data }) => {
 
 {
   organizations.map((o) => (
-    <ShadowBox class="p-4">
+    <ShadowBox class="p-4 bg-slate-50">
       <section>
         {o.main_image && (
           <img
