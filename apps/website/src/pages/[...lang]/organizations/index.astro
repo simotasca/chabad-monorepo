@@ -41,10 +41,10 @@ const t = await getTranslations("pages/organizations", Astro.url);
   <section slot="content-1" class="flex flex-col gap-4">
     <OrganizationSection />
   </section>
-  
+
   <section slot="sidebar" class="md:flex flex-col gap-4">
-    <ShadowBox class="bg-slate-50">
-      <div class="py-5">
+    <ShadowBox class="">
+      <div class="py-5 bg-slate-50">
         <EventsSection
           nome={events[0].name}
           data={events[0].date}

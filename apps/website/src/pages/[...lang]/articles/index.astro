@@ -35,7 +35,7 @@ console.log("TITOLO:", t("main.title"));
 console.log("SOTTO-TITOLO:", t("main.subtitle"));
 ---
 
-<PageLayout title="Articoli" description="bla bla bla">
+<PageLayout title="Articoli" description="Article Page">
   <section slot="title">
     <div
       class="grid grid-cols-[1fr_auto_1fr] items-center pt-2 pb-[1px] sm:pt-4 sm:pb-3 px-8"
@@ -54,7 +54,7 @@ console.log("SOTTO-TITOLO:", t("main.subtitle"));
     <PageArticleSection mainArticle={mainArticle} />
 
     <ShadowBox>
-      <div class="p-6 bg-slate-50">
+      <div class="p-6">
         <h1 class="mb-4">
           <SectionTitle>{t("articles-section.title")}</SectionTitle>
         </h1>

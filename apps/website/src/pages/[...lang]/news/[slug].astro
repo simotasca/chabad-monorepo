@@ -84,7 +84,7 @@ const Content = (await run(code, runtime)).default || "div";
 
   <section slot="content-1">
     <ShadowBox>
-      <div class="pb-6 px-6 pt-4 bg-stone-50">
+      <div class="pb-6 px-6 pt-4">
         <article>
           <div class="relative grid grid-cols-[1fr_auto_1fr] items-center mt-2">
             <div class="absolute flex -top-1 w-full">
@@ -183,7 +183,7 @@ const Content = (await run(code, runtime)).default || "div";
   </section>
 
   <section slot="sidebar" class="md:flex flex-col gap-4">
-    <ShadowBox class="bg-slate-50">
+    <ShadowBox>
       <div class="py-5">
         <EventsSection
           nome={events[0].name}

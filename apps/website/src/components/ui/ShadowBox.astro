@@ -2,7 +2,9 @@
 const { class: className } = Astro.props;
 ---
 
-<div class:list={[className, "shadow-box bg-white border border-neutral-200"]}>
+<div
+  class:list={[className, "shadow-box bg-slate-50 border border-neutral-200"]}
+>
   <slot />
 </div>
 

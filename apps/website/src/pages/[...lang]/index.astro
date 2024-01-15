@@ -45,8 +45,8 @@ const imgVideo = "/images/video-prova.jpg";
   description="sito ufficiale di chabad in italia"
 >
   <section slot="content-1" class="flex flex-col gap-4">
-    <ShadowBox class="contents md:block bg-slate-50">
-      <div class="py-1 md:p-4">
+    <ShadowBox class="contents md:block">
+      <div class="py-1 md:p-4 bg-slate-50">
         <h1 class="pb-2">
           <Link href={routes.news}>
             <SectionTitle icon="/images/icons/clock.svg">
@@ -66,8 +66,8 @@ const imgVideo = "/images/video-prova.jpg";
       </div>
     </ShadowBox>
 
-    <ShadowBox class="contents md:block bg-slate-50">
-      <div class="py-1 md:p-4">
+    <ShadowBox class="contents md:block">
+      <div class="py-1 md:p-4 bg-slate-50">
         <h1 class="pb-2">
           <a href="https://www.chabad.org/">
             <SectionTitle icon="/images/icons/blue-icons/globe-icon.svg">
@@ -91,7 +91,7 @@ const imgVideo = "/images/video-prova.jpg";
 
     <!-- TODO: PAGINA A PARTE A CUI MANDARE PER TUTTE LE NOTIZIE DAL MONDO -->
 
-    <ShadowBox class="contents md:block bg-slate-50">
+    <ShadowBox class="contents md:block">
       <div class="py-1 md:p-4">
         <h1 class="pb-2">
           <a href={routes.articles}>
@@ -113,7 +113,7 @@ const imgVideo = "/images/video-prova.jpg";
   <!-- SIDEBAR -->
   <section slot="sidebar" class="flex flex-col gap-4">
     <!-- VIDEOS -->
-    <ShadowBox class="contents md:block bg-slate-50">
+    <ShadowBox class="contents md:block">
       <SidebarTitle
         title={t("sidebar.title-live")}
         img="/images/icons/video.svg"
@@ -126,7 +126,7 @@ const imgVideo = "/images/video-prova.jpg";
     <!-- TODO: immettere video di categoria differente (abilitare il filtro categorie per i videolives) -->
 
     <!-- JIM TV -->
-    <ShadowBox class="contents md:block bg-slate-50">
+    <ShadowBox class="contents md:block">
       <SidebarTitle title="Jim TV" img="/images/icons/maghen-david.svg" />
       <SidebarContainer>
         <SidebarVideo />
@@ -139,7 +139,7 @@ const imgVideo = "/images/video-prova.jpg";
       image="images/parshat/acharei-kedoshim.jpeg"
     />
 
-    <ShadowBox class="bg-slate-50 max-md:hidden">
+    <ShadowBox class="max-md:hidden">
       <div class="py-5">
         <EventsSection
           nome={events[0].name}
@@ -152,7 +152,7 @@ const imgVideo = "/images/video-prova.jpg";
     </ShadowBox>
   </section>
 
-  <div class="hidden md:block bg-slate-50">
+  <div class="hidden md:block">
     <Newsletter />
   </div>
 

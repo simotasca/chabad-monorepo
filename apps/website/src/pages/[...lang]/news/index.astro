@@ -53,7 +53,7 @@ const t = await getTranslations("pages/news", Astro.url);
     <PageNewsSection mainNews={mainNews} />
 
     <ShadowBox>
-      <div class="p-6 bg-slate-50">
+      <div class="p-6">
         <h2
           class="font-raleway text-2xl font-semibold text-blue-950 uppercase mb-4"
         >
@@ -86,7 +86,7 @@ const t = await getTranslations("pages/news", Astro.url);
 
   <!-- FIXME: EventsPageSection da errore -->
   <section slot="sidebar" class="md:flex flex-col gap-4">
-    <ShadowBox class="max-md:hidden bg-slate-50">
+    <ShadowBox class="max-md:hidden">
       <div class="py-5">
         <EventsSection
           nome={events[0].name}
