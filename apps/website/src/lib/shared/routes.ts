@@ -7,19 +7,20 @@ const routes = {
   articles: "/articles",
   article: ({ slug }: WithSlug) => `/articles/${slug}`,
   news: "/news",
+  worldnews: "/world-news",
   new: ({ slug }: WithSlug) => `/news/${slug}`,
   organizations: (qs?: OrganizationsQueryParams) =>
     "/organizations" + organizationsQueryString(qs),
   organization: ({ slug }: WithSlug) => `/organizations/${slug}`,
   events: "/events",
   event: ({ slug }: WithSlug) => `/events/${slug}`,
-  lessons: "/lessons",
+
   live: "/live",
   chabad: "/chabad",
   resources: "resources",
   contribute: "/contribute",
   contacts: "/contacts",
-  about: "/about"
+  about: "/about",
 } as const;
 
 export default routes;

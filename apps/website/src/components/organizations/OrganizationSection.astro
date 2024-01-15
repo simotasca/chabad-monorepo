@@ -11,6 +11,7 @@ import { Image } from "astro:assets";
 import iconInstagram from "@/images/icons/instagram.svg";
 import iconFacebook from "@/images/icons/blue-icons/facebook.svg";
 import iconShare from "@/images/icons/share.svg";
+import Link from "@/components/navigation/Link.astro";
 
 // TODO :collegare i contatti alle organizzazioni
 
@@ -38,7 +39,7 @@ console.log(organizations.find((o) => o.id === 3));
 
 {
   organizations.map((o) => (
-    <a href={o.url}>
+    <Link href={o.url}>
       <ShadowBox>
         <section class="relative">
           <div class="flex gap-2 sm:gap-4 px-4 xs:pr-2 sm:p-4">
@@ -139,6 +140,6 @@ console.log(organizations.find((o) => o.id === 3));
           </div>
         </section>
       </ShadowBox>
-    </a>
+    </Link>
   ))
 }

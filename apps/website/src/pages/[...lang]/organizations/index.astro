@@ -7,7 +7,7 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import { errorResponse } from "@/lib/server/error-response";
 import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
 import { getData } from "../_utils";
-
+import Link from "@/components/navigation/Link.astro";
 if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
 }

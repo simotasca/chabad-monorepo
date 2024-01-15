@@ -8,6 +8,8 @@ import StealthPlugin from "puppeteer-extra-plugin-stealth";
 puppeteer.use(StealthPlugin());
 
 const CHABAD_HOMEPAGE_URL = "https://it.chabad.org/";
+const COLLIVE_HOMEPAGE_URL = "https://collive.com/";
+const AISH_HOMEPAGE_URL = "https://aish.com/";
 const MAIN_ARTICLES_SELECTOR = "#promo_scroller_container .item";
 const REMAINING_ARTICLES_SELECTOR = ".home_remaining_promo_container .item";
 
@@ -50,7 +52,9 @@ export async function scrape() {
     console.log("Scraping it.chabad.org");
 
     const page = await browser.newPage();
-    await page.goto(CHABAD_HOMEPAGE_URL, { waitUntil: "load" });
+    await page.goto(CHABAD_HOMEPAGE_URL, {
+      waitUntil: "load",
+    });
 
     console.log("Chabad homepage opened");
 

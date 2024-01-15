@@ -5,6 +5,7 @@ import Parshat from "@/components/sidebar/Parshat.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
 import { errorResponse } from "@/lib/server/error-response";
 import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
+import Link from "@/components/navigation/Link.astro";
 import { throwError } from "@/lib/shared/error";
 import supabase from "@/lib/server/supabase";
 import {
@@ -48,9 +49,9 @@ const events = await supabase
   <section slot="content-1" class="grid xs:grid-cols-2 xl:grid-cols-3 gap-4">
     {
       events.map((e) => (
-        <a href={e.url}>
+        <Link href={e.url}>
           <EventsPageSection event={e} />
-        </a>
+        </Link>
       ))
     }
   </section>

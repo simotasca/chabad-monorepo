@@ -20,6 +20,7 @@ import logoText from "@/images/logo/chabad-text-black.svg";
 import logoChabad from "@/images/logo/logo-black.svg";
 import iconShare from "@/images/icons/share.svg";
 import routes from "@/lib/shared/routes";
+import Link from "@/components/navigation/Link.astro";
 // import * as runtime from 'react/jsx-dev-runtime' // Development.
 
 if (!checkLangParam(Astro)) {
@@ -148,8 +149,8 @@ const articles = await supabase
       <ShadowBox>
         <div class="p-6 bg-slate-50">
           <h1 class="mb-4">
-            <a href={routes.articles}>
-              <SectionTitle>Tutti gli articoli</SectionTitle></a
+            <Link href={routes.articles}>
+              <SectionTitle>Tutti gli articoli</SectionTitle></Link
             >
           </h1>
           <div
@@ -159,7 +160,7 @@ const articles = await supabase
             {
               articles.map((a) => (
                 <>
-                  <a href={a.url}>
+                  <Link href={a.url}>
                     <div>
                       <img
                         class="w-full aspect-video"
@@ -170,7 +171,7 @@ const articles = await supabase
                         {a.title}
                       </p>
                     </div>
-                  </a>
+                  </Link>
                 </>
               ))
             }

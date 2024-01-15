@@ -13,13 +13,14 @@ const t = await getTranslations("components/header", Astro.url);
   <div class="w-full bg-[#031B4D]">
     <div
       class="chabad-container grid grid-cols-[auto_1fr_auto] xs:grid-cols-[1fr_auto_1fr] gap-x-10 xs:gap-x-0 items-center py-2 mx-auto">
-      <a href={routes.home}
-        ><div class="flex justify-start -translate-y-px pl-2">
+      <Link href={routes.home}
+        >
+        <div class="flex justify-start -translate-y-px pl-2">
           <img src="/images/logo.svg" class="h-8 xs:h-10 -m-1" alt="chabad logo icon" />
 
           <img src="/images/logo-text.svg" alt="chabad.it" class="w-24 xs:w-28 translate-y-[4px]" />
-        </div></a
-      >
+        </div>
+        </Link>
       <ul class="hidden sm:flex items-center gap-8 text-slate-200 font-raleway text-sm justify-center translate-y-px">
         {
           config.lang.locales.map((lang) => (
@@ -74,23 +75,26 @@ const t = await getTranslations("components/header", Astro.url);
 <div class="bg-slate-100 border-y border-blue-950 py-2">
   <nav class="chabad-container px-4 mx-auto">
     <ul
-      class="flex justify-center gap-6 lg:gap-14 text-sm lg:text-base text-blue-950 font-semibold font-montserrat uppercase translate-y-px">
+      class="flex justify-center gap-6  text-sm md:text-xs lg:text-base text-blue-950 font-semibold font-montserrat uppercase translate-y-px">
       <li class="md:hidden">
-        <a href={routes.live} class="text-red-800">live</a>
+        <Link href={routes.live} class="text-red-800">live</Link>
       </li>
-      <li><a href={routes.news}>{t("navbar.news")}</a></li>
-      <li><a href={routes.articles}>{t("navbar.articles")}</a></li>
+      <li class="max-md:hidden">
+        <Link href={routes.home}>HOME</Link>
+      </li>
+      <li><Link href={routes.news}>{t("navbar.news")}</Link></li>
+      <li><Link href={routes.articles}>{t("navbar.articles")}</Link></li>
       <li class="hidden sm:block">
-        <a href={routes.live}>{t("navbar.video-live")}</a>
+        <Link href={routes.live}>{t("navbar.video-live")}</Link>
       </li>
       <li class="hidden md:block">
-        <a href={routes.organizations()}>{t("navbar.organizations")}</a>
+        <Link href={routes.organizations()}>{t("navbar.organizations")}</Link>
       </li>
       <li class="hidden md:block">
-        <a href={routes.events}>{t("navbar.events")}</a>
+        <Link href={routes.events}>{t("navbar.events")}</Link>
       </li>
       <li class="hidden xs:block">
-        <a href={routes.about}>{t("navbar.about-us")}</a>
+        <Link href={routes.about}>{t("navbar.about-us")}</Link>
       </li>
       <!-- <li class="hidden md:block">
         <a href={routes.resources}>{t("navbar.resources")}</a>
@@ -99,7 +103,7 @@ const t = await getTranslations("components/header", Astro.url);
         <a href={routes.contacts}>{t("navbar.contacts")}</a>
       </li> -->
       <li class="hidden md:block">
-        <a href={routes.contribute}>{t("navbar.contributes")}</a>
+        <Link href={routes.contribute}>{t("navbar.contributes")}</Link>
       </li>
     </ul>
   </nav>

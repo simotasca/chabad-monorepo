@@ -66,7 +66,6 @@
 - [ ] bug fix scraper (simone)
 - [ ] feed rss jimtv (simone)
 
-
 ## Nuovi
 
 HEADER (DESKTOP)
@@ -74,7 +73,7 @@ HEADER (DESKTOP)
 - [x] Button contattaci, manca href (eh)
 - [x] Button newsletter, manca href (eh)
 - [x] Non va il tasto delle lingue (st)
-  - [ ] sostituire tutti gli <a> con <Link> (eh)
+  - [x] sostituire tutti gli <a> con <Link> (eh) ===> FATTO SU TUTTO IL SITO
 - [x] Togliere lingua ebraica finche non la si usa (eh)
 
 HEADER (MOBILE)
@@ -82,13 +81,14 @@ HEADER (MOBILE)
 - [x] Dropdown delle lingue non funziona (st)
   - [x] Sistemare ovunque c'è un elenco di lingue con il config
 - [ ] Manca il cursor pointer sull'hamburger (eh)
-- [~] Scegliere con cognizione le voci che compaiono/scompaiono sulla navbar mentre si ridimensiona (eh)
+- [x] Scegliere con cognizione le voci che compaiono/scompaiono sulla navbar mentre si ridimensiona (eh)
 - [ ] sistemare la lente piccola in PageHeader
 
 HOMEPAGE
 
 - [ ] Mettere i contenuti live-video, dividendo quelli dalla jimtv da quelli caricati su database (st)
   - [ ] https://www.npmjs.com/package/rss-parser
+- [ ] Aggiungere href agli eventi, una volta estrapolato l'url (vedi punto "EVENTI") (eh)
 
 NOTIZIE e [slug], ARTICOLI e [slug]
 
@@ -98,15 +98,16 @@ NOTIZIE e [slug], ARTICOLI e [slug]
 
 LIVE-VIDEO
 
-- [ ] Abilitare visualizzazione video da youtube (st)
-  - [ ] <div set:html={htmlCodeFromSupabase} class="[&>iframe]:bg-red-500"></div>
+- [x] Abilitare visualizzazione video da youtube (eh)
+  - [x] <div set:html={htmlCodeFromSupabase} class="[&>iframe]:bg-red-500"></div>
 - [ ] Includere i video jimtv con feed rss (st)
 - [x] Mettere in sidebar l'evento prossimo (eh)
+- [x] Aggiungere graficamente sezione jim tv (eh)
 
-PUNTI CHABAD 
+PUNTI CHABAD
 
 - [ ] Mettere le icone social giuste alle card (eh)
-- [ ] Cambiare bottone delle card (eh)
+- [x] Cambiare bottone delle card (eh)
 - [ ] Aggiungere filtro città (st)
 - [ ] Far comparire i responsible delle organizzazioni, se si ha un'idea di dove e come (st)
 
@@ -116,19 +117,20 @@ PUNTI CHABAD [SLUG]
   - [ ] alcune cose non compaiono
 - [ ] collegare markdown per descrizione, con possibilità di mettere immagini (e video?) (st)
 
-EVENTI 
+EVENTI
 
-- [ ] Cambiare icona bottone delle card (eh)
+- [x] Cambiare icona bottone delle card (eh)
 - [ ] Aggiungere filtro per città (st)
+- [ ] Aggiungere l'href alla pagina slug eventi (tirare fuori url) (st)
 
 EVENTI [SLUG]
 
 - [ ] Far comparire i contatti dell'evento sulla sidebar (eh)
 
-CONTRIBUISCI 
+CONTRIBUISCI
 
 - [ ] Far comparire i responsibles delle organizzazioni sulle card (st)
-- [ ] Aggiungere alla sidebar il prossimo evento (eh)
+- [x] Aggiungere alla sidebar il prossimo evento (eh)
 
 NEWSLETTER
 
@@ -140,6 +142,15 @@ FOOTER
 - [ ] Collegare le sedi (città) alle organizzazioni relative nella pagina punti chabad (st)
 - [ ] Collegare i vari social di chabad.it e aggiungere i mancanti (eh)
 
+DIFFERENZIARE SU DATABASE ARTICOLI E NEWS (TABELLE DIVERSE?)
+
+SCRAPER (st)
+
+- [ ] Scrapare gli articoli dai siti che ho messo tra le const di chabad.js
+- [ ] Mettere gli articoli scrapati nella pagina delle world-news e sulla home
+- [ ] Collegare il titolo della sezione della home alla pagina
+
 # POST RILASCIO
+
 - [ ] Non va tasto ricerca, se si vuol fare (st)
   - [ ] fare prima la ui (eh)
