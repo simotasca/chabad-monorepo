@@ -114,10 +114,12 @@ const imgVideo = "/images/video-prova.jpg";
   <section slot="sidebar" class="flex flex-col gap-4">
     <!-- VIDEOS -->
     <ShadowBox class="contents md:block">
-      <SidebarTitle
-        title={t("sidebar.title-live")}
-        img="/images/icons/video.svg"
-      />
+      <Link href={routes.live}>
+        <SidebarTitle
+          title={t("sidebar.title-live")}
+          img="/images/icons/video.svg"
+        />
+      </Link>
       <SidebarContainer>
         <SidebarVideo />
       </SidebarContainer>
