@@ -9,7 +9,10 @@ import { Image } from "astro:assets";
 import iconShare from "@/images/icons/share.svg";
 import Link from "../navigation/Link.astro";
 
-type Article = Pick<Tables<"articles">, "title" | "date" | "image"> & {
+type Article = {
+  title: string;
+  date: string;
+  image: string;
   url: string;
   category: string;
   preview?: string;
@@ -91,7 +94,7 @@ const {
       articles.map((a) => (
         <Link href={a.url} class="cursor-pointer" target={articleLinkTarget(a)}>
           <article>
-            <div class="flex gap-2 items-center py-0 font-display lg:text-lg md:text-base text-xl leading-[1.1] md:leading-[1.1] lg:leading-[1.1]">
+            <div class="flex gap-2 items-center py-0 font-display lg:text-lg md:text-base text-xl leading-[1.1] md:leading-[1.1] lg:leading-[1.1] [&>*]:hover:text-blue-900 lg:[&>*]:hover:text-blue-900">
               <div class="hidden md:block h-12 lg:h-6 w-[2px] bg-blue-950" />
               <h3>{a.title}</h3>
             </div>

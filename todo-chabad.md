@@ -146,7 +146,9 @@ FOOTER
 - [ ] Collegare le sedi (città) alle organizzazioni relative nella pagina punti chabad (st)
 - [ ] Collegare i vari social di chabad.it e aggiungere i mancanti (eh)
 
-DIFFERENZIARE SU DATABASE ARTICOLI E NEWS (TABELLE DIVERSE?)
+- [ ] HEADER: sia sulla page, che sulla home, l'header dovrebbe comparire quando si scorre verso l'alto dal basso della pagina
+
+- [x] DIFFERENZIARE SU DATABASE ARTICOLI E NEWS (TABELLE DIVERSE?)
 
 SCRAPER (st)
 

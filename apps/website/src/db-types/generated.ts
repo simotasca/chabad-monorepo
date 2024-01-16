@@ -256,7 +256,7 @@ export interface Database {
       }
       news: {
         Row: {
-          category: Database["public"]["Enums"]["news_category"] | null
+          category: Database["public"]["Enums"]["news_category"]
           content: string
           created_at: string
           date: string
@@ -268,7 +268,7 @@ export interface Database {
           title: string
         }
         Insert: {
-          category?: Database["public"]["Enums"]["news_category"] | null
+          category: Database["public"]["Enums"]["news_category"]
           content: string
           created_at?: string
           date?: string
@@ -280,7 +280,7 @@ export interface Database {
           title: string
         }
         Update: {
-          category?: Database["public"]["Enums"]["news_category"] | null
+          category?: Database["public"]["Enums"]["news_category"]
           content?: string
           created_at?: string
           date?: string
@@ -299,8 +299,12 @@ export interface Database {
           city: string
           content: string | null
           created_at: string
+          iban: string | null
           id: number
           link_donate: string | null
+          link_facebook: string | null
+          link_instagram: string | null
+          link_youtube: string | null
           logo: string | null
           main_image: string | null
           markdown: string
@@ -314,8 +318,12 @@ export interface Database {
           city: string
           content?: string | null
           created_at?: string
+          iban?: string | null
           id?: number
           link_donate?: string | null
+          link_facebook?: string | null
+          link_instagram?: string | null
+          link_youtube?: string | null
           logo?: string | null
           main_image?: string | null
           markdown: string
@@ -329,8 +337,12 @@ export interface Database {
           city?: string
           content?: string | null
           created_at?: string
+          iban?: string | null
           id?: number
           link_donate?: string | null
+          link_facebook?: string | null
+          link_instagram?: string | null
+          link_youtube?: string | null
           logo?: string | null
           main_image?: string | null
           markdown?: string
@@ -378,26 +390,26 @@ export interface Database {
       }
       scraped: {
         Row: {
+          category: Database["public"]["Enums"]["scraper_website"]
           created_at: string
           id: number
           image: string | null
-          source: Database["public"]["Enums"]["scraper_website"]
           title: string
           url: string
         }
         Insert: {
+          category: Database["public"]["Enums"]["scraper_website"]
           created_at?: string
           id?: number
           image?: string | null
-          source: Database["public"]["Enums"]["scraper_website"]
           title: string
           url: string
         }
         Update: {
+          category?: Database["public"]["Enums"]["scraper_website"]
           created_at?: string
           id?: number
           image?: string | null
-          source?: Database["public"]["Enums"]["scraper_website"]
           title?: string
           url?: string
         }

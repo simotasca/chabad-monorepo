@@ -1,6 +1,6 @@
 @import url("./fonts.css");
 
-.chabad-containers {
+.chabad-container {
     @apply container max-lg:max-w-screen-lg;
 }
 
