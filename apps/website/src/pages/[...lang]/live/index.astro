@@ -142,16 +142,18 @@ const mainVideoLive = videolives.pop()!;
         >
           {
             videolives.map((l) => (
-              <><Link href={l.url}>
-                <div>
-                  <div
-                    set:html={l.youtube_link}
-                    class="[&>iframe]:w-full [&>iframe]:max-w-full [&>iframe]:h-full [&>iframe]:max-h-full [&>iframe]:aspect-[4/3] "
-                  />
-                  <h2 class="text-lg font-bold font-display uppercase mt-1 ">
-                    {l.title}
-                  </h2>
-                </div></Link>
+              <>
+                <Link href={l.url}>
+                  <div>
+                    <div
+                      set:html={l.youtube_link}
+                      class="[&>iframe]:w-full [&>iframe]:max-w-full [&>iframe]:h-full [&>iframe]:max-h-full [&>iframe]:aspect-[4/3] "
+                    />
+                    <h2 class="text-lg font-bold font-display uppercase mt-1 ">
+                      {l.title}
+                    </h2>
+                  </div>
+                </Link>
               </>
             ))
           }
@@ -166,16 +168,14 @@ const mainVideoLive = videolives.pop()!;
           {
             videolives.map((l) => (
               <>
-                
-                  <div
-                    set:html={l.youtube_link}
-                    class="[&>iframe]:w-full [&>iframe]:max-w-full [&>iframe]:h-full [&>iframe]:max-h-full [&>iframe]:aspect-[4/3]"
-                  />
+                <div
+                  set:html={l.youtube_link}
+                  class="[&>iframe]:w-full [&>iframe]:max-w-full [&>iframe]:h-full [&>iframe]:max-h-full [&>iframe]:aspect-[4/3]"
+                />
 
-                  <h2 class="font-display font-bold text-lg uppercase mt-1">
-                    {l.title}
-                  </h2>
-                
+                <h2 class="font-display font-bold text-lg uppercase mt-1">
+                  {l.title}
+                </h2>
               </>
             ))
           }
