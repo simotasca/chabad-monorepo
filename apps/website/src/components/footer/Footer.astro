@@ -1,5 +1,6 @@
 ---
 import routes from "@/lib/shared/routes";
+import Link from "../navigation/Link.astro";
 
 interface Props {
   t: (key: string) => any;
@@ -52,11 +53,13 @@ const cities = ["Milano", "Roma", "Venezia", "Torino", "Trieste", "Firenze", "Bo
       <div class="flex lg:block gap-3 xs:gap-0 md:gap-3">
         <div class="lg:hidden w-5 md:w-5"></div>
         <ul class="flex flex-col gap-2 font-raleway text-white uppercase items-start translate-y-1">
-          {cities.map(city => (
-            <li>
-              <a href={routes.organizations({ city })}>{city}</a>
-            </li>
-          ))}
+          {
+            cities.map((city) => (
+              <li>
+                <a href={routes.organizations({ city })}>{city}</a>
+              </li>
+            ))
+          }
         </ul>
       </div>
     </div>
@@ -109,15 +112,14 @@ const cities = ["Milano", "Roma", "Venezia", "Torino", "Trieste", "Firenze", "Bo
   <div class="xs:flex sm:pt-3 max-sm:pt-6 pb-8 px-8 gap-8">
     <div
       class="grid max-sm:grid-cols-[auto_auto] sm:grid-cols-[auto_auto_auto] md:flex flex-wrap gap-y-4 gap-x-14 text-white text-xs font-montserrat uppercase">
-      <span>{t("navbar-menu.home")}</span>
-      <span>{t("navbar-menu.news")}</span>
-      <span>{t("navbar-menu.articles")}</span>
-      <span>{t("navbar-menu.video-live")}</span>
-      <span>{t("navbar-menu.organizations")}</span>
-      <span>{t("navbar-menu.events")}</span>
-      <span>{t("navbar-menu.about-us")}</span>
-      <span>{t("navbar-menu.resources")}</span>
-      <span>{t("navbar-menu.contributes")}</span>
+      <Link href={routes.home}><span>{t("navbar-menu.home")}</span></Link>
+      <Link href={routes.news}><span>{t("navbar-menu.news")}</span></Link>
+      <Link href={routes.articles}><span>{t("navbar-menu.articles")}</span></Link>
+      <Link href={routes.live}><span>{t("navbar-menu.video-live")}</span></Link>
+      <Link href={routes.organizations()}><span>{t("navbar-menu.organizations")}</span></Link>
+      <Link href={routes.events}><span>{t("navbar-menu.events")}</span></Link>
+      <Link href={routes.about}><span>{t("navbar-menu.about-us")}</span></Link>
+      <Link href={routes.contribute}><span>{t("navbar-menu.contributes")}</span></Link>
     </div>
     <button
       class="block bg-blue-950 border border-white text-white font-raleway uppercase font-semibold px-8 py-1 mx-auto xs:ml-auto xs:mr-0 mt-9 xs:mt-2 sm:mt-0 lg:mt-2">
