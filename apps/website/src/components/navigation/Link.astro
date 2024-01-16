@@ -5,7 +5,6 @@ type Props = astroHTML.JSX.AnchorHTMLAttributes & HrefSpec;
 
 const { href, lang, ...props } = Astro.props;
 let hrefOk = translateRoute({ href, lang }, Astro.url);
-console.log(Astro.url.toString(), href, lang, hrefOk);
 ---
 
 <a href={hrefOk} {...props}>

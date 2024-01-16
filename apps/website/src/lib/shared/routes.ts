@@ -2,6 +2,10 @@ export interface WithSlug {
   slug: string;
 }
 
+export interface WithUrl {
+  url: string;
+}
+
 const routes = {
   home: "/",
   articles: "/articles",
@@ -30,9 +34,9 @@ interface OrganizationsQueryParams {
 
 function organizationsQueryString(props?: OrganizationsQueryParams) {
   if (!props) return "";
-  let stringParams: string[] = [];
-  stringParams = Object.keys(props).reduce((p, k) => {
-    return !props[k] ? p : [p, props[k]];
-  }, stringParams);
-  return stringParams ? "?" + stringParams.join("=") : "";
+  const stringParams: string[] = [];
+  for (const key in props) {
+    stringParams.push(key + "=" + props[key]);
+  }
+  return stringParams.length > 0 ? "?" + stringParams.join("&") : "";
 }

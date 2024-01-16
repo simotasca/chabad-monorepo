@@ -6,32 +6,41 @@ import ShadowBox from "@/components/ui/ShadowBox.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
 import { errorResponse } from "@/lib/server/error-response";
 import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
+import supabase from "@/lib/server/supabase";
+import { throwError } from "@/lib/shared/error";
+import { organizationContactsMapper, organizationsMapper } from "@/lib/shared/supabase/organizations";
 import { getData } from "../_utils";
 
 if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
 }
 
-const { events } = await getData();
-
 const t = await getTranslations("pages/organizations", Astro.url);
 
-// const cityFilter = Astro.url.searchParams.get("city");
-// const query = supabase.from("organizations").select().limit(10);
-// if (cityFilter) {
-//   query.like("city", cityFilter);
-// }
+const { events } = await getData();
+
+const cityFilter = Astro.url.searchParams.get("city");
+const query = supabase.from("organizations").select("*, contacts(*)");
+if (cityFilter) query.like("city", cityFilter);
+const organizations = await query.then(({ error, data }) => {
+  if (error) {
+    throwError("PAGE Organizations", "Error fetching organizations-by-city:" + error.message);
+  }
+  return data?.map(organizationsMapper).map(organizationContactsMapper) || [];
+});
+
+let emptyResultMessage = "";
+if (cityFilter && organizations.length === 0) {
+  // TODO: tradurre
+  emptyResultMessage = "Nessuna organizzazione trovata a " + cityFilter + "...";
+}
 ---
 
-<PageLayout title="deo" description="demo">
+<PageLayout title="deo gratia" description="demo">
   <section slot="title">
-    <div
-      class="grid grid-cols-[1fr_auto_1fr] items-center pt-2 pb-[1px] sm:pt-4 sm:pb-3 px-4"
-    >
+    <div class="grid grid-cols-[1fr_auto_1fr] items-center pt-2 pb-[1px] sm:pt-4 sm:pb-3 px-4">
       <div class="h-0.5 bg-white mr-4 mb-2 ml-9 border-t"></div>
-      <h1
-        class="text-2xl sm:text-3xl uppercase font-messiri text-white font-bold text-center"
-      >
+      <h1 class="text-2xl sm:text-3xl uppercase font-messiri text-white font-bold text-center">
         {t("main-title")}
       </h1>
       <div class="h-0.5 bg-white ml-4 mb-2 mr-9 border-t"></div>
@@ -39,7 +48,7 @@ const t = await getTranslations("pages/organizations", Astro.url);
   </section>
 
   <section slot="content-1" class="flex flex-col gap-4">
-    <OrganizationSection />
+    {emptyResultMessage ? <p class="text-neutral-600">{emptyResultMessage}</p>:<OrganizationSection organizations={organizations} />}
   </section>
 
   <section slot="sidebar" class="md:flex flex-col gap-4">

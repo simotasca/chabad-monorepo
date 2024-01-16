@@ -112,6 +112,10 @@ PUNTI CHABAD
 
 PUNTI CHABAD [SLUG]
 
+- [ ] la ricerca è fatta in base alla città ma dovrebbe essere fatta in base alla provincia
+  - aggiungere il campo provincia su db
+  - modificare il filtro
+  - eventualmente nel footer mostrare tutte le provincie trovate con una distinct
 - [ ] controllare che i contatti siano collegati correttamente (st)
   - [ ] alcune cose non compaiono
 - [ ] collegare markdown per descrizione, con possibilità di mettere immagini (e video?) (st)
