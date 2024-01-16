@@ -18,7 +18,8 @@ const parshatImage = getParshatImage(parshat);
         <h2
           class="text-blue-950 font-medium font-display text-2xl md:text-xl lg:text-2xl leading-tight uppercase"
         >
-          {parshat}
+          <span class="md:hidden">Parshat:</span>
+          <span>{parshat}</span>
         </h2>
         <p class="italic font-raleway text-neutral-500 text-sm mb-1">
           {formatDate(today)}

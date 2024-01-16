@@ -3,6 +3,7 @@ import ShadowBox from "@/components/ui/ShadowBox.astro";
 import supabase from "@/lib/server/supabase";
 import { throwError } from "@/lib/shared/error";
 import { organizationsMapper } from "@/lib/shared/supabase/organizations";
+import Link from "@/components/navigation/Link.astro";
 const { associazione, città, immagine, testo, rabbini } = Astro.props;
 
 const query = supabase.from("organizations").select();

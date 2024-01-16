@@ -10,6 +10,7 @@ import supabase from "@/lib/server/supabase";
 import { articlesMapper } from "@/lib/shared/supabase/articles";
 import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
 import { errorResponse } from "@/lib/server/error-response";
+import Link from "@/components/navigation/Link.astro";
 
 if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
@@ -42,7 +43,7 @@ console.log("SOTTO-TITOLO:", t("main.subtitle"));
     >
       <div class="h-0.5 bg-white mr-4 mb-2 ml-9 border-t"></div>
       <h1
-        class="text-2xl sm:text-4xl uppercase font-messiri text-white font-bold text-center"
+        class="text-2xl sm:text-4xl md:text-2xl lg:text-4xl uppercase font-messiri text-white font-bold text-center"
       >
         {t("main-title")}
       </h1>
@@ -64,7 +65,7 @@ console.log("SOTTO-TITOLO:", t("main.subtitle"));
           <!-- TODO: SE getStrapiUrl da errore, l'errore risulta lanciato da questo file!!! -->
           {
             articles.map((a) => (
-              <a href={a.url}>
+              <Link href={a.url}>
                 <div>
                   <img
                     class="w-full aspect-video"
@@ -75,7 +76,7 @@ console.log("SOTTO-TITOLO:", t("main.subtitle"));
                     {a.title}
                   </p>
                 </div>
-              </a>
+              </Link>
             ))
           }
         </div>

@@ -7,6 +7,7 @@ import iconShare from "@/images/icons/share.svg";
 import { type WithUrl } from "@/lib/shared/routes";
 import { type OrganizationWithSplitContacts } from "@/lib/shared/supabase/organizations";
 import { Image } from "astro:assets";
+import Link from "@/components/navigation/Link.astro";
 
 export type Props = {
   organizations: (OrganizationWithSplitContacts & WithUrl)[];
@@ -23,7 +24,7 @@ const { organizations } = Astro.props;
 
 {
   organizations.map((o) => (
-    <a href={o.url}>
+    <Link href={o.url}>
       <ShadowBox>
         <section class="relative">
           <div class="flex gap-2 sm:gap-4 px-4 xs:pr-2 sm:p-4">
@@ -34,14 +35,18 @@ const { organizations } = Astro.props;
               <div class="gap-2 items-center">
                 <h2 class="text-2xl font-display mt-2 sm:mt-0 font-medium uppercase">{o.name}</h2>
 
-                <p class="text-blue-900  text-base lg:text-xl font-raleway font-bold uppercase leading-tight">
+                <p class="text-blue-900 text-base lg:text-xl font-raleway font-bold uppercase leading-tight">
                   {o.city}
                 </p>
               </div>
 
               <div class="sm:hidden h-2" />
 
-              <img class="sm:hidden w-full aspect-video" src={o.main_image} alt="main chabad organization image" />
+              <img
+                class="sm:hidden w-60 xs:w-80 sm:w-60 aspect-video xs:aspect-[7/3] sm:aspect-video object-cover"
+                src={o.main_image}
+                alt="main chabad organization image"
+              />
 
               <div class="sm:hidden h-2" />
 
@@ -92,20 +97,22 @@ const { organizations } = Astro.props;
               ))}
             </div>
           </div>
+          {o.social.length == 0 && <div class="h-8" />}
           <div class="absolute bg-blue-950 shadow-button mt-16 md:mt-0 px-3 pt-2 pb-1.5 -right-2 -bottom-2">
             <button class="flex gap-3">
-              <p class="items-center font-raleway text-sm md:text-base text-white uppercase">scopri</p>
-              <Tooltip>
-                <Image class="-translate-y-0.5 w-6 items-center" src={iconShare} alt="share icon" />
+              <p class="items-center font-raleway text-sm md:text-base text-white uppercase">
+                scopri
+              </p>
 
-                <div class="bg-black bg-opacity-70 text-white px-2" slot="tooltip">
-                  share
-                </div>
-              </Tooltip>
+              <Image
+                class="-translate-y-0.5 w-6 items-center"
+                src={iconShare}
+                alt="share icon"
+              />
             </button>
           </div>
         </section>
       </ShadowBox>
-    </a>
+    </Link>
   ))
 }

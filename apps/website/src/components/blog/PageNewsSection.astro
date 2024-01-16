@@ -2,6 +2,7 @@
 import ShadowBox from "@/components/ui/ShadowBox.astro";
 import Tooltip from "@/components/ui/Tooltip.astro";
 import type { Tables } from "@/db-types";
+import Link from "@/components/navigation/Link.astro";
 
 type News = Pick<
   Tables<"news">,
@@ -19,7 +20,7 @@ const { mainNews } = Astro.props;
 
 <ShadowBox>
   <div class="py-4 px-6 bg-slate-50">
-    <a href={mainNews.url}>
+    <Link href={mainNews.url}>
       <article class="p-0">
         <div class="flex gap-2">
           <p class="text-blue-800 text-sm font-raleway font-bold uppercase">
@@ -67,6 +68,6 @@ const { mainNews } = Astro.props;
           </div>
         </div>
       </article>
-    </a>
+    </Link>
   </div>
 </ShadowBox>

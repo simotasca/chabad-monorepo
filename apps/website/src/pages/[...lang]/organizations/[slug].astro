@@ -73,32 +73,30 @@ const { events } = await getData();
 
 <PageLayout title="demo" description="demo">
   <section slot="title">
-    <div class="h-6"></div>
+    <div class="h-2 xs:h-4 sm:h-6"></div>
   </section>
 
   <section slot="content-1">
     <ShadowBox class="mb-4">
       <div
-        class="grid grid-cols-2 w-full items-center bg-[#031B4D] border-b-white border-b-[1px] text-white pl-3 pt-3 pr-6"
+        class="grid grid-cols-2 w-full gap-4 items-center bg-[#031B4D] border-b-white border-b-[1px] text-white py-2 pl-3 pr-3 xs:pr-6"
       >
-        <div
-          class="flex justify-start items-center h-full -translate-y-px gap-3"
-        >
+        <div class="flex justify-start items-center h-full gap-1 xs:gap-3">
           <img
             src={organization.logo}
-            class="h-10 aspect-square object-cover"
+            class="h-8 aspect-square object-cover"
             alt="chabad logo icon"
           />
 
           <h2
-            class="font-display text-lg md:text-2xl uppercase leading-4 md:leading-6"
+            class="font-display text-sm xs:text-base sm:text-lg uppercase leading-3 xs:leading-4 sm:leading-4 md:leading-4 lg:leading-4"
           >
             {organization.name}
           </h2>
         </div>
 
         <div
-          class="flex gap-6 justify-end font-montserrat font-medium text-base"
+          class="flex gap-3 xs:gap-6 justify-end items-end font-montserrat font-medium text-sm sm:text-base"
         >
           {
             organization.website && (
@@ -114,12 +112,15 @@ const { events } = await getData();
         <img
           src={organization.main_image}
           alt="immagine a caso"
-          class="w-full object-cover aspect-[9/4]"
+          class="w-full h-full object-cover aspect-[4/3] xs:aspect-[9/4]"
         />
-        <div class="w-full h-full bg-blue-950 opacity-60"></div>
+        <div
+          class="w-full h-full bg-blue-950 opacity-60 aspect-[4/3] xs:aspect-[9/4]"
+        >
+        </div>
         <div class="z-10 flex flex-col justify-center gap-y-1">
           <h3
-            class="text-white font-display font-bold text-5xl uppercase text-center text mx-auto"
+            class="text-white font-display font-bold text-3xl xs:text-4xl sm:text-5xl uppercase text-center mx-2 max-md:mt-2"
             style="text-shadow: 0 0 5px rgb(37, 37, 37)"
           >
             {organization.name}
@@ -132,11 +133,11 @@ const { events } = await getData();
             {organization.slogan && organization.slogan}
           </p>
 
-          <div class="h-10"></div>
+          <div class="h-2 md:h-10"></div>
 
           {
             organization.link_donate && (
-              <button class="bg-blue-950 border border-white text-white font-raleway uppercase font-semibold px-16 py-2 mx-auto">
+              <button class="bg-blue-950 border border-white text-white font-raleway max-sm:text-sm uppercase font-semibold px-16 py-2 mx-auto">
                 <a href={organization.link_donate}>
                   <p>{t("contacts.donate")}</p>
                 </a>
@@ -211,10 +212,10 @@ const { events } = await getData();
 
       <div
         id="contacts"
-        class="bg-[#18315E] px-10 py-6 grid grid-cols-3 gap-4 text-white font-montserrat mt-6 scroll-m-10"
+        class="bg-[#18315E] px-10 py-6 grid sm:grid-cols-3 gap-4 text-white font-montserrat mt-6 scroll-m-10"
       >
         {
-          (contacts.length || social.length || iban.length) && (
+          (!!contacts.length || !!social.length || !!iban.length) && (
             <ul>
               <li class="text-lg uppercase font-semibold">
                 {t("contacts.title")}
@@ -228,7 +229,7 @@ const { events } = await getData();
                   </p>
                 ))}
               </li>
-              <li class="flex gap-3 items-center pt-2">
+              <li class="flex gap-2 sm:gap-3 items-center pt-2">
                 {social.map((s) => (
                   <a
                     href={s.value}
@@ -260,18 +261,18 @@ const { events } = await getData();
         </ul>
 
         {
-          (iban.length || organization.link_donate) && (
+          (!!iban.length || !!organization.link_donate) && (
             <ul>
               <li class="text-lg uppercase font-semibold">
                 {t("contacts.contribute")}
               </li>
-              {iban.length && (
+              {!!iban.length && (
                 <li class="flex items-center gap-1 text-sm">
                   <b>Iban:</b>
                   <span>{iban.map(({ value }) => value).join("; ")}</span>
                 </li>
               )}
-              {organization.link_donate && (
+              {!!organization.link_donate && (
                 <li class="flex items-center gap-1 text-sm">
                   <button class="bg-blue-950 border border-white text-white font-raleway uppercase font-semibold px-10 py-2 mt-2">
                     <a href={organization.link_donate}>

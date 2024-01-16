@@ -1,9 +1,10 @@
 ---
 import { Image } from "astro:assets";
+import Link from "@/components/navigation/Link.astro";
 const { associazione, nome, data, immagine, citta, url } = Astro.props;
 ---
 
-<a href={url}>
+<Link href={url}>
   <div class="stack place-items-center mx-5 aspect-square">
     <img
       src={immagine}
@@ -38,5 +39,5 @@ const { associazione, nome, data, immagine, citta, url } = Astro.props;
         {data}
       </p>
     </div>
-  </div></a
+  </div></
 >

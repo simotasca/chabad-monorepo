@@ -214,28 +214,28 @@ const t = await getTranslations("components/header", Astro.url);
         <ul
           class="flex justify-center gap-5 xs:gap-8 md:gap-6 lg:gap-8 text-sm lg:text-base text-blue-950 font-semibold font-montserrat translate-y-px uppercase">
           <li class="md:hidden">
-            <a href={routes.live} class="text-red-800">live</a>
+            <Link href={routes.live} class="text-red-800">live</Link>
           </li>
-          <li><a href={routes.news}>{t("navbar.news")}</a></li>
+          <li><Link href={routes.news}>{t("navbar.news")}</Link></li>
           <li><a href={routes.articles}>{t("navbar.articles")}</a></li>
           <li class="hidden sm:block">
-            <a href={routes.live}>{t("navbar.video-live")}</a>
+            <Link href={routes.live}>{t("navbar.video-live")}</Link>
           </li>
           <li class="hidden md:block">
-            <a href={routes.organizations()}>{t("navbar.organizations")}</a>
+            <Link href={routes.organizations()}>{t("navbar.organizations")}</Link>
           </li>
           <li class="hidden md:block">
-            <a href={routes.events}>{t("navbar.events")}</a>
+            <Link href={routes.events}>{t("navbar.events")}</Link>
           </li>
           <li class="hidden xs:block">
-            <a href={routes.about}>{t("navbar.about-us")}</a>
+            <Link href={routes.about}>{t("navbar.about-us")}</Link>
           </li>
 
           <!-- <li class="hidden md:block">
         <a href={routes.contacts}>{t("navbar.contacts")}</a>
       </li> -->
           <li class="hidden md:block">
-            <a href={routes.contribute}>{t("navbar.contributes")}</a>
+            <Link href={routes.contribute}>{t("navbar.contributes")}</Link>
           </li>
         </ul>
       </nav>

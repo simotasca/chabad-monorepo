@@ -9,13 +9,14 @@ import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
 import supabase from "@/lib/server/supabase";
 import { livesMapper } from "@/lib/shared/supabase/live";
 import { throwError } from "@/lib/shared/error";
+import Link from "@/components/navigation/Link.astro";
 import type { Tables } from "@/db-types";
 
 if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
 }
 
-const t = await getTranslations("pages/articles", Astro.url);
+const t = await getTranslations("pages/live", Astro.url);
 
 const videolives = await supabase
   .from("live_video")
@@ -32,7 +33,7 @@ const videolives = await supabase
 const mainVideoLive = videolives.pop()!;
 ---
 
-<PageLayout title="Live & Video" description="bla bla bla">
+<PageLayout title="Live & Video" description="All videos and lives">
   <section slot="title">
     <div
       class="grid grid-cols-[1fr_auto_1fr] items-center pt-2 pb-[1px] sm:pt-4 sm:pb-3 px-8"
@@ -50,30 +51,14 @@ const mainVideoLive = videolives.pop()!;
   <section slot="content-1" class="flex flex-col gap-4">
     <ShadowBox>
       <div class="p-6">
-        <a href={mainVideoLive.url}>
-          <div class="flex">
-            <h2 class="mb-4 font-display text-3xl font-bold">
-              {mainVideoLive.title}
-            </h2><div class="ml-auto mr-0">
-              <Tooltip>
-                <button>
-                  <img
-                    class="-translate-y-0.5"
-                    src="/images/icons/share.svg"
-                    alt="share icon"
-                  />
-                </button>
-                <div
-                  class="bg-black bg-opacity-70 text-white px-2"
-                  slot="tooltip"
-                >
-                  share
-                </div>
-              </Tooltip>
-            </div>
-          </div>
-        </a>
-        <div>{mainVideoLive.youtube_link}</div>
+        <h2 class="mb-4 font-display text-3xl font-bold">
+          {mainVideoLive.title}
+        </h2>
+
+        <div
+          set:html={mainVideoLive.youtube_link}
+          class="[&>iframe]:w-full [&>iframe]:h-full [&>iframe]:aspect-video"
+        />
       </div>
     </ShadowBox>
   </section>
@@ -82,17 +67,49 @@ const mainVideoLive = videolives.pop()!;
     <ShadowBox>
       <div class="p-6">
         <h2 class="mb-4">
-          <SectionTitle>Tutti e video e live</SectionTitle>
+          <SectionTitle>{t("all-videos-section.title")}</SectionTitle>
         </h2>
+
         <div
-          class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-6"
+          class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-6"
         >
           <!-- TODO: SE getStrapiUrl da errore, l'errore risulta lanciato da questo file!!! -->
+
           {
             videolives.map((l) => (
               <>
-                <div>{l.youtube_link}</div>
-                <h2>{l.title}</h2>
+                <Link href={l.url}>
+                  <div
+                    set:html={l.youtube_link}
+                    class="[&>iframe]:w-full [&>iframe]:max-w-full [&>iframe]:h-full [&>iframe]:max-h-full [&>iframe]:aspect-[4/3]"
+                  />
+
+                  <h2 class="font-display font-bold text-lg uppercase mt-1">
+                    {l.title}
+                  </h2>
+                </Link>
+              </>
+            ))
+          }
+        </div>
+        <div class="h-16"></div>
+        <a href="https://www.jimtv.it/"><h2 class="mb-4">JIM TV</h2></a>
+        <div
+          class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-6"
+        >
+          <!-- TODO: SE getStrapiUrl da errore, l'errore risulta lanciato da questo file!!! -->
+
+          {
+            videolives.map((l) => (
+              <>
+                <div
+                  set:html={l.youtube_link}
+                  class="[&>iframe]:w-full [&>iframe]:max-w-full [&>iframe]:h-full [&>iframe]:max-h-full [&>iframe]:aspect-[4/3]"
+                />
+
+                <h2 class="font-display font-bold text-lg uppercase mt-1">
+                  {l.title}
+                </h2>
               </>
             ))
           }
@@ -121,15 +138,44 @@ const mainVideoLive = videolives.pop()!;
           <SectionTitle>{t("all-videos-section.title")}</SectionTitle>
         </h2>
         <div
-          class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-6"
+          class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-6"
         >
           {
             videolives.map((l) => (
-              <>
+              <><Link href={l.url}>
                 <div>
-                  <div>{l.youtube_link}</div>
-                  <h2>{l.title}</h2>
-                </div>
+                  <div
+                    set:html={l.youtube_link}
+                    class="[&>iframe]:w-full [&>iframe]:max-w-full [&>iframe]:h-full [&>iframe]:max-h-full [&>iframe]:aspect-[4/3] "
+                  />
+                  <h2 class="text-lg font-bold font-display uppercase mt-1 ">
+                    {l.title}
+                  </h2>
+                </div></Link>
+              </>
+            ))
+          }
+        </div>
+        <div class="h-10"></div>
+        <h2 class="mb-4"><SectionTitle>JIM TV</SectionTitle></h2>
+        <div
+          class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-6"
+        >
+          <!-- TODO: SE getStrapiUrl da errore, l'errore risulta lanciato da questo file!!! -->
+
+          {
+            videolives.map((l) => (
+              <>
+                
+                  <div
+                    set:html={l.youtube_link}
+                    class="[&>iframe]:w-full [&>iframe]:max-w-full [&>iframe]:h-full [&>iframe]:max-h-full [&>iframe]:aspect-[4/3]"
+                  />
+
+                  <h2 class="font-display font-bold text-lg uppercase mt-1">
+                    {l.title}
+                  </h2>
+                
               </>
             ))
           }

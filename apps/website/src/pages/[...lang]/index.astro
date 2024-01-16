@@ -69,10 +69,10 @@ const imgVideo = "/images/video-prova.jpg";
     <ShadowBox class="contents md:block">
       <div class="py-1 md:p-4 bg-slate-50">
         <h1 class="pb-2">
-          <a href="https://www.chabad.org/">
+          <Link href={routes.worldnews}>
             <SectionTitle icon="/images/icons/blue-icons/globe-icon.svg">
               {t("main.title-scraped")}
-            </SectionTitle></a
+            </SectionTitle></Link
           >
         </h1>
 
@@ -94,10 +94,10 @@ const imgVideo = "/images/video-prova.jpg";
     <ShadowBox class="contents md:block">
       <div class="py-1 md:p-4">
         <h1 class="pb-2">
-          <a href={routes.articles}>
+          <Link href={routes.articles}>
             <SectionTitle icon="/images/icons/pencil-icon.svg">
               {t("main.title-articles")}
-            </SectionTitle></a
+            </SectionTitle></Link
           >
         </h1>
 
@@ -114,10 +114,12 @@ const imgVideo = "/images/video-prova.jpg";
   <section slot="sidebar" class="flex flex-col gap-4">
     <!-- VIDEOS -->
     <ShadowBox class="contents md:block">
-      <SidebarTitle
-        title={t("sidebar.title-live")}
-        img="/images/icons/video.svg"
-      />
+      <Link href={routes.live}>
+        <SidebarTitle
+          title={t("sidebar.title-live")}
+          img="/images/icons/video.svg"
+        />
+      </Link>
       <SidebarContainer>
         <SidebarVideo />
       </SidebarContainer>
@@ -126,8 +128,11 @@ const imgVideo = "/images/video-prova.jpg";
     <!-- TODO: immettere video di categoria differente (abilitare il filtro categorie per i videolives) -->
 
     <!-- JIM TV -->
+
     <ShadowBox class="contents md:block">
-      <SidebarTitle title="Jim TV" img="/images/icons/maghen-david.svg" />
+      <a href="https://www.jimtv.it/">
+        <SidebarTitle title="Jim TV" img="/images/icons/maghen-david.svg" />
+      </a>
       <SidebarContainer>
         <SidebarVideo />
       </SidebarContainer>
@@ -170,7 +175,7 @@ const imgVideo = "/images/video-prova.jpg";
             {
               organizations1.map((o) => (
                 <CarouselItem>
-                  <a href={o.url}>
+                  <Link href={o.url}>
                     <div class="w-40 md:w-60 mr-5 overflow-hidden">
                       <div class="relative aspect-[4/3] border border-black bg-slate-200">
                         {o["main_image"] && (
@@ -184,7 +189,7 @@ const imgVideo = "/images/video-prova.jpg";
                         {o.name}
                       </h3>
                     </div>
-                  </a>
+                  </Link>
                 </CarouselItem>
               ))
             }
@@ -195,7 +200,7 @@ const imgVideo = "/images/video-prova.jpg";
             {
               organizations2.map((o) => (
                 <CarouselItem>
-                  <a href={o.url}>
+                  <Link href={o.url}>
                     <div class="w-40 md:w-60 mr-5 overflow-hidden">
                       <div class="relative aspect-[4/3] border border-black bg-slate-200">
                         {o["main_image"] && (
@@ -209,7 +214,7 @@ const imgVideo = "/images/video-prova.jpg";
                         {o.name}
                       </h3>
                     </div>
-                  </a>
+                  </Link>
                 </CarouselItem>
               ))
             }
