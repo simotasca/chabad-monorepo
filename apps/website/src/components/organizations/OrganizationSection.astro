@@ -1,34 +1,19 @@
 ---
 import ShadowBox from "@/components/ui/ShadowBox.astro";
 import Tooltip from "@/components/ui/Tooltip.astro";
-import { throwError } from "@/lib/shared/error";
-import supabase from "@/lib/server/supabase";
-import {
-  organizationsMapper,
-  organizationContactsMapper,
-} from "@/lib/shared/supabase/organizations";
-import { Image } from "astro:assets";
-import iconInstagram from "@/images/icons/instagram.svg";
 import iconFacebook from "@/images/icons/blue-icons/facebook.svg";
+import iconInstagram from "@/images/icons/instagram.svg";
 import iconShare from "@/images/icons/share.svg";
+import { type WithUrl } from "@/lib/shared/routes";
+import { type OrganizationWithSplitContacts } from "@/lib/shared/supabase/organizations";
+import { Image } from "astro:assets";
 import Link from "@/components/navigation/Link.astro";
 
-// TODO :collegare i contatti alle organizzazioni
+export type Props = {
+  organizations: (OrganizationWithSplitContacts & WithUrl)[];
+};
 
-const organizations = await supabase
-  .from("organizations")
-  .select("*, contacts(*)")
-  .then(({ error, data }) => {
-    if (error) {
-      throwError(
-        "PAGE Organizations",
-        "Error fetching organizations-by-city:" + error.message
-      );
-    }
-    return data?.map(organizationsMapper).map(organizationContactsMapper) || [];
-  });
-
-console.log(organizations.find((o) => o.id === 3));
+const { organizations } = Astro.props;
 ---
 
 <style>
@@ -44,17 +29,11 @@ console.log(organizations.find((o) => o.id === 3));
         <section class="relative">
           <div class="flex gap-2 sm:gap-4 px-4 xs:pr-2 sm:p-4">
             {o.main_image && (
-              <img
-                class="hidden sm:block w-60 lg:w-80 aspect-video my-2"
-                src={o.main_image}
-                alt="main article image"
-              />
+              <img class="hidden sm:block w-60 lg:w-80 aspect-video my-2" src={o.main_image} alt="main article image" />
             )}
             <div class="lg:flex flex-col gap-2 py-1">
               <div class="gap-2 items-center">
-                <h2 class="text-2xl font-display mt-2 sm:mt-0 font-medium uppercase">
-                  {o.name}
-                </h2>
+                <h2 class="text-2xl font-display mt-2 sm:mt-0 font-medium uppercase">{o.name}</h2>
 
                 <p class="text-blue-900 text-base lg:text-xl font-raleway font-bold uppercase leading-tight">
                   {o.city}
@@ -72,9 +51,7 @@ console.log(organizations.find((o) => o.id === 3));
               <div class="sm:hidden h-2" />
 
               <div class="mb-2 sm:mb-0">
-                <h3 class="text-black font-display font-mediumg uppercase text-lg">
-                  Contatti
-                </h3>
+                <h3 class="text-black font-display font-mediumg uppercase text-lg">Contatti</h3>
                 <ul class="text-black font-raleway text-sm leading-tight">
                   <li class="mb-2">{o.address}</li>
                   {o.contacts.map(({ key, value }) => (
@@ -91,14 +68,11 @@ console.log(organizations.find((o) => o.id === 3));
                     <a
                       href={s.value}
                       target="_blank"
-                      class="[&_img]:h-8 [&_img]:w-8 [&_img]:object-cover [&_img]:object-center"
-                    >
+                      class="[&_img]:h-8 [&_img]:w-8 [&_img]:object-cover [&_img]:object-center">
                       {
                         {
                           facebook: <Image src={iconFacebook} alt="facebook" />,
-                          instagram: (
-                            <Image src={iconInstagram} alt="instagram" />
-                          ),
+                          instagram: <Image src={iconInstagram} alt="instagram" />,
                         }[s.key]
                       }
                     </a>
@@ -112,8 +86,7 @@ console.log(organizations.find((o) => o.id === 3));
                 <a
                   href={s.value}
                   target="_blank"
-                  class="[&_img]:h-8 [&_img]:w-8 [&_img]:object-cover [&_img]:object-center"
-                >
+                  class="[&_img]:h-8 [&_img]:w-8 [&_img]:object-cover [&_img]:object-center">
                   {
                     {
                       facebook: <Image src={iconFacebook} alt="facebook" />,
