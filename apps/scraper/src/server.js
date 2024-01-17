@@ -3,8 +3,8 @@ import express from "express";
 import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
 import { scrapeAll } from "./scrape-all.js";
-import { scrape as scrapeAish } from "./strategies/aish.js";
-import { scrape as scrapeChabad } from "./strategies/chabad.js";
+import { scrape as scrapeAish } from "./scraping/aish.js";
+import { scrape as scrapeChabad } from "./scraping/chabad.js";
 
 import dotenv from "dotenv";
 dotenv.config();

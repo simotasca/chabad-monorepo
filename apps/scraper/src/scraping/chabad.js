@@ -10,12 +10,9 @@ import StealthPlugin from "puppeteer-extra-plugin-stealth";
 puppeteer.use(StealthPlugin());
 
 const CHABAD_HOMEPAGE_URL = "https://it.chabad.org/";
-const DB_SOURCE = "it-chabad";
+
 const MAIN_ARTICLES_SELECTOR = "#promo_scroller_container .item";
 const REMAINING_ARTICLES_SELECTOR = ".home_remaining_promo_container .item";
-
-const COLLIVE_HOMEPAGE_URL = "https://collive.com/";
-const AISH_HOMEPAGE_URL = "https://aish.com/";
 
 export async function scrape() {
   const scrapedArticles = [];
