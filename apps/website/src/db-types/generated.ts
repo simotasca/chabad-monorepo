@@ -219,8 +219,8 @@ export interface Database {
           created_at: string
           date: string
           id: number
+          live_now: boolean
           responsible: number | null
-          slug: string
           title: string
           youtube_link: string
         }
@@ -229,8 +229,8 @@ export interface Database {
           created_at?: string
           date?: string
           id?: number
+          live_now?: boolean
           responsible?: number | null
-          slug: string
           title: string
           youtube_link: string
         }
@@ -239,8 +239,8 @@ export interface Database {
           created_at?: string
           date?: string
           id?: number
+          live_now?: boolean
           responsible?: number | null
-          slug?: string
           title?: string
           youtube_link?: string
         }
@@ -441,6 +441,19 @@ export interface Database {
           o_name: string
         }[]
       }
+      recent_scraped: {
+        Args: {
+          num: number
+        }
+        Returns: {
+          id: number
+          title: string
+          category: Database["public"]["Enums"]["scraper_website"]
+          created_at: string
+          url: string
+          image: string
+        }[]
+      }
     }
     Enums: {
       article_category: "torah" | "family"
@@ -455,7 +468,7 @@ export interface Database {
         | "twitter"
         | "linkedin"
       news_category: "mazaltov" | "comunità" | "politica" | "società"
-      scraper_website: "it-chabad"
+      scraper_website: "chabad" | "aish" | "collive"
       video_live_category: "video" | "live"
     }
     CompositeTypes: {
