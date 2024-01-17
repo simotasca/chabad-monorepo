@@ -1,8 +1,12 @@
 ---
 import ShadowBox from "@/components/ui/ShadowBox.astro";
 import Tooltip from "@/components/ui/Tooltip.astro";
-import iconFacebook from "@/images/icons/blue-icons/facebook.svg";
-import iconInstagram from "@/images/icons/instagram.svg";
+import logoFacebook from "@/images/icons/blue-icons/facebook.svg";
+import logoInstagram from "@/images/icons/instagram.svg";
+import logoYoutube from "@/images/icons/youtube.svg";
+import logoTwitter from "@/images/icons/blue-icons/twitter.svg";
+import logoLinkedin from "@/images/icons/blue-icons/linkedin.png";
+import logoTiktok from "@/images/icons/blue-icons/tiktok.svg";
 import iconShare from "@/images/icons/share.svg";
 import { type WithUrl } from "@/lib/shared/routes";
 import { type OrganizationWithSplitContacts } from "@/lib/shared/supabase/organizations";
@@ -68,11 +72,15 @@ const { organizations } = Astro.props;
                     <a
                       href={s.value}
                       target="_blank"
-                      class="[&_img]:h-8 [&_img]:w-8 [&_img]:object-cover [&_img]:object-center">
+                      class="[&_img]:h-6 [&_img]:w-6 [&_img]:object-cover [&_img]:object-center">
                       {
                         {
-                          facebook: <Image src={iconFacebook} alt="facebook" />,
-                          instagram: <Image src={iconInstagram} alt="instagram" />,
+                          facebook: <Image src={logoFacebook} alt="facebook" />,
+                          instagram: <Image src={logoInstagram} alt="instagram" />,
+                          youtube: <Image src={logoYoutube} alt="youtube"></Image>,
+                          twitter: <Image src={logoTwitter} alt="twitter"></Image>,
+                          linkedin: <Image src={logoLinkedin} alt="linkedin"></Image>,
+                          tiktok: <Image src={logoTiktok} alt="tiktok"></Image>
                         }[s.key]
                       }
                     </a>
@@ -81,16 +89,20 @@ const { organizations } = Astro.props;
               )}
             </div>
 
-            <div class="hidden xs:flex flex-col max-sm:my-auto mr-0 ml-auto max-sm:w-24">
+            <div class="hidden xs:flex flex-col gap-1 max-sm:my-auto max-sm:-mr-16 sm:mr-0 ml-auto max-sm:w-24">
               {o.social.map((s) => (
                 <a
                   href={s.value}
                   target="_blank"
-                  class="[&_img]:h-8 [&_img]:w-8 [&_img]:object-cover [&_img]:object-center">
+                  class="[&_img]:h-7 [&_img]:w-7 [&_img]:object-cover [&_img]:object-center">
                   {
                     {
-                      facebook: <Image src={iconFacebook} alt="facebook" />,
-                      instagram: <Image src={iconInstagram} alt="instagram" />,
+                      facebook:<Image src={logoFacebook} alt="facebook" />,
+                      instagram: <Image src={logoInstagram} alt="instagram" />,
+                      youtube:<Image src={logoYoutube} alt="youtube"></Image>,
+                      twitter:<Image src={logoTwitter} alt="twitter"></Image>,
+                      linkedin:<Image src={logoLinkedin} alt="linkedin"></Image>,
+                      tiktok:<Image src={logoTiktok} alt="tiktok"></Image>
                     }[s.key]
                   }
                 </a>

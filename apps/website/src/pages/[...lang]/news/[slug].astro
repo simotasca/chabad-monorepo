@@ -17,10 +17,11 @@ import { errorResponse } from "@/lib/server/error-response";
 import { Image } from "astro:assets";
 import logoText from "@/images/logo/chabad-text-black.svg";
 import logoChabad from "@/images/logo/logo-black.svg";
-import iconShare from "@/images/icons/share.svg";
+import iconShare from "@/images/icons/share-black.svg";
 import routes from "@/lib/shared/routes";
 import EventsSection from "@/components/events/EventsSection.astro";
 import { getData } from "../_utils";
+import Link from "@/components/navigation/Link.astro";
 // import * as runtime from 'react/jsx-dev-runtime' // Development.
 
 if (!checkLangParam(Astro)) {
@@ -113,9 +114,7 @@ const Content = (await run(code, runtime)).default || "div";
               </p>
             </div>
             <div class="flex gap-1 justify-end items-center">
-              <span class="text-xs text-blue-950 font-medium font-raleway"
-                >share</span
-              >
+             
               <Tooltip>
                 <Image class="sm:w-8" src={iconShare} alt="share icon" />
                 <div
@@ -127,7 +126,7 @@ const Content = (await run(code, runtime)).default || "div";
               </Tooltip>
             </div>
           </div>
-          <div class="font-display font-bold text-3xl pb-4 -mt-1">
+          <div class="font-display font-bold text-3xl pb-6 -mt-1">
             <h1 class="leading-4">{news.title}</h1>
           </div>
 
@@ -153,8 +152,8 @@ const Content = (await run(code, runtime)).default || "div";
       <ShadowBox>
         <div class="p-6">
           <h1 class="mb-4">
-            <a href={routes.news}>
-              <SectionTitle>Tutte le notizie</SectionTitle></a
+            <Link href={routes.news}>
+              <SectionTitle>Tutte le notizie</SectionTitle></Link
             >
           </h1>
           <div
@@ -163,16 +162,16 @@ const Content = (await run(code, runtime)).default || "div";
             <!-- TODO: SE getStrapiUrl da errore, l'errore risulta lanciato da questo file!!! -->
             {
               allNews.map((n) => (
-                <div>
+                <Link href={n.url}><div>
                   <img
-                    class="w-full aspect-[8/3]"
+                    class="w-full aspect-[2/1]"
                     src={n.image}
                     alt="main article image"
                   />
                   <p class="text-lg font-display font-medium mt-2 leading-tight">
                     {n.title}
                   </p>
-                </div>
+                </div></Link>
               ))
             }
           </div>

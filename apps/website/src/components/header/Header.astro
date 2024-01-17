@@ -218,13 +218,13 @@ const t = await getTranslations("components/header", Astro.url);
           </li>
           <li><Link href={routes.news}>{t("navbar.news")}</Link></li>
           <li><a href={routes.articles}>{t("navbar.articles")}</a></li>
-          <li class="hidden sm:block">
+          <li class="hidden md:block">
             <Link href={routes.live}>{t("navbar.video-live")}</Link>
           </li>
-          <li class="hidden md:block">
+          <li class="hidden sm:block">
             <Link href={routes.organizations()}>{t("navbar.organizations")}</Link>
           </li>
-          <li class="hidden md:block">
+          <li class="hidden sm:block">
             <Link href={routes.events}>{t("navbar.events")}</Link>
           </li>
           <li class="hidden xs:block">

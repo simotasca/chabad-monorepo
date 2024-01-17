@@ -18,7 +18,7 @@ import { formatDate } from "@/lib/shared/calendar";
 import { Image } from "astro:assets";
 import logoText from "@/images/logo/chabad-text-black.svg";
 import logoChabad from "@/images/logo/logo-black.svg";
-import iconShare from "@/images/icons/share.svg";
+import iconShare from "@/images/icons/share-black.svg";
 import routes from "@/lib/shared/routes";
 import Link from "@/components/navigation/Link.astro";
 // import * as runtime from 'react/jsx-dev-runtime' // Development.
@@ -127,7 +127,7 @@ const articles = await supabase
               </Tooltip>
             </div>
           </div>
-          <div class="font-display font-bold text-3xl sm:text-4xl pb-4 -mt-1">
+          <div class="font-display font-bold text-3xl sm:text-4xl pb-6 -mt-1">
             <h1 class="leading-8">{article.title}</h1>
           </div>
 
@@ -163,7 +163,7 @@ const articles = await supabase
                   <Link href={a.url}>
                     <div>
                       <img
-                        class="w-full aspect-video"
+                        class="w-full aspect-[2/1]"
                         src={a.image}
                         alt="main article image"
                       />

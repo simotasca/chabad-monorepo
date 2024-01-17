@@ -11,6 +11,10 @@ import { eventsWithOrganizationsMapper } from "@/lib/shared/supabase/events";
 import { splitContacts } from "@/lib/shared/supabase/contacts";
 import logoFacebook from "@/images/icons/blue-icons/facebook.svg";
 import logoInstagram from "@/images/icons/instagram.svg";
+import logoYoutube from "@/images/icons/youtube.svg";
+import logoTwitter from "@/images/icons/blue-icons/twitter.svg";
+import logoLinkedin from "@/images/icons/blue-icons/linkedin.png";
+import logoTiktok from "@/images/icons/blue-icons/tiktok.svg";
 import { Image } from "astro:assets";
 
 if (!checkLangParam(Astro)) {
@@ -50,13 +54,13 @@ const { contacts, social } = splitContacts(event.contacts);
 
   <section slot="content-1">
     <ShadowBox class="relative flex flex-col gap-y-1 p-4">
-      <div>
-        <p class="text-blue-800 text-sm font-raleway font-bold uppercase">
+      <div class="text-blue-800 text-sm font-raleway font-bold">
+        <span class="uppercase">
           {event.organizations.map((o) => o.name).join(", ")}
-        </p>
-        <p class="text-xl font-bold text-blue-800 font-raleway mb-2 uppercase">
+        </span><span>-</span>
+        <span class=" mb-2">
           {event.city}
-        </p>
+        </span>
       </div>
 
       <h2 class="text-black text-3xl font-display font-semibold leading-tight">
@@ -90,14 +94,25 @@ const { contacts, social } = splitContacts(event.contacts);
           </h3>
 
           <ul class="text-black font-raleway text-sm">
-            <li>{contacts}</li>
+            {contacts.map(({ key, value }) => (
+                    <li>
+                      <b>{key}: </b>
+                      <span>{value}</span>
+                    </li>
+                  ))}
           </ul>
+          
+          
           {social.map((s) => (
             <a href={s.value}>
               {
                 {
-                  facebook: <Image src={logoFacebook} alt="facebook" />,
-                  instagram: <Image src={logoInstagram} alt="instagram" />,
+                  facebook: <Image class="w-6" src={logoFacebook} alt="facebook" />,
+                  instagram: <Image class="w-6" src={logoInstagram} alt="instagram" />,
+                  youtube: <Image class="w-6" src={logoYoutube} alt="youtube"></Image>,
+                  twitter: <Image class="w-6" src={logoTwitter} alt="twitter"></Image>,
+                  linkedin: <Image class="w-6" src={logoLinkedin} alt="linkedin"></Image>,
+                  tiktok: <Image class="w-6" src={logoTiktok} alt="tiktok"></Image>
                 }[s.key]
               }
             </a>

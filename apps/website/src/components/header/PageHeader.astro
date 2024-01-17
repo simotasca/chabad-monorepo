@@ -36,7 +36,7 @@ const t = await getTranslations("components/header", Astro.url);
         }
       </div>
       <div
-        class="sm:hidden flex items-center gap-1 text-sm sm:text-base text-white font-montserrat font-medium max-xs:translate-y-[4.5px] xs:translate-y-[5px]">
+        class="sm:hidden flex items-center gap-1 text-sm lg:text-base text-white font-montserrat font-medium max-xs:translate-y-[4.5px] xs:translate-y-[5px]">
         <LangSelect class="bg-transparent" />
       </div>
       <div class="flex items-center gap-4 xs:gap-6 justify-end pr-2">
@@ -89,13 +89,13 @@ const t = await getTranslations("components/header", Astro.url);
       </li>
       <li><Link href={routes.news}>{t("navbar.news")}</Link></li>
       <li><Link href={routes.articles}>{t("navbar.articles")}</Link></li>
-      <li class="hidden sm:block">
+      <li class="hidden md:block">
         <Link href={routes.live}>{t("navbar.video-live")}</Link>
       </li>
-      <li class="hidden md:block">
+      <li class="hidden sm:block">
         <Link href={routes.organizations()}>{t("navbar.organizations")}</Link>
       </li>
-      <li class="hidden md:block">
+      <li class="hidden sm:block">
         <Link href={routes.events}>{t("navbar.events")}</Link>
       </li>
       <li class="hidden xs:block">
