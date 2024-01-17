@@ -6,6 +6,9 @@ import {
   eventsWithOrganizationsMapper,
 } from "@/lib/shared/supabase/events";
 import { organizationsMapper } from "@/lib/shared/supabase/organizations";
+import { newsMapper } from "@/lib/shared/supabase/news";
+
+
 
 const formatter = new Intl.DateTimeFormat("en", {
   day: "2-digit",
@@ -59,9 +62,19 @@ export async function getData() {
         return data?.map(articlesMapper) || [];
       }),
 
+      news: await supabase
+      .from("news")
+      .select("title, date, content, category, image, preview, slug")
+      .order("date", { ascending: false })
+      .then(({ data, error }) => {
+        if (error)
+          throwError("Page Index", "Error fetching articles:" + error.message);
+        return data?.map(newsMapper) || [];
+      }),
+
     scraped: await supabase
       .from("scraped")
-      .select("title, url, image, created_at")
+      .select("title, url, image, created_at, category")
       .limit(7)
       .then(({ data, error }) => {
         if (error)
@@ -71,12 +84,10 @@ export async function getData() {
           );
         return (
           data?.map((s) => ({
-            ...s,
-            preview:
-              "La preview dovrebbe essere opzionale perchè gli articoli esterni non ce l'hanno...",
-            category: "chabad",
-            image: s.image || "https://picsum.photos/1200/800?c=12",
+            ...s, 
+            image: s.image || "/images/world-nes.jpg",
             date: s.created_at,
+            
           })) || []
         );
       }),

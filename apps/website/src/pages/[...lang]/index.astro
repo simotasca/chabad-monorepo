@@ -27,7 +27,7 @@ let metrics = Date.now();
 
 console.log("started at ", metrics);
 
-const { articles, scraped, organizations1, organizations2, events } =
+const { articles, news, scraped, organizations1, organizations2, events } =
   await getData();
 
 console.log("get data", Date.now() - metrics, "ms");
@@ -57,8 +57,8 @@ const imgVideo = "/images/video-prova.jpg";
         {
           articles.length > 0 && (
             <ArticleSection
-              mainArticle={articles[0]}
-              articles={articles.slice(1)}
+              mainArticle={news[0]}
+              articles={news.slice(1)}
               reverse={true}
             />
           )
