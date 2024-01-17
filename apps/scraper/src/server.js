@@ -28,7 +28,12 @@ export function server() {
   });
 
   app.all("/seed", authMiddleware, (_, res) => {
-    scrapeAll((result) => res.send(result ? "ok" : "No new article found"));
+    scrapeAll()
+      .then(() => res.send("Ok"))
+      .catch((e) => {
+        console.error(e.message)
+        res.send("Error scraping articles");
+      });
   });
 
   return app;

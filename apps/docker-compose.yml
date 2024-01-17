@@ -37,6 +37,7 @@ services:
       - CRON_EXPRESSION=${SCRAPER_CRON_EXPR}
       - SUPABASE_HOST=http://kong:8000
       - SUPABASE_SERVICE_ROLE_KEY=${SUPA_SERVICE_ROLE_KEY}
+      - PUPPETEER_DISABLE_HEADLESS_WARNING=true
     volumes:
       - ./scraper/src:/usr/src/app/src
       - ./scraper/index.html:/usr/src/app/index.html

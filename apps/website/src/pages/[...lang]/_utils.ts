@@ -1,11 +1,10 @@
-import { articlesMapper } from "@/lib/shared/supabase/articles";
-import { throwError } from "@/lib/shared/error";
 import supabase from "@/lib/server/supabase";
+import { throwError } from "@/lib/shared/error";
+import { articlesMapper } from "@/lib/shared/supabase/articles";
 import {
   eventsMapper,
   eventsWithOrganizationsMapper,
 } from "@/lib/shared/supabase/events";
-import { livesMapper } from "@/lib/shared/supabase/live";
 import { organizationsMapper } from "@/lib/shared/supabase/organizations";
 import { newsMapper } from "@/lib/shared/supabase/news";
 

@@ -1,12 +1,9 @@
 ---
-import SectionTitle from "@/components/ui/SectionTitle.astro";
-import ShadowBox from "@/components/ui/ShadowBox.astro";
 import Tooltip from "@/components/ui/Tooltip.astro";
+import iconShare from "@/images/icons/share.svg";
 import { formatDate } from "@/lib/shared/calendar.js";
-import type { Tables } from "@/db-types";
 import { articleLinkTarget } from "@/lib/shared/supabase/articles";
 import { Image } from "astro:assets";
-import iconShare from "@/images/icons/share.svg";
 import Link from "../navigation/Link.astro";
 
 type Article = {
