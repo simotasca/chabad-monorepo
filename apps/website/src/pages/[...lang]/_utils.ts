@@ -7,8 +7,7 @@ import {
 } from "@/lib/shared/supabase/events";
 import { organizationsMapper } from "@/lib/shared/supabase/organizations";
 import { newsMapper } from "@/lib/shared/supabase/news";
-
-
+import { shuffle } from "@/lib/shared/array";
 
 const formatter = new Intl.DateTimeFormat("en", {
   day: "2-digit",
@@ -62,7 +61,7 @@ export async function getData() {
         return data?.map(articlesMapper) || [];
       }),
 
-      news: await supabase
+    news: await supabase
       .from("news")
       .select("title, date, content, category, image, preview, slug")
       .order("date", { ascending: false })
@@ -72,24 +71,45 @@ export async function getData() {
         return data?.map(newsMapper) || [];
       }),
 
+    // scraped: await supabase
+    //   .from("scraped")
+    //   .select("title, url, image, created_at, category")
+    //   .order("created_at", {ascending: false})
+    //   .limit(7)
+
+    //   .then(({ data, error }) => {
+    //     if (error)
+    //       throwError(
+    //         "Page Index",
+    //         "Error fetching scraped articles:" + error.message
+    //       );
+    //     return (
+    //       data?.map((s) => ({
+    //         ...s,
+    //         image: s.image || "/images/world-nes.jpg",
+    //         date: s.created_at,
+
+    //       })) || []
+    //     );
+    //   }),
+
     scraped: await supabase
-      .from("scraped")
-      .select("title, url, image, created_at, category")
-      .limit(7)
+      .rpc("recent_scraped", { num: 5 })
+      .select()
       .then(({ data, error }) => {
         if (error)
-          throwError(
-            "Page Index",
-            "Error fetching scraped articles:" + error.message
-          );
-        return (
+          throwError("Page Index", "Error fetching articles:" + error.message);
+        let result = shuffle(
           data?.map((s) => ({
-            ...s, 
+            ...s,
             image: s.image || "/images/world-nes.jpg",
             date: s.created_at,
-            
           })) || []
         );
+        const withImageIdx = result.findIndex(s => s.image != null); 
+        const withImage = result.splice(withImageIdx == -1 ? 0 : withImageIdx, 1)[0];
+        result.unshift(withImage);
+        return result;
       }),
   };
 }
