@@ -1,9 +1,11 @@
-import express from "express";
 import bodyParser from "body-parser";
+import express from "express";
 import { dirname, resolve } from "path";
-import { scrape as scrapeChabad } from "./strategies/chabad.js";
-import { scrapeAll } from "./scrape-all.js";
 import { fileURLToPath } from "url";
+import { scrapeAll } from "./scrape-all.js";
+import { scrape as scrapeAish } from "./strategies/aish.js";
+import { scrape as scrapeChabad } from "./strategies/chabad.js";
+
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -23,8 +25,12 @@ export function server() {
     res.sendFile(resolve(__dirname, "../index.html"));
   });
 
-  app.all("/chabad", authMiddleware, (_, res) => {
+  app.all("/chabad", (_, res) => {
     scrapeChabad().then((data) => res.json(data));
+  });
+
+  app.all("/aish", (_, res) => {
+    scrapeAish().then((data) => res.json(data));
   });
 
   app.all("/seed", authMiddleware, (_, res) => {
