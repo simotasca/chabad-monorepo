@@ -164,7 +164,7 @@ POPOLAMENTI (eh)
 -[ ] Popolare dati e foto delle organizzazioni e produrre markdown
 -[ ] Fare degli articoli di partenza con markdown e scrivere qualche notizia
 -[ ] Segnare i responsibles delle varie organizzazioni
- 
+-[ ] Cambiatre il campo telephone in phone dappertutto 
 
 # POST RILASCIO
 
