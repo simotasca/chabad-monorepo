@@ -80,7 +80,7 @@ HEADER (MOBILE)
 
 - [x] Dropdown delle lingue non funziona (st)
   - [x] Sistemare ovunque c'è un elenco di lingue con il config
-- [ ] Manca il cursor pointer sull'hamburger (eh)
+- [ ] Sul menu del cellulare non funziona l'orario di shabbat di shabbat
 - [x] Scegliere con cognizione le voci che compaiono/scompaiono sulla navbar mentre si ridimensiona (eh)
 - [ ] sistemare la lente piccola in PageHeader
 
