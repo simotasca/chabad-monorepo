@@ -158,6 +158,14 @@ SCRAPER (st)
 - [ ] Collegare il titolo della sezione della home alla pagina
 - [ ] Non si vede l'immagine principale, in seguito alle modifiche fatte (new)
 
+POPOLAMENTI (eh)
+
+-[ ] Mettere città giuste per il filtro delle organizzazioni (disegnare il filtro nella pagina?)
+-[ ] Popolare dati e foto delle organizzazioni e produrre markdown
+-[ ] Fare degli articoli di partenza con markdown e scrivere qualche notizia
+-[ ] Segnare i responsibles delle varie organizzazioni
+ 
+
 # POST RILASCIO
 
 - [ ] Non va tasto ricerca, se si vuol fare (st)
