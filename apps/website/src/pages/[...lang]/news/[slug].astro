@@ -108,7 +108,7 @@ const Content = (await run(code, runtime)).default || "div";
           <div class="flex">
             <div class="ml-0 mr-auto">
               <p
-                class="font-raleway uppercase text-blue-950 font-bold items-end"
+                class="font-raleway max-sm:text-sm uppercase text-blue-950 font-bold items-end"
               >
                 {news.category}
               </p>
@@ -126,8 +126,8 @@ const Content = (await run(code, runtime)).default || "div";
               </Tooltip>
             </div>
           </div>
-          <div class="font-display font-bold text-3xl pb-6 -mt-1">
-            <h1 class="leading-4">{news.title}</h1>
+          <div class="font-display font-bold text-2xl sm:text-3xl pb-6 -mt-1 leading-[1.2]">
+            <h1>{news.title}</h1>
           </div>
 
           <div class="pb-6 aspect-video">
