@@ -80,9 +80,9 @@ HEADER (MOBILE)
 
 - [x] Dropdown delle lingue non funziona (st)
   - [x] Sistemare ovunque c'è un elenco di lingue con il config
-- [ ] Sul menu del cellulare non funziona l'orario di shabbat di shabbat
+- [x] Sul menu del cellulare non funziona l'orario di shabbat
 - [x] Scegliere con cognizione le voci che compaiono/scompaiono sulla navbar mentre si ridimensiona (eh)
-- [ ] sistemare la lente piccola in PageHeader
+- [x] sistemare la lente piccola in PageHeader (eh)
 
 HOMEPAGE
 
@@ -156,7 +156,7 @@ SCRAPER (st)
 - [ ] Scrapare gli articoli dai siti che ho messo tra le const di chabad.js
 - [ ] Mettere gli articoli scrapati nella pagina delle world-news e sulla home
 - [ ] Collegare il titolo della sezione della home alla pagina
-- [ ] Non si vede l'immagine principale, in seguito alle modifiche fatte (new)
+- [x] Non si vede l'immagine principale, in seguito alle modifiche fatte (new)
 
 POPOLAMENTI (eh)
 
