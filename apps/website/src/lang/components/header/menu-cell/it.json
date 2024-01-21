@@ -1,0 +1,35 @@
+{
+  "shabbat":{
+    "friday":"VEN",
+    "saturday":"SAB"
+  },
+
+  "navbar-menu": {
+    "home": "Home",
+    "news": "Notizie",
+    "articles": "Articoli",
+    "video-live": "Live-Video",
+    "organizations": "Punti Chabad",
+    "events": "Eventi",
+    "about-us": "Chi siamo",
+    "resources": "Risorse",
+    "contributes": "Contribuisci"
+},
+
+"newsletter-paragraph": "Iscriviti alla newsletter per essere sempre aggiornato!",
+"subscribe-button": "Iscriviti",
+
+"contacts": {
+  "title": "Contatti",
+  "email": "email",
+  "telephone": "Telefono",
+  "address": "indirizzo"
+},
+
+"locations-title": "Sedi",
+
+"conditions":{
+  "terms": "Termini",
+  "hidden-terms": "e Condizioni"
+}
+}
