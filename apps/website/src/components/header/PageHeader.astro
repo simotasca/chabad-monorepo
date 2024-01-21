@@ -126,3 +126,64 @@ const t = await getTranslations("components/header", Astro.url);
       });
     })();
 </script>
+
+<script>
+  const select = document.querySelectorAll<HTMLSelectElement>("[data-cities-select]");
+  const shabbesStart = document.querySelectorAll("[data-shabbes-start]");
+  const shabbesEnd = document.querySelectorAll("[data-shabbes-end]");
+
+  const currItem = localStorage.getItem("halachic-times-location");
+  if (currItem) {
+    select.forEach((s) => {
+      s.value = currItem;
+      fetchCandles(s, ({ start, end }) => {
+        shabbesStart.forEach((ss) => (ss.textContent = formatTime(new Date(start))));
+        shabbesEnd.forEach((se) => (se.textContent = formatTime(new Date(end))));
+      });
+    });
+  } 
+
+  select.forEach((s) => {
+    s.addEventListener("change", () => {
+      select.forEach((s) => (s.disabled = true));
+
+      if (!s.value) {
+        shabbesStart.forEach((ss) => (ss.textContent = "--:--"));
+        shabbesEnd.forEach((se) => (se.textContent = "--:--"));
+        localStorage.removeItem("halachic-times-location");
+        select.forEach((s) => (s.disabled = false));
+        return;
+      }
+
+      localStorage.setItem("halachic-times-location", s.value);
+
+      fetchCandles(s, (data) => {
+        select.forEach((s) => (s.disabled = false));
+        if (!data) return;
+        const { start, end } = data;
+        shabbesStart.forEach((ss) => (ss.textContent = formatTime(new Date(start))));
+        shabbesEnd.forEach((se) => (se.textContent = formatTime(new Date(end))));
+      });
+    });
+  });
+
+  function formatTime(date: Date) {
+    return String(date.getHours()).padStart(2, "0") + ":" + String(date.getMinutes()).padStart(2, "0");
+  }
+
+  function fetchCandles(sel: HTMLSelectElement, cb: Function) {
+    fetch("/api/calendar/candles", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        city: sel.value,
+      }),
+    })
+      .then((res) => res.json())
+      .catch(() => cb(null))
+      .then((data) => cb(data));
+  }
+
+  
+</script>
+
