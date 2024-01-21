@@ -46,7 +46,7 @@ const imgVideo = "/images/video-prova.jpg";
 >
   <section slot="content-1" class="flex flex-col gap-4">
     <ShadowBox class="contents md:block">
-      <div class="py-1 md:p-4 bg-slate-50">
+      <div class="py-1 md:p-4">
         <h1 class="pb-2">
           <Link href={routes.news}>
             <SectionTitle icon="/images/icons/clock.svg">
@@ -67,7 +67,7 @@ const imgVideo = "/images/video-prova.jpg";
     </ShadowBox>
 
     <ShadowBox class="contents md:block">
-      <div class="py-1 md:p-4 bg-slate-50">
+      <div class="py-1 md:p-4">
         <h1 class="pb-2">
           <Link href={routes.worldnews}>
             <SectionTitle icon="/images/icons/blue-icons/globe-icon.svg">
@@ -165,11 +165,13 @@ const imgVideo = "/images/video-prova.jpg";
     <!-- PUNTI CHABAD -->
     <section class="relative">
       <ShadowBox class="contents md:block md:p-4 bg-slate-50">
-        <h2 class="mb-4 mt-2 ml-2 md:ml-4">
-          <SectionTitle icon="/images/icons/synagogue.svg">
-            {t("chabad-section.title")}
-          </SectionTitle>
-        </h2>
+        <Link href={routes.organizations()}>
+          <h2 class="mb-4 mt-2 ml-2 md:ml-4">
+            <SectionTitle icon="/images/icons/synagogue.svg">
+              {t("chabad-section.title")}
+            </SectionTitle>
+          </h2>
+        </Link>
         <div class="relative px-2 md:px-4 overflow-x-hidden">
           <Carousel nextArrowId="arrow-next" prevArrowId="arrow-previous">
             {
@@ -246,11 +248,13 @@ const imgVideo = "/images/video-prova.jpg";
     <!-- EVENTI -->
     <section>
       <ShadowBox class="contents md:block md:p-4 bg-slate-50">
-        <h2 class="mb-4 mt-2 ml-2 md:ml-4">
-          <SectionTitle icon={"/images/icons/blue-icons/event-upcoming.svg"}>
-            {t("events-section.title")}
-          </SectionTitle>
-        </h2>
+        <Link href={routes.events}>
+          <h2 class="mb-4 mt-2 ml-2 md:ml-4">
+            <SectionTitle icon={"/images/icons/blue-icons/event-upcoming.svg"}>
+              {t("events-section.title")}
+            </SectionTitle>
+          </h2>
+        </Link>
         <div class="relative">
           <Carousel
             nextArrowId="arrow-next-event"
