@@ -21,10 +21,12 @@ const routes = {
 
   live: "/live",
   chabad: "/chabad",
-  resources: "resources",
+  resources: "/resources",
   contribute: "/contribute",
   contacts: "/contacts",
   about: "/about",
+  terms: "/terms-and-conditions",
+  privacy: "/privacy-policy"
 } as const;
 
 export default routes;

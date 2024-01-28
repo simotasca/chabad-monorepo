@@ -33,7 +33,7 @@ const { organizations } = Astro.props;
         <section class="relative">
           <div class="flex gap-2 sm:gap-4 px-4 xs:pr-2 sm:p-4">
             {o.main_image && (
-              <img class="hidden sm:block w-60 lg:w-80 aspect-video my-2" src={o.main_image} alt="main article image" />
+              <img class="hidden sm:block w-60 lg:w-80 aspect-video object-cover my-2" src={o.main_image} alt="main article image" />
             )}
             <div class="lg:flex flex-col gap-2 py-1">
               <div class="gap-2 items-center">

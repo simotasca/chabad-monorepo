@@ -4,6 +4,7 @@ import supabase from "@/lib/server/supabase";
 import { throwError } from "@/lib/shared/error";
 import { organizationsMapper } from "@/lib/shared/supabase/organizations";
 import Link from "@/components/navigation/Link.astro";
+import routes from "@/lib/shared/routes";
 const { associazione, città, immagine, testo, rabbini } = Astro.props;
 
 const query = supabase.from("organizations").select();
@@ -24,29 +25,36 @@ const organizations = await query.then(({ error, data }) => {
       <section>
         {o.main_image && (
           <img
-            class="w-full aspect-video my-2"
+            class="w-full aspect-[3/2] object-cover my-2"
             src={o.main_image}
             alt="main article image"
           />
         )}
 
-        <h2 class="mt-2 text-2xl font-display">{o.name}</h2>
+        <Link href={o.url}><h2 class="mt-2 text-2xl font-display">{o.name}</h2></Link>
 
         <div class="flex gap-2 items-center font-raleway text-blue-950 uppercase">
-          <h2 class="whitespace-nowrap font-bold" />
-          <p class="font-medium">{o.city}</p>
+          <p class="font-medium whitespace-nowrap">{o.city}</p>
 
           <div class="w-full" />
         </div>
-        <div class="flex">
+        <div class="flex max-lg:flex-col">
           <p class="text-xs font-raleway font-medium">
             Rav A.Hazan, Rav Kaplan
           </p>
-          <button class="justify-end bg-blue-950 border border-white text-white font-raleway uppercase font-semibold px-16 py-2 mt-4 ml-auto mr-0">
-            <a href={o.link_donate}>
-              <p>dona</p>
-            </a>
-          </button>
+          {o.link_donate ? (
+            <button class="max-lg:w-full rounded-sm justify-end bg-blue-950 border border-white text-white font-raleway uppercase font-semibold lg:px-12 2xl:px-16 py-2 mt-6 mx-auto lg:ml-auto lg:mr-0">
+              <a href={o.link_donate}>
+                <p>dona</p>
+              </a>
+            </button>
+          ) : (
+            <button class="max-lg:w-full rounded-sm justify-end bg-blue-950 border border-white text-white font-raleway uppercase font-semibold lg:px-12 2xl:px-16 py-2 mt-4 mx-auto lg:ml-auto lg:mr-0">
+              <Link href={o.url}>
+                <p>dona</p>
+              </Link>
+            </button>
+          )}
         </div>
       </section>
     </ShadowBox>

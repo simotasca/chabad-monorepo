@@ -124,12 +124,12 @@ const cities = ["Milano", "Roma", "Venezia", "Torino", "Trieste", "Firenze", "Bo
     </div>
     <button
       class="block bg-blue-950 border border-white text-white font-raleway uppercase font-semibold px-8 py-1 mx-auto xs:ml-auto xs:mr-0 mt-9 xs:mt-2 sm:mt-0 lg:mt-2">
-      <p>{t("donate-button")}</p>
+      <Link href={routes.contribute}><p>{t("donate-button")}</p></Link>
     </button>
   </div>
   <div class="flex w-fit gap-1 font-montserrat text-white text-xs mx-auto pb-4">
-    <p>{t("terms-and-conditions")}</p>
+    <Link href={routes.terms}><p>{t("terms-and-conditions")}</p></Link>
     <p>-</p>
-    <p>Privacy Policy</p>
+    <Link href={routes.privacy}><p>Privacy Policy</p></Link>
   </div>
 </footer>
