@@ -19,8 +19,10 @@ let { videos, error } = await getYoutubeLives(channels.sky, 40);
 
 if (error) throw new Error("ERROR fetching videos: " + error);
 
-videos.forEach((i) => {
-  console.log(i);
-});
+// videos.forEach((i) => {
+//   console.log(i);
+// });
 
-getYoutubeLives(channels.sky, 10).then(persistYoutube);
+console.log("MASJASJD")
+await getYoutubeLives(channels.sky, 10).then(persistYoutube("video"));
+console.log("FINNNEEEEEH")

@@ -71,9 +71,13 @@ export function persistScraped(source, websiteName) {
   };
 }
 
-export async function persistYoutube(type) {
+export function persistYoutube(type) {
   return async function (ytApiVideos) {
-    let videos = ytApiVideos.map((v) => ({ ...v, url: youtubeIdToEmbed(v.id.videoId) }));
+    console.log("Persisting youtube  " + type);
+
+    if(ytApiVideos.error) return;
+
+    let videos = ytApiVideos.videos.map((v) => ({ ...v, url: youtubeIdToEmbed(v.id.videoId) }));
 
     let { data: alreadySaved, error: selectOldError } = await supabase
       .from("live_video")
