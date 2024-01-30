@@ -1,0 +1,35 @@
+{
+  "shabbat":{
+    "friday":"FRI",
+    "saturday":"SAT"
+  },
+
+  "navbar-menu": {
+    "home": "Home",
+    "news": "News",
+    "articles": "Articles",
+    "video-live": "Live-Video",
+    "organizations": "Chabad Projects",
+    "events": "Events",
+    "about-us": "About Us",
+    "resources": "Risources",
+    "contributes": "Contributes"
+},
+
+"newsletter-paragraph": "Subscribe to the newsletter to stay updated!",
+"subscribe-button": "Subscribe",
+
+"contacts": {
+  "title": "Contacts",
+  "email": "email",
+  "telephone": "phone",
+  "address": "address"
+},
+
+"locations-title": "Locations",
+
+"conditions":{
+  "terms": "Terms",
+  "hidden-terms": "and Conditions"
+}
+}

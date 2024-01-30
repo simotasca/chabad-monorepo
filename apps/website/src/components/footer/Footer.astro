@@ -16,15 +16,15 @@ const cities = ["Milano", "Roma", "Venezia", "Torino", "Trieste", "Firenze", "Bo
     class="w-full px-14 xs:px-24 lg:px-16 xl:px-24 py-16 md:grid grid-cols-[auto_auto_auto] gap-16 lg:gap-12 xl:gap-24 mx-auto">
     <div class="xs:grid grid-cols-2 md:block lg:flex gap-8">
       <div class="flex gap-2 xs:justify-end md:justify-start">
-        <img src="/images/icons/contacts-white.svg" alt="icon contacts" class="w-5 translate-y-[5px] mb-auto mt-0" />
+        <img src="/images/icons/contacts-white.svg" alt="icon contacts" class="w-4 translate-y-[5px] mb-auto mt-0" />
         <h3
-          class="uppercase text-2xl xs:text-right md:text-left pb-1 items-start text-white font-raleway font-semibold">
+          class="uppercase text-xl xs:text-right md:text-left pb-1 items-start text-white font-raleway font-semibold">
           {t("contacts.title")}
         </h3>
       </div>
       <div class="flex lg:block gap-3 xs:gap-0 md:gap-2">
         <div class="lg:hidden w-5 xs:-0 md:w-5"></div>
-        <ul class="font-raleway text-white items-start translate-y-1">
+        <ul class="font-raleway max-sm:text-sm text-white items-start translate-y-1">
           <li class="leading-5">
             <b>{t("contacts.email")}:</b> info@chabad.it
           </li>
@@ -45,14 +45,14 @@ const cities = ["Milano", "Roma", "Venezia", "Torino", "Trieste", "Firenze", "Bo
 
     <div class="xs:grid grid-cols-2 md:block lg:flex gap-8">
       <div class="flex gap-2 xs:justify-end md:justify-start">
-        <img src="/images/icons/icon-map.svg" alt="icon map" class="w-5 translate-y-[6px] mb-auto mt-0" />
-        <h3 class="uppercase text-2xl xs:text-right md:text pb-1 items-start text-white font-raleway font-semibold">
+        <img src="/images/icons/icon-map.svg" alt="icon map" class="w-4 translate-y-[6px] mb-auto mt-0" />
+        <h3 class="uppercase text-xl xs:text-right md:text-left pb-1 items-start text-white font-raleway font-semibold">
           {t("locations-title")}
         </h3>
       </div>
       <div class="flex lg:block gap-3 xs:gap-0 md:gap-3">
         <div class="lg:hidden w-5 md:w-5"></div>
-        <ul class="flex flex-col gap-2 font-raleway text-white uppercase items-start translate-y-1">
+        <ul class="flex flex-col gap-2 font-raleway max-sm:text-sm text-white uppercase items-start translate-y-1">
           {
             cities.map((city) => (
               <li>
@@ -68,9 +68,9 @@ const cities = ["Milano", "Roma", "Venezia", "Torino", "Trieste", "Firenze", "Bo
 
     <div class="xs:grid grid-cols-2 md:block lg:flex gap-8">
       <div class="flex gap-2 xs:justify-end md:justify-start">
-        <img src="/images/icons/social-white.svg" alt="icon social" class="w-5 translate-y-[5px] mb-auto mt-0" />
+        <img src="/images/icons/social-white.svg" alt="icon social" class="w-4 translate-y-[5px] mb-auto mt-0" />
         <h3
-          class="uppercase text-2xl xs:text-right md:text-left pb-1 items-start text-white font-raleway font-semibold">
+          class="uppercase text-xl xs:text-right md:text-left pb-1 items-start text-white font-raleway font-semibold">
           Social <br />Network:
         </h3>
       </div>
@@ -124,12 +124,12 @@ const cities = ["Milano", "Roma", "Venezia", "Torino", "Trieste", "Firenze", "Bo
     </div>
     <button
       class="block bg-blue-950 border border-white text-white font-raleway uppercase font-semibold px-8 py-1 mx-auto xs:ml-auto xs:mr-0 mt-9 xs:mt-2 sm:mt-0 lg:mt-2">
-      <p>{t("donate-button")}</p>
+      <Link href={routes.contribute}><p>{t("donate-button")}</p></Link>
     </button>
   </div>
   <div class="flex w-fit gap-1 font-montserrat text-white text-xs mx-auto pb-4">
-    <p>{t("terms-and-conditions")}</p>
+    <Link href={routes.terms}><p>{t("terms-and-conditions")}</p></Link>
     <p>-</p>
-    <p>Privacy Policy</p>
+    <Link href={routes.privacy}><p>Privacy Policy</p></Link>
   </div>
 </footer>

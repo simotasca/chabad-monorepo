@@ -15,6 +15,10 @@ import logoFacebook from "@/images/icons/facebook-white.svg";
 import logoInstagram from "@/images/icons/instagram-white.svg";
 import { Image } from "astro:assets";
 import { getData } from "../_utils";
+import {
+  organizationContactsMapper,
+  organizationsMapper,
+} from "@/lib/shared/supabase/organizations";
 
 if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
@@ -66,7 +70,26 @@ if (!organization) {
   return errorResponse(Astro.url);
 }
 
-const { contacts, social, iban } = splitContacts(organization.contacts);
+const cityFilter = Astro.url.searchParams.get("city");
+const query = supabase.from("organizations").select("*, contacts(*)");
+if (cityFilter) query.like("city", cityFilter);
+const organizations = await query.then(({ error, data }) => {
+  if (error) {
+    throwError(
+      "PAGE Organizations",
+      "Error fetching organizations-by-city:" + error.message
+    );
+  }
+  return data?.map(organizationsMapper).map(organizationContactsMapper) || [];
+});
+
+let emptyResultMessage = "";
+if (cityFilter && organizations.length === 0) {
+  // TODO: tradurre
+  emptyResultMessage = "Nessuna organizzazione trovata a " + cityFilter + "...";
+}
+
+const { contacts, social } = splitContacts(organization.contacts);
 
 const { events } = await getData();
 ---
@@ -215,7 +238,7 @@ const { events } = await getData();
         class="bg-[#18315E] px-10 py-6 grid sm:grid-cols-3 gap-4 text-white font-montserrat mt-6 scroll-m-10"
       >
         {
-          (!!contacts.length || !!social.length || !!iban.length) && (
+          (!!contacts.length || !!social.length) && (
             <ul>
               <li class="text-lg uppercase font-semibold">
                 {t("contacts.title")}
@@ -256,34 +279,38 @@ const { events } = await getData();
             {t("contacts.location")}
           </li>
           <li class="flex items-start gap-1 text-sm">
-            <b>{organization.city}</b>, {organization.address}
+            <span><b>{organization.city}</b>, {organization.address}</span>
           </li>
         </ul>
-
-        {
-          (!!iban.length || !!organization.link_donate) && (
-            <ul>
-              <li class="text-lg uppercase font-semibold">
-                {t("contacts.contribute")}
-              </li>
-              {!!iban.length && (
+        <div>
+          <p class="text-lg uppercase font-semibold">
+            {t("contacts.contribute")}
+          </p>
+          {
+            !!organization.iban && (
+              <ul>
                 <li class="flex items-center gap-1 text-sm">
                   <b>Iban:</b>
-                  <span>{iban.map(({ value }) => value).join("; ")}</span>
+                  <span>{organization.iban}</span>
                 </li>
-              )}
-              {!!organization.link_donate && (
+              </ul>
+            )
+          }
+
+          {
+            !!organization.link_donate && (
+              <ul>
                 <li class="flex items-center gap-1 text-sm">
                   <button class="bg-blue-950 border border-white text-white font-raleway uppercase font-semibold px-10 py-2 mt-2">
                     <a href={organization.link_donate}>
                       <p>{t("contacts.donate")}</p>
                     </a>
                   </button>
-                </li>
-              )}
-            </ul>
-          )
-        }
+                </li>{" "}
+              </ul>
+            )
+          }
+        </div>
       </div>
     </ShadowBox>
   </section>
@@ -313,7 +340,7 @@ const { events } = await getData();
       {t("single-project-page.chabad-projects-section-title")}
     </h2>
     <div class="flex flex-col gap-6">
-      <OrganizationSection />
+      <OrganizationSection organizations={organizations} />
     </div>
   </section>
 
@@ -325,7 +352,7 @@ const { events } = await getData();
         {t("single-project-page.chabad-projects-section-title")}
       </h2>
       <div class="flex flex-col gap-6">
-        <OrganizationSection />
+        <OrganizationSection organizations={organizations} />
       </div>
     </ShadowBox>
   </section>

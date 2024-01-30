@@ -36,7 +36,7 @@ if (cityFilter && organizations.length === 0) {
 }
 ---
 
-<PageLayout title="deo gratia" description="demo">
+<PageLayout title="progetti chabad" description="tutti i progetti chabad in italia">
   <section slot="title">
     <div class="grid grid-cols-[1fr_auto_1fr] items-center pt-2 pb-[1px] sm:pt-4 sm:pb-3 px-4">
       <div class="h-0.5 bg-white mr-4 mb-2 ml-9 border-t"></div>
@@ -47,12 +47,12 @@ if (cityFilter && organizations.length === 0) {
     </div>
   </section>
 
-  <section slot="content-1" class="flex flex-col gap-4">
-    {emptyResultMessage ? <p class="text-neutral-600">{emptyResultMessage}</p>:<OrganizationSection organizations={organizations} />}
+  <section slot="content-1" >
+    {emptyResultMessage ? <p class="text-neutral-600">{emptyResultMessage}</p>: <div class="flex flex-col gap-4"><OrganizationSection organizations={organizations}></OrganizationSection></div>}
   </section>
 
   <section slot="sidebar" class="md:flex flex-col gap-4">
-    <ShadowBox class="">
+    <ShadowBox class="max-md:hidden">
       <div class="py-5 bg-slate-50">
         <EventsSection
           nome={events[0].name}

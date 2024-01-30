@@ -80,15 +80,15 @@ HEADER (MOBILE)
 
 - [x] Dropdown delle lingue non funziona (st)
   - [x] Sistemare ovunque c'è un elenco di lingue con il config
-- [ ] Manca il cursor pointer sull'hamburger (eh)
+- [x] Sul menu del cellulare non funziona l'orario di shabbat
 - [x] Scegliere con cognizione le voci che compaiono/scompaiono sulla navbar mentre si ridimensiona (eh)
-- [ ] sistemare la lente piccola in PageHeader
+- [x] sistemare la lente piccola in PageHeader (eh)
 
 HOMEPAGE
 
 - [ ] Mettere i contenuti live-video, dividendo quelli dalla jimtv da quelli caricati su database (st)
   - [ ] https://www.npmjs.com/package/rss-parser
-- [ ] Aggiungere href agli eventi, una volta estrapolato l'url (vedi punto "EVENTI") (eh)
+- [x] Aggiungere href agli eventi, una volta estrapolato l'url (vedi punto "EVENTI") (eh)
 
 NOTIZIE e [slug], ARTICOLI e [slug]
 
@@ -106,7 +106,7 @@ LIVE-VIDEO
 
 PUNTI CHABAD
 
-- [ ] Mettere le icone social giuste alle card (eh)
+- [x] Mettere le icone social giuste alle card (eh)
 - [x] Cambiare bottone delle card (eh)
 - [ ] Aggiungere filtro città (st)
 - [ ] Far comparire i responsible delle organizzazioni, se si ha un'idea di dove e come (st)
@@ -120,16 +120,17 @@ PUNTI CHABAD [SLUG]
 - [ ] controllare che i contatti siano collegati correttamente (st)
   - [ ] alcune cose non compaiono
 - [ ] collegare markdown per descrizione, con possibilità di mettere immagini (e video?) (st)
+- [ ] OrganizationSection da errore non compreso (st)
 
 EVENTI
 
 - [x] Cambiare icona bottone delle card (eh)
 - [ ] Aggiungere filtro per città (st)
-- [ ] Aggiungere l'href alla pagina slug eventi (tirare fuori url) (st)
+
 
 EVENTI [SLUG]
 
-- [ ] Far comparire i contatti dell'evento sulla sidebar (eh)
+- [x] Far comparire i contatti dell'evento sulla sidebar (eh)
 
 CONTRIBUISCI
 
@@ -144,7 +145,7 @@ FOOTER
 
 - [ ] Generare i termini e condizioni (eh)
 - [ ] Collegare le sedi (città) alle organizzazioni relative nella pagina punti chabad (st)
-- [ ] Collegare i vari social di chabad.it e aggiungere i mancanti (eh)
+- [x] Collegare i vari social di chabad.it e aggiungere i mancanti (eh)
 
 - [ ] HEADER: sia sulla page, che sulla home, l'header dovrebbe comparire quando si scorre verso l'alto dal basso della pagina
 
@@ -155,6 +156,15 @@ SCRAPER (st)
 - [ ] Scrapare gli articoli dai siti che ho messo tra le const di chabad.js
 - [ ] Mettere gli articoli scrapati nella pagina delle world-news e sulla home
 - [ ] Collegare il titolo della sezione della home alla pagina
+- [x] Non si vede l'immagine principale, in seguito alle modifiche fatte (new)
+
+POPOLAMENTI (eh)
+
+-[ ] Mettere città giuste per il filtro delle organizzazioni (disegnare il filtro nella pagina?)
+-[ ] Popolare dati e foto delle organizzazioni e produrre markdown
+-[ ] Fare degli articoli di partenza con markdown e scrivere qualche notizia
+-[ ] Segnare i responsibles delle varie organizzazioni
+-[ ] Cambiatre il campo telephone in phone dappertutto 
 
 # POST RILASCIO
 

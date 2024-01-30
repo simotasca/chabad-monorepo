@@ -5,26 +5,43 @@ import { config } from "@/lib/shared/config";
 import { currLang } from "@/lib/shared/lang";
 import LangSelect from "../navigation/LangSelect.astro";
 import Link from "@/components/navigation/Link.astro";
+import { getTranslations } from "@/lib/server/lang/lang";
+
+const t = await getTranslations("components/header/menu-cell", Astro.url);
 
 const { cities } = Astro.props;
 const stringCities = Object.keys(cities);
+
+const city = [
+  "Milano",
+  "Roma",
+  "Venezia",
+  "Torino",
+  "Trieste",
+  "Firenze",
+  "Bologna",
+  "Napoli",
+];
 ---
 
 <header
   id="menu-cell"
-  class="md:translate-x-full fixed top-0 left-0 w-screen h-screen overflow-y-auto overflow-x-hidden text-white translate-x-full transition-transform duration-300 z-[99]">
+  class="md:translate-x-full fixed top-0 left-0 w-screen h-screen overflow-y-auto overflow-x-hidden text-white translate-x-full transition-transform duration-300 z-[99]"
+>
   <!-- 1° RIGA -->
 
-  <div class="w-full bg-[#031B4D] z-10">
+  <div class="relative w-full bg-[#031B4D] z-10">
     <div class="chabad-container pl-2 xs:pl-4 pr-4 md:px-4 mx-auto">
       <div class="grid grid-cols-2 h-8 md:h-12">
         <div
-          class="md:hidden flex gap-x-3 sm:gap-x-5 justify-start items-center cursor-pointer">
+          class="md:hidden flex gap-x-3 sm:gap-x-5 justify-start items-center cursor-pointer"
+        >
           <div>
             <Widget icon="/images/icons/location.svg">
               <select
                 data-cities-select
-                class="bg-transparent border rounded-sm border-white border-opacity-40 text-white cursor-pointer w-12 sm:w-18 overflow-ellipsis uppercase xr-1 sm:pr-1">
+                class="bg-transparent border rounded-sm border-white border-opacity-40 text-white cursor-pointer w-12 sm:w-18 overflow-ellipsis uppercase xr-1 sm:pr-1"
+              >
                 <option selected value="">---</option>
                 {
                   stringCities.map((c) => (
@@ -41,7 +58,7 @@ const stringCities = Object.keys(cities);
               <span class="hidden sm:inline">VEN</span>
               <span data-shabbes-start>--:--</span>
             </Widget>
-            <div class="xs:hidden -translate-y-[2px]">
+            <div class="xs:hidden -translate-y-[2px] pt-1">
               <Widget icon="/images/icons/stars.svg">
                 <span class="hidden">SAB</span>
                 <span data-shabbes-end>--:--</span>
@@ -56,7 +73,8 @@ const stringCities = Object.keys(cities);
           </div>
         </div>
         <div
-          class="md:hidden flex items-center justify-end gap-4 text-sm sm:text-base text-white font-montserrat">
+          class="md:hidden flex items-center justify-end gap-4 text-sm sm:text-base text-white font-montserrat"
+        >
           <LangSelect class="bg-transparent" />
           <span>ב"ה</span>
         </div>
@@ -65,7 +83,8 @@ const stringCities = Object.keys(cities);
 
     <div
       style={{ boxShadow: "0px 0px 4px #0F60DD" }}
-      class="w-full h-[2px] bg-[#3363AC]">
+      class="w-full h-[2px] bg-[#3363AC]"
+    >
     </div>
 
     <!-- 2° RIGA -->
@@ -73,14 +92,17 @@ const stringCities = Object.keys(cities);
       style={{
         background:
           "linear-gradient(#00378A -10%, #002D70 14.48%, #002D70 33.75%, #001C46 196.02%)",
-      }}>
+      }}
+    >
       <div class="chabad-container px-4 mx-auto">
         <!-- GRIDROW -->
         <div
-          class="grid grid-cols-[1fr_auto_1fr] gap-x-10 xs:gap-x-16 md:gap-x-10 lg:gap-x-16 items-center md:pt-6">
+          class="grid grid-cols-[1fr_auto_1fr] gap-x-10 xs:gap-x-16 md:gap-x-10 lg:gap-x-16 items-center md:pt-6"
+        >
           <div class="flex md:hidden items-center xs:pl-4 pt-1">
             <button
-              class="w-8 xs:w-9 sm:w-10 aspect-square bg-white border-blue-800 rounded-full p-2">
+              class="w-8 xs:w-9 sm:w-10 aspect-square bg-white border-blue-800 rounded-full p-2"
+            >
               <img
                 class="w-full h-full translate-y-px"
                 src="/images/icons/search.png"
@@ -109,53 +131,68 @@ const stringCities = Object.keys(cities);
 
           <div
             data-sidebar-toggle
-            class="cursor-pointer md:hidden flex aspect-square w-8 xs:w-9 sm:w-10 ml-auto mr-0 xs:mr-4 items-center justify-end mt-1">
+            class="cursor-pointer md:hidden flex aspect-square w-8 xs:w-9 sm:w-10 ml-auto mr-0 xs:mr-4 items-center justify-end mt-1"
+          >
             <img src="/images/icons/close-icon.svg" alt="close menu icon" />
           </div>
         </div>
       </div>
 
       <nav
-        class="font-raleway font-bold text-base xs:text-lg sm:text-xl flex flex-col gap-y-3 xs:gap-y-4 px-12 xs:px-20 pb-[45px] pt-[38px]">
-        <Link href={routes.home} class="uppercase text-white mt-[1px]">home</Link>
+        class="font-raleway font-bold text-base xs:text-lg sm:text-xl flex flex-col gap-y-3 xs:gap-y-4 px-12 xs:px-20 pb-[45px] pt-[38px]"
+      >
+        <Link href={routes.home} class="uppercase text-white mt-[1px]">
+          {t("navbar-menu.home")}
+        </Link>
         <div class="bg-gray-300 h-[1px] w-full"></div>
         <Link href={routes.articles} class="uppercase text-white mt-[1px]">
-          articoli
+          {t("navbar-menu.articles")}
         </Link>
         <div class="bg-gray-300 h-[1px] w-full"></div>
-        <Link href={routes.news} class="uppercase text-white mt-[1px]">notizie</Link>
-        <div class="bg-gray-300 h-[1px] w-full"></div>
-        
-        
-        <Link href={routes.live} class="uppercase text-white mt-[1px]">live e video</Link>
-        <div class="bg-gray-300 h-[1px] w-full"></div>
-        <Link href={routes.organizations()} class="uppercase text-white mt-[1px]">
-          punti chabad
+        <Link href={routes.news} class="uppercase text-white mt-[1px]">
+          {t("navbar-menu.news")}
         </Link>
         <div class="bg-gray-300 h-[1px] w-full"></div>
-        <Link href={routes.events} class="uppercase text-white mt-[1px]">eventi</Link>
+
+        <Link href={routes.live} class="uppercase text-white mt-[1px]">
+          {t("navbar-menu.video-live")}
+        </Link>
         <div class="bg-gray-300 h-[1px] w-full"></div>
-        <Link href={routes.resources} class="uppercase text-white mt-[1px]">
-          risorse
+        <Link
+          href={routes.organizations()}
+          class="uppercase text-white mt-[1px]"
+        >
+          {t("navbar-menu.organizations")}
+        </Link>
+        <div class="bg-gray-300 h-[1px] w-full"></div>
+        <Link href={routes.events} class="uppercase text-white mt-[1px]">
+          {t("navbar-menu.events")}
+        </Link>
+        <div class="bg-gray-300 h-[1px] w-full"></div>
+        <Link href={routes.about} class="uppercase text-white mt-[1px]">
+          {t("navbar-menu.about-us")}
         </Link>
         <div class="bg-gray-300 h-[1px] w-full"></div>
         <Link href={routes.contribute} class="uppercase text-white mt-[1px]">
-          contribuisci
+          {t("navbar-menu.contributes")}
         </Link>
       </nav>
     </div>
 
     <div class="p-8 xs:px-16 sm:px-20 bg-white">
       <h3
-        class="text-blue-950 font-semibold font-raleway text-lg sm:text-xl leading-tight uppercase">
+        class="text-blue-950 font-semibold font-raleway text-lg sm:text-xl leading-tight uppercase"
+      >
         Newsletter
       </h3>
       <p
-        class="italic font-raleway text-neutral-700 mt-1 mb-2 text-sm sm:text-base">
-        Iscriviti alla newsletter per essere sempre aggiornato!
+        class="italic font-raleway text-neutral-700 mt-1 mb-2 text-sm sm:text-base"
+      >
+        {t("newsletter-paragraph")}
       </p>
       <div
-        class="flex focus-within:ring-1 focus-within:ring-blue-900 focus-within:outline-none border border-neutral-200 rounded-lg shadow-md">
+        class="flex focus-within:ring-1 focus-within:ring-blue-900 focus-within:outline-none border border-neutral-200 rounded-lg shadow-md"
+      >
         <p class="ml-2 mr-1 my-1 text-blue-950">@</p>
         <p class="my-1 mr-1 text-blue-950">|</p>
         <input
@@ -165,8 +202,8 @@ const stringCities = Object.keys(cities);
         />
       </div>
       <div class="bg-red-700 w-fit py-1 px-4 cursor-pointer mt-4">
-        <span class="text-center text-white font-montserrat text-base"
-          >ISCRIVITI</span
+        <span class="text-center text-white font-montserrat text-base uppercase"
+          >{t("subscribe-button")}</span
         >
       </div>
     </div>
@@ -176,35 +213,59 @@ const stringCities = Object.keys(cities);
         background:
           "linear-gradient(#00378A -10%, #002D70 14.48%, #002D70 33.75%, #001C46 196.02%)",
       }}
-      class="px-10 py-6 text-white">
+      class="grid xs:grid-cols-2 gap-x-12 px-12 pt-12 pb-24 text-white"
+    >
+      <div>
+        <h3
+          class="uppercase font-bold text-base xs:text-lg sm:text-xl pb-2 items-start text-white font-raleway"
+        >
+          {t("contacts.title")}
+        </h3>
+
+        <ul
+          class="font-raleway max-sm:text-sm text-white items-start translate-y-1"
+        >
+          <li class="leading-5">
+            <b>{t("contacts.email")}:</b> info@chabad.it
+          </li>
+          <div class="h-3"></div>
+          <li class="leading-5">
+            <b>{t("contacts.telephone")}:</b> 34567891234
+          </li>
+          <div class="h-3"></div>
+          <li class="leading-5">
+            <b>{t("contacts.address")}:</b> via Poerio 29, Milano (MI)
+          </li>
+          <div class="h-3"></div>
+        </ul>
+      </div>
+    
+    <div class="max-xs:pt-6">
+      <h3
+        class="uppercase font-bold text-base xs:text-lg sm:text-xl pb-2 items-start text-white font-raleway"
+      >
+        {t("locations-title")}
+      </h3>
+
       
-      <div
-        class="pt-2 sm:pt-4 mx-auto">
-        <div>
-          <span
-            class="font-monteserrat text-base font-bold"
-            >Milano</span
-          >
-          <ul>
-            <li class="flex gap-x-1 text-base font-light">
-              <span>-</span>Email: chabadmilano@gmail
-            </li>
-            <li class="flex gap-x-1 text-base font-light">
-              <span>-</span>Telefono: 36597231
-            </li>
-            <li class="flex gap-x-1 text-base font-light">
-              <span>-</span>Indirizzo: via degli importanti
-            </li>
-            <li class="flex gap-x-1 text-base font-light">
-              <span>-</span>Fax: 54325678
-            </li>
-            <li class="flex gap-x-1 text-base font-light">
-              <span>-</span>Referente: rav rosenfield
-            </li>
-          </ul>
-        </div>
-        
+        <ul
+          class="flex flex-col gap-3 font-raleway max-sm:text-sm text-white uppercase items-start translate-y-1"
+        >
+          {
+            city.map((city) => (
+              <li>
+                <a href={routes.organizations({ city })}>{city}</a>
+              </li>
+            ))
+          }
+        </ul>
+      
     </div>
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 pb-6 font-light text-sm">
+<span>{t("conditions.terms")}</span> <span class="max-xs:hidden">{t("conditions.hidden-terms")} </span> <span>   |   </span> <span> Privacy</span> <span class="max-xs:hidden">Policy</span>
   </div>
+  </div>
+  
 </header>
 <script is:inline></script>
+
