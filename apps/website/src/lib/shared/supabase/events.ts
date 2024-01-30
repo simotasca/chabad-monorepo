@@ -1,7 +1,10 @@
-import type { Functions, Tables } from "@/db-types";
+import type { Database, Functions, Tables } from "@/db-types";
 import type { WithSlug } from "../routes";
 import routes from "../routes";
 import type { Prettify } from "../types";
+import type { SupabaseClient } from "@supabase/supabase-js";
+import { throwError } from "../error";
+import { dateFormatter } from ".";
 
 /**
  * maps the event's **slug** to the corresponding **Astro url**
@@ -35,33 +38,29 @@ export function eventsWithOrganizationsMapper<T extends EventWithOrganizations>(
   };
 }
 
-// type EventWithOrganizations = Tables<"events"> & { url: string } & {
-//   organizations: Pick<Tables<"organizations">, "id" | "name">[];
-// };
+export async function latestEvents(
+  supabase: SupabaseClient<Database>,
+  filters?: { limit?: number; dateFrom?: Date }
+) {
+  const query = supabase
+    .from("events")
+    .select("*, events_organizations(*, organizations(*))")
+    .order("date", { ascending: true });
 
-// type ArrayType<T> = T extends (infer U)[] ? U : T;
+  if (filters?.limit) query.limit(filters?.limit);
+  if (filters?.dateFrom) query.gte("date", dateFormatter.format(filters?.dateFrom));
 
-// export function eventsWithOrganizationsReducer(
-//   prev: EventWithOrganizations[],
-//   curr: ArrayType<Functions<"events_with_organizations">>
-// ) {
-//   let idx = prev.findIndex((p) => p.id === curr.e_id);
-//   const organization = { id: curr.o_id, name: curr.o_name };
-//   if (idx === -1) {
-//     return [
-//       ...prev,
-//       {
-//         id: curr.e_id,
-//         created_at: curr.e_created_at,
-//         main_image: curr.e_main_image,
-//         markdown: curr.e_markdown,
-//         name: curr.e_name,
-//         slug: curr.e_slug,
-//         url: eventsMapper({ slug: curr.e_slug }),
-//         organizations: [organization],
-//       },
-//     ];
-//   }
-//   prev[idx].organizations.push(organization);
-//   return prev;
-// }
+  return query.then(({ error, data }) => {
+    if (error) {
+      throwError("Latest Events function", "Error fetching events:" + error.message);
+    }
+    return data?.map(eventsWithOrganizationsMapper).map(eventsMapper) || [];
+  });
+}
+
+export async function nextEvents(supabase: SupabaseClient, limit?: number) {
+  const dateFrom = new Date();
+  dateFrom.setHours(0);
+  dateFrom.setMinutes(0);
+  return latestEvents(supabase, { limit, dateFrom })
+}

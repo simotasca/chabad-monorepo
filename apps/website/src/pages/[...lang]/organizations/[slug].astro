@@ -19,6 +19,8 @@ import {
   organizationContactsMapper,
   organizationsMapper,
 } from "@/lib/shared/supabase/organizations";
+import { parseMdx } from "@/lib/server/mdx";
+import { nextEvents } from "@/lib/shared/supabase/events";
 
 if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
@@ -70,28 +72,22 @@ if (!organization) {
   return errorResponse(Astro.url);
 }
 
-const cityFilter = Astro.url.searchParams.get("city");
-const query = supabase.from("organizations").select("*, contacts(*)");
-if (cityFilter) query.like("city", cityFilter);
-const organizations = await query.then(({ error, data }) => {
-  if (error) {
-    throwError(
-      "PAGE Organizations",
-      "Error fetching organizations-by-city:" + error.message
-    );
-  }
-  return data?.map(organizationsMapper).map(organizationContactsMapper) || [];
-});
+const organizations = await supabase
+  .from("organizations")
+  .select("*, contacts(*)")
+  .then(({ error, data }) => {
+    if (error) {
+      throwError(
+        "PAGE Organizations",
+        "Error fetching organizations-by-city:" + error.message
+      );
+    }
+    return data?.map(organizationsMapper).map(organizationContactsMapper) || [];
+  });
 
-let emptyResultMessage = "";
-if (cityFilter && organizations.length === 0) {
-  // TODO: tradurre
-  emptyResultMessage = "Nessuna organizzazione trovata a " + cityFilter + "...";
-}
-
+const Content = await parseMdx(organization.content);
 const { contacts, social } = splitContacts(organization.contacts);
-
-const { events } = await getData();
+const events = await nextEvents(supabase, 10);
 ---
 
 <PageLayout title="demo" description="demo">
