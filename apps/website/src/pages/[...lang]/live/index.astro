@@ -61,64 +61,118 @@ const mainVideoLive = videolives.pop()!;
         />
       </div>
     </ShadowBox>
-  </section>
 
-  <section slot="elenco-cell">
-    <ShadowBox>
-      <div class="p-6">
-        <h2 class="mb-4">
-          <SectionTitle>{t("all-videos-section.title")}</SectionTitle>
-        </h2>
+    <section slot="elenco-cell">
+      <ShadowBox>
+        <div class="p-6">
+          <h2 class="mb-4">
+            <SectionTitle>{t("all-videos-section.title")}</SectionTitle>
+          </h2>
 
-        <div
-          class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-6"
-        >
-          <!-- TODO: SE getStrapiUrl da errore, l'errore risulta lanciato da questo file!!! -->
+          <div
+            class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-6"
+          >
+            <!-- TODO: SE getStrapiUrl da errore, l'errore risulta lanciato da questo file!!! -->
 
-          {
-            videolives.map((l) => (
-              <>
-                <Link href={l.url}>
-                  <div
-                    set:html={l.youtube_link}
-                    class="[&>iframe]:w-full [&>iframe]:max-w-full [&>iframe]:h-full [&>iframe]:max-h-full [&>iframe]:aspect-[4/3]"
-                  />
+            {
+              videolives.map((l) => (
+                <>
+                  <div>
+                    <div
+                      set:html={l.youtube_link}
+                      class="[&>iframe]:w-full [&>iframe]:max-w-full [&>iframe]:h-full [&>iframe]:max-h-full [&>iframe]:aspect-[4/3]"
+                    />
 
-                  <h2 class="font-display font-bold text-lg uppercase mt-1">
-                    {l.title}
-                  </h2>
-                </Link>
-              </>
-            ))
-          }
+                    <h2 class="font-display font-bold text-lg uppercase mt-1">
+                      {l.title}
+                    </h2>
+                  </div>
+                </>
+              ))
+            }
+          </div>
+          <div class="h-16"></div>
+          <a href="https://www.jimtv.it/"><h2 class="text-lg text-blue-950 mb-4">JIM TV</h2></a>
+          <div
+            class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-6"
+          >
+            <!-- TODO: SE getStrapiUrl da errore, l'errore risulta lanciato da questo file!!! -->
+
+            {
+              videolives.map((l) => (
+                <>
+                  <div>
+                    <div
+                      set:html={l.youtube_link}
+                      class="[&>iframe]:w-full [&>iframe]:max-w-full [&>iframe]:h-full [&>iframe]:max-h-full [&>iframe]:aspect-[4/3]"
+                    />
+
+                    <h2 class="font-display font-bold text-lg uppercase mt-1">
+                      {l.title}
+                    </h2>
+                  </div>
+                </>
+              ))
+            }
+          </div>
         </div>
-        <div class="h-16"></div>
-        <a href="https://www.jimtv.it/"><h2 class="mb-4">JIM TV</h2></a>
-        <div
-          class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-6"
-        >
-          <!-- TODO: SE getStrapiUrl da errore, l'errore risulta lanciato da questo file!!! -->
+      </ShadowBox>
+      <div class="max-md:hidden lg:hidden h-1"></div>
+    </section>
 
-          {
-            videolives.map((l) => (
-              <>
-                <div
-                  set:html={l.youtube_link}
-                  class="[&>iframe]:w-full [&>iframe]:max-w-full [&>iframe]:h-full [&>iframe]:max-h-full [&>iframe]:aspect-[4/3]"
-                />
+    <section class="max-md:hidden" slot="elenco-desktop">
+      <ShadowBox>
+        <div class="p-6">
+          <h2 class="mb-4">
+            <SectionTitle>{t("all-videos-section.title")}</SectionTitle>
+          </h2>
+          <div
+            class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-6"
+          >
+            {
+              videolives.map((l) => (
+                <>
+                  <div>
+                    <div
+                      set:html={l.youtube_link}
+                      class="[&>iframe]:w-full [&>iframe]:max-w-full [&>iframe]:h-full [&>iframe]:max-h-full [&>iframe]:aspect-[4/3] "
+                    />
+                    <h2 class="text-lg font-bold font-display uppercase mt-1 ">
+                      {l.title}
+                    </h2>
+                  </div>
+                </>
+              ))
+            }
+          </div>
+          <div class="h-10"></div>
+          <h2 class="text-lg text-blue-900 mb-4"><SectionTitle>JIM TV</SectionTitle></h2>
+          <div
+            class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-6"
+          >
+            <!-- TODO: SE getStrapiUrl da errore, l'errore risulta lanciato da questo file!!! -->
 
-                <h2 class="font-display font-bold text-lg uppercase mt-1">
-                  {l.title}
-                </h2>
-              </>
-            ))
-          }
+            {
+              videolives.map((l) => (
+                <>
+                  <div>
+                    <div
+                      set:html={l.youtube_link}
+                      class="[&>iframe]:w-full [&>iframe]:max-w-full [&>iframe]:h-full [&>iframe]:max-h-full [&>iframe]:aspect-[4/3]"
+                    />
+
+                    <h2 class="font-display font-bold text-lg uppercase mt-1">
+                      {l.title}
+                    </h2>
+                  </div>
+                </>
+              ))
+            }
+          </div>
         </div>
-      </div>
-    </ShadowBox>
-    <div class="max-md:hidden lg:hidden h-1"></div>
+      </ShadowBox>
+    </section>
   </section>
-
   <section slot="sidebar" class="md:flex flex-col gap-4">
     <Parshat
       title="acharei kedoshim"
@@ -129,60 +183,5 @@ const mainVideoLive = videolives.pop()!;
     <div class="hidden md:block">
       <Newsletter />
     </div>
-  </section>
-
-  <section slot="elenco-desktop">
-    <ShadowBox>
-      <div class="p-6">
-        <h2 class="mb-4">
-          <SectionTitle>{t("all-videos-section.title")}</SectionTitle>
-        </h2>
-        <div
-          class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-6"
-        >
-          {
-            videolives.map((l) => (
-              <>
-                <Link href={l.url}>
-                  <div>
-                    <div
-                      set:html={l.youtube_link}
-                      class="[&>iframe]:w-full [&>iframe]:max-w-full [&>iframe]:h-full [&>iframe]:max-h-full [&>iframe]:aspect-[4/3] "
-                    />
-                    <h2 class="text-lg font-bold font-display uppercase mt-1 ">
-                      {l.title}
-                    </h2>
-                  </div>
-                </Link>
-              </>
-            ))
-          }
-        </div>
-        <div class="h-10"></div>
-        <h2 class="mb-4"><SectionTitle>JIM TV</SectionTitle></h2>
-        <div
-          class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-6"
-        >
-          <!-- TODO: SE getStrapiUrl da errore, l'errore risulta lanciato da questo file!!! -->
-
-          {
-            videolives.map((l) => (
-              <>
-                <div>
-                  <div
-                    set:html={l.youtube_link}
-                    class="[&>iframe]:w-full [&>iframe]:max-w-full [&>iframe]:h-full [&>iframe]:max-h-full [&>iframe]:aspect-[4/3]"
-                  />
-
-                  <h2 class="font-display font-bold text-lg uppercase mt-1">
-                    {l.title}
-                  </h2>
-                </div>
-              </>
-            ))
-          }
-        </div>
-      </div>
-    </ShadowBox>
   </section>
 </PageLayout>

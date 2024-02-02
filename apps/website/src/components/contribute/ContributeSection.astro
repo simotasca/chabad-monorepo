@@ -31,7 +31,9 @@ const organizations = await query.then(({ error, data }) => {
           />
         )}
 
-        <Link href={o.url}><h2 class="mt-2 text-2xl font-display">{o.name}</h2></Link>
+        <h2 class="mt-2 text-2xl leading-6 font-display">
+          <Link href={o.url}>{o.name}</Link>
+        </h2>
 
         <div class="flex gap-2 items-center font-raleway text-blue-950 uppercase">
           <p class="font-medium whitespace-nowrap">{o.city}</p>
