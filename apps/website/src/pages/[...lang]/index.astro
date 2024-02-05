@@ -18,6 +18,7 @@ import { organizationsMapper } from "@/lib/shared/supabase/organizations";
 import routes from "@/lib/shared/routes";
 import upcomingEvent from "@/images/icons/blue-icons/event-upcoming.svg";
 import Link from "@/components/navigation/Link.astro";
+import BucketImage from "@/components/supabase/BucketImage.astro";
 
 if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
@@ -29,6 +30,8 @@ console.log("started at ", metrics);
 
 const { articles, news, scraped, organizations1, organizations2, events } =
   await getData();
+
+console.log("EVENTS", events.length);
 
 console.log("get data", Date.now() - metrics, "ms");
 metrics = Date.now();
@@ -181,7 +184,7 @@ const imgVideo = "/images/video-prova.jpg";
                     <div class="w-40 md:w-60 mr-5 overflow-hidden">
                       <div class="relative aspect-[4/3] border border-black bg-slate-200">
                         {o["main_image"] && (
-                          <img
+                          <BucketImage
                             src={o["main_image"]}
                             class="absolute inset-0 w-full h-full object-cover"
                           />
@@ -219,7 +222,7 @@ const imgVideo = "/images/video-prova.jpg";
                     <div class="w-40 md:w-60 mr-5 overflow-hidden">
                       <div class="relative aspect-[4/3] border border-black bg-slate-200">
                         {o["main_image"] && (
-                          <img
+                          <BucketImage
                             src={o["main_image"]}
                             class="absolute inset-0 w-full h-full object-cover"
                           />
@@ -291,7 +294,6 @@ const imgVideo = "/images/video-prova.jpg";
                   <EventsSection
                     associazione={evento.organizations
                       .map((o) => o.name)
-
                       .join("<br />")}
                     nome={evento.name}
                     data={evento.date}

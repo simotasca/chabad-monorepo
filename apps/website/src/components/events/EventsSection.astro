@@ -1,15 +1,16 @@
 ---
 import { Image } from "astro:assets";
 import Link from "@/components/navigation/Link.astro";
+import BucketImage from "../supabase/BucketImage.astro";
 const { associazione, nome, data, immagine, citta, url } = Astro.props;
 ---
 
 <Link href={url}>
-  <div class="stack place-items-center mx-5 aspect-square">
-    <img
+  <div class="stack place-items-center mx-5 md:mx-3 lg:mx-5 h-52 w-52 aspect-square">
+    <BucketImage
       src={immagine}
       alt="immagine a caso"
-      class="w-full h-full opacity-80"
+      class="h-full w-full opacity-80"
     />
     <div class="w-full h-full bg-black opacity-50"></div>
     <div class="z-10 flex flex-col justify-center gap-y-1 px-2">

@@ -12,6 +12,7 @@ import { type WithUrl } from "@/lib/shared/routes";
 import { type OrganizationWithSplitContacts } from "@/lib/shared/supabase/organizations";
 import { Image } from "astro:assets";
 import Link from "@/components/navigation/Link.astro";
+import BucketImage from "../supabase/BucketImage.astro";
 
 export type Props = {
   organizations: (OrganizationWithSplitContacts & WithUrl)[];
@@ -33,7 +34,7 @@ const { organizations } = Astro.props;
         <section class="relative">
           <div class="flex gap-2 sm:gap-4 px-4 xs:pr-2 sm:p-4">
             {o.main_image && (
-              <img class="hidden sm:block w-60 lg:w-80 aspect-video object-cover my-2" src={o.main_image} alt="main article image" />
+              <BucketImage class="hidden sm:block w-60 lg:w-80 aspect-video object-cover my-2" src={o.main_image} alt="main article image" />
             )}
             <div class="lg:flex flex-col gap-2 py-1">
               <div class="gap-2 items-center">
@@ -46,7 +47,7 @@ const { organizations } = Astro.props;
 
               <div class="sm:hidden h-2" />
 
-              <img
+              <BucketImage
                 class="sm:hidden w-60 xs:w-80 sm:w-60 aspect-video xs:aspect-[7/3] sm:aspect-video object-cover"
                 src={o.main_image}
                 alt="main chabad organization image"
