@@ -148,7 +148,7 @@ const imgVideo = "/images/video-prova.jpg";
     />
 
     <ShadowBox class="max-md:hidden">
-      <div class="py-5">
+      <div class="aspect-square">
         <EventsSection
           nome={events[0].name}
           data={events[0].date}
@@ -291,16 +291,18 @@ const imgVideo = "/images/video-prova.jpg";
             {
               events.map((evento) => (
                 <CarouselItem>
-                  <EventsSection
-                    associazione={evento.organizations
-                      .map((o) => o.name)
-                      .join("<br />")}
-                    nome={evento.name}
-                    data={evento.date}
-                    immagine={evento.main_image}
-                    citta={evento.city}
-                    url={evento.url}
-                  />
+                  <div class="w-64 md:max-lg:mr-5">
+                    <EventsSection
+                      associazione={evento.organizations
+                        .map((o) => o.name)
+                        .join("<br />")}
+                      nome={evento.name}
+                      data={evento.date}
+                      immagine={evento.main_image}
+                      citta={evento.city}
+                      url={evento.url}
+                    />
+                  </div>
                 </CarouselItem>
               ))
             }

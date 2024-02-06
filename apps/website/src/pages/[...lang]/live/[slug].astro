@@ -21,7 +21,7 @@ const videoLive = !slug
   ? null
   : await supabase
       .from("live_video")
-      .select("title, date, youtube_link, category, slug, responsibles(name)")
+      .select("title, date, youtube_link, category, responsibles(name)")
       .eq("slug", slug)
       .then(({ data, error }) => {
         if (error) {
@@ -36,13 +36,13 @@ if (!videoLive) {
 
 const allVideoLives = await supabase
   .from("live_video")
-  .select("title, youtube_link, category, slug")
+  .select("title, youtube_link, category")
   .limit(10)
   .then(({ error, data }) => {
     if (error) {
       throwError("Page live", "Error fetching videos:" + error.message);
     }
-    return data?.map(livesMapper) || [];
+    return data || [];
   });
 console.log(allVideoLives, "un minimo di messagio");
 ---

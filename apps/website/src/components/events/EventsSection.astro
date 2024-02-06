@@ -6,11 +6,11 @@ const { associazione, nome, data, immagine, citta, url } = Astro.props;
 ---
 
 <Link href={url}>
-  <div class="stack place-items-center mx-5 md:mx-3 lg:mx-5 h-52 w-52 aspect-square">
+  <div class="stack place-items-center w-full aspect-square max-md:p-5 lg:p-5">
     <BucketImage
       src={immagine}
       alt="immagine a caso"
-      class="h-full w-full opacity-80"
+      class="h-full w-full opacity-80 object-cover md:max-lg:shadow-xl"
     />
     <div class="w-full h-full bg-black opacity-50"></div>
     <div class="z-10 flex flex-col justify-center gap-y-1 px-2">
