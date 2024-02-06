@@ -1,0 +1,8 @@
+---
+import { bucketSrc } from '@/lib/shared/supabase/image';
+
+type Props = astroHTML.JSX.ImgHTMLAttributes;
+let { src, ...props } = Astro.props;
+---
+
+<img src={bucketSrc(src)} {...props} />

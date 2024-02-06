@@ -31,7 +31,7 @@ const {
 } = Astro.props;
 ---
 
-<div>
+<x-article-section class="block">
   <!-- MAIN ARTICLE -->
   <Link
     href={mainArticle.url}
@@ -89,7 +89,11 @@ const {
   <div class="md:grid grid-cols-3 gap-4 mt-4">
     {
       articles.map((a) => (
-        <Link href={a.url} class="cursor-pointer" target={articleLinkTarget(a)}>
+        <Link
+          href={a.url}
+          class={"cursor-pointer max-sm:[&:nth-child(n+4)]:hidden"}
+          target={articleLinkTarget(a)}
+        >
           <article>
             <div class="flex gap-2 items-center py-0 font-display lg:text-lg md:text-base text-xl leading-[1.1] md:leading-[1.1] lg:leading-[1.1] [&>*]:hover:text-blue-900 lg:[&>*]:hover:text-blue-900">
               <div class="hidden md:block h-12 lg:h-6 w-[2px] bg-blue-950" />
@@ -111,4 +115,4 @@ const {
       ))
     }
   </div>
-</div>
+  

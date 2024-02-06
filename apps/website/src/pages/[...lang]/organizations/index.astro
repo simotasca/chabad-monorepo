@@ -8,7 +8,10 @@ import { errorResponse } from "@/lib/server/error-response";
 import { checkLangParam, getTranslations } from "@/lib/server/lang/lang";
 import supabase from "@/lib/server/supabase";
 import { throwError } from "@/lib/shared/error";
-import { organizationContactsMapper, organizationsMapper } from "@/lib/shared/supabase/organizations";
+import {
+  organizationContactsMapper,
+  organizationsMapper,
+} from "@/lib/shared/supabase/organizations";
 import { getData } from "../_utils";
 import Link from "@/components/navigation/Link.astro";
 if (!checkLangParam(Astro)) {
@@ -24,36 +27,54 @@ const query = supabase.from("organizations").select("*, contacts(*)");
 if (cityFilter) query.like("city", cityFilter);
 const organizations = await query.then(({ error, data }) => {
   if (error) {
-    throwError("PAGE Organizations", "Error fetching organizations-by-city:" + error.message);
+    throwError(
+      "PAGE Organizations",
+      "Error fetching organizations-by-city:" + error.message
+    );
   }
   return data?.map(organizationsMapper).map(organizationContactsMapper) || [];
 });
 
-let emptyResultMessage = "";
-if (cityFilter && organizations.length === 0) {
-  // TODO: tradurre
-  emptyResultMessage = "Nessuna organizzazione trovata a " + cityFilter + "...";
-}
+const emptyResultMessage =
+  "Nessuna organizzazione trovata a " + cityFilter + "...";
+const foundResultMessage =
+  "Progetti chabad trovati nella città di " + cityFilter + "...";
 ---
 
-<PageLayout title="progetti chabad" description="tutti i progetti chabad in italia">
+<PageLayout
+  title="progetti chabad"
+  description="tutti i progetti chabad in italia"
+>
   <section slot="title">
-    <div class="grid grid-cols-[1fr_auto_1fr] items-center pt-2 pb-[1px] sm:pt-4 sm:pb-3 px-4">
+    <div
+      class="grid grid-cols-[1fr_auto_1fr] items-center pt-2 pb-[1px] sm:pt-4 sm:pb-3 px-4"
+    >
       <div class="h-0.5 bg-white mr-4 mb-2 ml-9 border-t"></div>
-      <h1 class="text-2xl sm:text-3xl uppercase font-messiri text-white font-bold text-center">
+      <h1
+        class="text-2xl sm:text-3xl uppercase font-messiri text-white font-bold text-center"
+      >
         {t("main-title")}
       </h1>
       <div class="h-0.5 bg-white ml-4 mb-2 mr-9 border-t"></div>
     </div>
   </section>
 
-  <section slot="content-1" >
-    {emptyResultMessage ? <p class="text-neutral-600">{emptyResultMessage}</p>: <div class="flex flex-col gap-4"><OrganizationSection organizations={organizations}></OrganizationSection></div>}
+  <section slot="content-1">
+    {
+      cityFilter && (
+        <p class="md:max-lg:text-white text-neutral-600 ml-2 max-md:mt-2 mb-4">
+          {organizations.length === 0 ? emptyResultMessage : foundResultMessage}
+        </p>
+      )
+    }
+    <div class="flex flex-col gap-4">
+      <OrganizationSection organizations={organizations} />
+    </div>
   </section>
 
   <section slot="sidebar" class="md:flex flex-col gap-4">
     <ShadowBox class="max-md:hidden">
-      <div class="py-5 bg-slate-50">
+      <div class="bg-slate-50">
         <EventsSection
           nome={events[0].name}
           data={events[0].date}

@@ -21,6 +21,7 @@ import {
 } from "@/lib/shared/supabase/organizations";
 import { parseMdx } from "@/lib/server/mdx";
 import { nextEvents } from "@/lib/shared/supabase/events";
+import BucketImage from "@/components/supabase/BucketImage.astro";
 
 if (!checkLangParam(Astro)) {
   return errorResponse(Astro.url);
@@ -101,7 +102,7 @@ const events = await nextEvents(supabase, 10);
         class="grid grid-cols-2 w-full gap-4 items-center bg-[#031B4D] border-b-white border-b-[1px] text-white py-2 pl-3 pr-3 xs:pr-6"
       >
         <div class="flex justify-start items-center h-full gap-1 xs:gap-3">
-          <img
+          <BucketImage
             src={organization.logo}
             class="h-8 aspect-square object-cover"
             alt="chabad logo icon"
@@ -128,7 +129,7 @@ const events = await nextEvents(supabase, 10);
         </div>
       </div>
       <div class="stack place-items-center">
-        <img
+        <BucketImage
           src={organization.main_image}
           alt="immagine a caso"
           class="w-full h-full object-cover aspect-[4/3] xs:aspect-[9/4]"
@@ -167,16 +168,11 @@ const events = await nextEvents(supabase, 10);
       </div>
       <div class="h-14 bg-[#18315E] w-full border-t-[1px] border-t-white"></div>
 
-      <div class="grid grid-cols-[2fr_3fr] gap-10 px-8">
-        <div>
-          <img
-            src="/images/third-main-image.jpg"
-            alt="immagine a caso"
-            class="w-full object-cover aspect-[3/4] -translate-y-7 shadow shadow-black"
-          />
-        </div>
-        <div class="font-raleway py-10">
-          {organization.markdown}
+      <div class="px-12">
+        <div
+          class="max-w-full prose prose-h2:text-3xl prose:font-raleway prose:text-black prose-h2:font-display prose-h2:my-2 prose-h3:uppercase prose-h3:my-1 py-10"
+        >
+          <Content />
         </div>
       </div>
       {
